@@ -10,7 +10,7 @@ function App() {
       <AuthProvider>
         <Header />
         <Routes>
-          <Route path="/home" element={<Home />} >
+          <Route path="/" element={<Home />} >
           </Route>
         </Routes>
       </AuthProvider>
