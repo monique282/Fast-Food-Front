@@ -4,7 +4,6 @@ import reactLogo from './assets/images/80d51b7588fee0de05c7457a7d7a261f.jpg'
 
 function App() {
   const [count, setCount] = useState(0)
-
   return (
     <>
       <div>
