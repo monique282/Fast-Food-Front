@@ -5,14 +5,14 @@ export default function Header() {
 
     return (
         <All>
-            <Header>
+            <HeaderBhutans>
                 <SloganName>Fest Food</SloganName>
                 <Control>
                     <Requests>Pedidos</Requests>
                     <Kitchen>Cozinha</Kitchen>
                     <Withdrawal>Retirada</Withdrawal>
                 </Control>
-            </Header>      
+            </HeaderBhutans>      
         </All>
     )
 };
@@ -22,7 +22,7 @@ const All = styled.div`
     height: 100%;
     background-color: #FFFFFF;
 `
-const Header = styled.div`
+const HeaderBhutans = styled.div`
     width: 100%;
     height: 50px;
     background-color: #2E5D15;
