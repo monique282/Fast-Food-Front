@@ -8,7 +8,6 @@ import drinks from '../assets/images/drinks.png'
 import follow from '../assets/images/follow.jpg'
 
 
-
 export default function Home() {
 
     const { products, setProducts } = useContext(AuthContext);
@@ -26,6 +25,7 @@ export default function Home() {
         });
     }, []);
 
+    console.log(products)
     return (
         <All>
             <Welcome>Seja bem Vindo(a)!</Welcome>
@@ -40,7 +40,7 @@ export default function Home() {
                     </Box>
                     <Box>
                         <img src={follow} alt="" />
-                        <p>Acompanhamentos</p></Box>
+                        <p style={{marginTop:"-5px"}}>Acompanhamentos</p></Box>
                     <Box>
                         <img src={drinks} alt="" />
                         <p>Bebidas</p></Box>
