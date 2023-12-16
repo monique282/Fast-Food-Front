@@ -10,8 +10,9 @@ function App() {
       <AuthProvider>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} >
-          </Route>
+          <Route path="/" element={<Home />} ></Route>
+          <Route path="/kitchen" element={<Kitchen />} ></Route>
+          <Route path="/withdrawal" element={<Withdrawal />} ></Route>
         </Routes>
       </AuthProvider>
     </BrowserRouter>
