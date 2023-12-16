@@ -8,7 +8,7 @@ export default function Header() {
     return (
         <All>
             <HeaderBhutans>
-                <SloganName>Fest Food</SloganName>
+                <SloganName to="/" >Fest Food</SloganName>
                 <Control>
                     <Requests to="/" isActive={location.pathname === '/'}>Pedidos</Requests>
                     <Kitchen to="/kitchen" isActive={location.pathname === '/kitchen'}>Cozinha</Kitchen>
@@ -32,7 +32,7 @@ const HeaderBhutans = styled.div`
     align-items: center;   
     justify-content: space-around;
 `
-const SloganName = styled.div`
+const SloganName = styled(Link)`
     width: 100%;
     height: 60px;
     font-family: "Varela Round";
