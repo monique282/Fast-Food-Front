@@ -8,9 +8,9 @@ export default function Header() {
             <HeaderBhutans>
                 <SloganName>Fest Food</SloganName>
                 <Control>
-                    <Requests>Pedidos</Requests>
-                    <Kitchen>Cozinha</Kitchen>
-                    <Withdrawal>Retirada</Withdrawal>
+                    <Requests to={'/'} >Pedidos</Requests>
+                    <Kitchen to={'/kitchen'} >Cozinha</Kitchen>
+                    <Withdrawal to={'/withdrawal'} >Retirada</Withdrawal>
                 </Control>
             </HeaderBhutans>
         </All>
