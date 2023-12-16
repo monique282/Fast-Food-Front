@@ -32,6 +32,17 @@ export default function Kitchen() {
                 <Sidebar></Sidebar>
                 <Ready>
                     <p>Pronto:</p>
+                    <Order>
+                        <img src={products[1].image} alt="" />
+                        <NameCode>
+                            <h1>201 - Monique</h1>
+                            <h2>Descrução do que foi pedido</h2>
+                        </NameCode>
+                        <Butons>
+                            <Not ><HiOutlineX style={{ width: "30px", height: "30px", color: "#CF3C29" }} /></Not>
+                            {/* <Ok><HiOutlineCheck style={{ width: "30px", height: "30px", color: "#56A211" }} /></Ok> */}
+                        </Butons>
+                    </Order>
                 </Ready>
             </All>
         )
@@ -69,7 +80,7 @@ const Ready = styled.div`
     width: 50%;
     height: 100%;
     margin-top: 7%;
-    margin-left: 12%;
+    margin-left: 4%;
         p{
         font-family: "Varela Round";
         font-size: 24px;
