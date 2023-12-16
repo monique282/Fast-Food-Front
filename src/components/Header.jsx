@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Header() {
@@ -47,7 +48,7 @@ const Control = styled.div`
     align-items: center;
     justify-content: center;
 `
-const Requests = styled.div`
+const Requests = styled(Link)`
     width: 100%;
     height: 60px;
     font-family: "Varela Round";
@@ -57,7 +58,7 @@ const Requests = styled.div`
     justify-content: center;
     color: white;
 `
-const Kitchen = styled.div`
+const Kitchen = styled(Link)`
     width: 100%;
     height: 60px;
     font-family: "Varela Round";
@@ -67,7 +68,7 @@ const Kitchen = styled.div`
     justify-content: center;
     color: white; 
 `
-const Withdrawal = styled.div`
+const Withdrawal = styled(Link)`
     width: 100%;
     height: 60px;
     font-family: "Varela Round";
