@@ -8,7 +8,6 @@ import drinks from '../assets/images/drinks.png'
 import follow from '../assets/images/follow.jpg'
 
 
-
 export default function Home() {
 
     const { products, setProducts } = useContext(AuthContext);
@@ -26,33 +25,49 @@ export default function Home() {
         });
     }, []);
 
-    return (
-        <All>
-            <Welcome>Seja bem Vindo(a)!</Welcome>
-            <Search placeholder='O que voê procura?' type="text" value={search} onChange={e => setSearch(e.target.value)} ></Search>
-            <Products>
-                <Title>Categorias</Title>
-                <Subtitle>Navegue por categorais</Subtitle>
-                <Categories>
-                    <Box>
-                        <img src={Combo} alt="" />
-                        <p>Combos</p>
-                    </Box>
-                    <Box>
-                        <img src={follow} alt="" />
-                        <p>Acompanhamentos</p></Box>
-                    <Box>
-                        <img src={drinks} alt="" />
-                        <p>Bebidas</p></Box>
-                    <Box>
-                        <img src={dessert} alt="" />
-                        <p>Sobremesas</p></Box>
-                </Categories>
-                <Menu></Menu>
-            </Products>
-        </All>
-    )
-};
+    console.log(products)
+    if (products.length === 0) {
+        return (
+            <>carregando</>
+        )
+    } else {
+        return (
+            <All>
+                <Welcome>Seja bem Vindo(a)!</Welcome>
+                <Search placeholder='O que voê procura?' type="text" value={search} onChange={e => setSearch(e.target.value)} ></Search>
+                <Products>
+                    <Title>Categorias</Title>
+                    <Subtitle>Navegue por categorais</Subtitle>
+                    <Categories>
+                        <Box>
+                            <img src={Combo} alt="" />
+                            <p style={{ fontWeight: "bold" }}>Combos</p>
+                        </Box>
+                        <Box>
+                            <img src={follow} alt="" />
+                            <p style={{ marginTop: "-5px", fontWeight: "bold" }}>Acompanhamentos</p></Box>
+                        <Box>
+                            <img src={drinks} alt="" />
+                            <p style={{ fontWeight: "bold" }}>Bebidas</p></Box>
+                        <Box>
+                            <img src={dessert} alt="" />
+                            <p style={{ fontWeight: "bold" }}>Sobremesas</p></Box>
+                    </Categories>
+                    <Title>Produtos</Title>
+                    <Subtitle>Selecione um produto para adicioar ao seu pedido</Subtitle>
+                    <Menu>
+                        <ProductBox>
+                            <img src={products[1].image} alt="" />
+                            <h1>{products[1].name}</h1>
+                            <h2>{products[1].description}</h2>
+                            <p>R$ {products[1].price.toFixed(2)}</p>
+                        </ProductBox>
+                    </Menu>
+                </Products>
+            </All >
+        )
+    };
+}
 
 const All = styled.div`
     width: 100%;
@@ -67,6 +82,7 @@ const Welcome = styled.div`
     color: black;
     margin-top: 7%;
     margin-left: 12%;
+    font-weight: bold;
 `
 const Search = styled.input`
     width: 350px;
@@ -102,9 +118,10 @@ const Title = styled.div`
     font-size: 24px;
     color: black;
     margin-top: 5%;
+    font-weight: bold;
 `
 const Subtitle = styled.div`
-    width: 310px;
+    width: 100%;
     height: 100%;
     font-family: "Varela Round";
     font-size: 15px;
@@ -128,15 +145,51 @@ const Box = styled.div`
     text-align: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
         img{
-    width: 100px;
-    margin-left: 25%;
-    margin-bottom: 3px;
-   
-    }
+        width: 100px;
+        margin-left: 25%;
+        margin-bottom: 3px;
+        }
 `
 const Menu = styled.div`
 `
-const sd = styled.div`
+const ProductBox = styled.div`
+    width: 180px;
+    height: 220px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+    margin-top: 2%;
+        img{
+        width: 100px;
+        margin-left: 23%;
+        margin-bottom: 3px;
+        margin-top: 10px;
+        }
+        h1{
+        font-family: "Varela Round";
+        font-size: 20px;
+        color: black;
+        margin-top: 5%;
+        font-weight: bold;
+        }
+        h2{
+        font-family: "Varela Round";
+        font-size: 11px;
+        color: black;
+        margin-top: 5%;
+        }
+        p{
+        font-family: "Varela Round";
+        font-size: 17px;
+        color: black;
+        margin-top: 5%; 
+        font-weight: bold; 
+        }
+`
+const sdv = styled.div`
 `
 
 

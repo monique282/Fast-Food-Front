@@ -1,18 +1,20 @@
+import { Link, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 export default function Header() {
 
+    const location = useLocation();
 
     return (
         <All>
             <HeaderBhutans>
-                <SloganName>Fest Food</SloganName>
+                <SloganName to="/" >Fest Food</SloganName>
                 <Control>
-                    <Requests>Pedidos</Requests>
-                    <Kitchen>Cozinha</Kitchen>
-                    <Withdrawal>Retirada</Withdrawal>
+                    <Requests to="/" isActive={location.pathname === '/'}>Pedidos</Requests>
+                    <Kitchen to="/kitchen" isActive={location.pathname === '/kitchen'}>Cozinha</Kitchen>
+                    <Withdrawal to="/withdrawal" isActive={location.pathname === '/withdrawal'}>Retirada</Withdrawal>
                 </Control>
-            </HeaderBhutans>      
+            </HeaderBhutans>
         </All>
     )
 };
@@ -27,10 +29,11 @@ const HeaderBhutans = styled.div`
     height: 50px;
     background-color: #2E5D15;
     display: flex;
-    align-items: center;     
+    align-items: center;   
+    justify-content: space-around;
 `
-const SloganName = styled.div`
-    width: 180px;
+const SloganName = styled(Link)`
+    width: 100%;
     height: 60px;
     font-family: "Varela Round";
     font-size: 24px;
@@ -38,40 +41,45 @@ const SloganName = styled.div`
     align-items: center;
     justify-content: center;
     color: white;
-    margin-right: 50%;
 `
 const Control = styled.div`
-    width: 300px;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 `
-const Requests = styled.div`
-    width: 180px;
-    height: 60px;
+const Requests = styled(Link)`
+    width: 100px;
+    height: 30px;
     font-family: "Varela Round";
     font-size: 15px;
+    background-color: ${props => props.isActive ? '#1E410E' : '#2E5D15'};
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white;
 `
-const Kitchen = styled.div`
-    width: 180px;
-    height: 60px;
+const Kitchen = styled(Link)`
+    width: 100px;
+    height: 30px;
     font-family: "Varela Round";
     font-size: 15px;
+    background-color: ${props => props.isActive ? '#1E410E' : '#2E5D15'};
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     color: white; 
 `
-const Withdrawal = styled.div`
-    width: 180px;
-    height: 60px;
+const Withdrawal = styled(Link)`
+    width: 100px;
+    height: 30px;
     font-family: "Varela Round";
     font-size: 15px;
+    background-color: ${props => props.isActive ? '#1E410E' : '#2E5D15'};
+    border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
