@@ -2,6 +2,8 @@ import { BrowserRouter, Route, Routes } from "react-router-dom"
 import AuthProvider from "./context/authContext"
 import Home from "./pages/home"
 import Header from "./components/Header"
+import Kitchen from "./components/Kitchen"
+import Withdrawal from "./components/Withdrawal"
 
 
 function App() {
