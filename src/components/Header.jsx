@@ -12,7 +12,7 @@ export default function Header() {
                     <Kitchen>Cozinha</Kitchen>
                     <Withdrawal>Retirada</Withdrawal>
                 </Control>
-            </HeaderBhutans>      
+            </HeaderBhutans>
         </All>
     )
 };
@@ -27,10 +27,11 @@ const HeaderBhutans = styled.div`
     height: 50px;
     background-color: #2E5D15;
     display: flex;
-    align-items: center;     
+    align-items: center;   
+    justify-content: space-around;
 `
 const SloganName = styled.div`
-    width: 180px;
+    width: 100%;
     height: 60px;
     font-family: "Varela Round";
     font-size: 24px;
@@ -38,17 +39,16 @@ const SloganName = styled.div`
     align-items: center;
     justify-content: center;
     color: white;
-    margin-right: 50%;
 `
 const Control = styled.div`
-    width: 300px;
+    width: 100%;
     height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
 `
 const Requests = styled.div`
-    width: 180px;
+    width: 100%;
     height: 60px;
     font-family: "Varela Round";
     font-size: 15px;
@@ -58,7 +58,7 @@ const Requests = styled.div`
     color: white;
 `
 const Kitchen = styled.div`
-    width: 180px;
+    width: 100%;
     height: 60px;
     font-family: "Varela Round";
     font-size: 15px;
@@ -68,7 +68,7 @@ const Kitchen = styled.div`
     color: white; 
 `
 const Withdrawal = styled.div`
-    width: 180px;
+    width: 100%;
     height: 60px;
     font-family: "Varela Round";
     font-size: 15px;
