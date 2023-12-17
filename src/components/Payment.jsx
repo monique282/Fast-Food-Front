@@ -33,15 +33,24 @@ export default function Payment() {
                                     <Amount>R$ 30,50</Amount>
                                 </FinalValue>
                             </PurchaseSummary>
-
+                            <CodeName>
+                                <Name>
+                                    <p>Nome do cliente</p>
+                                    <input placeholder='Primeiro nome' type="text"></input>
+                                </Name>
+                                <Code>
+                                    <p>Código</p>
+                                    <div>1</div>
+                                </Code>
+                            </CodeName>
                         </Order>
                     </TotalPaymente>
                     <Sidebar></Sidebar>
-                    <FinalizarPagamento>
+                    <FinalizePayment>
                         <Order>
 
                         </Order>
-                    </FinalizarPagamento>
+                    </FinalizePayment>
                 </BoxAll>
 
             </All>
@@ -72,7 +81,6 @@ const TotalPaymente = styled.div`
     height: auto;
     margin-top: 7%;
     margin-left: 7%;
-    background-color: red;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -113,18 +121,16 @@ const Order = styled.div`
         }
 `
 const PurchaseSummary = styled.div`
+    width: 100%;
     height: auto;
-    margin-right: 1%;
     border: 1px solid #D2D2D2;
     border-radius: 5px;
-    margin-top: 3%;
-    background-color: #ce1eed;
+    margin-top: 1%;
 `
 const DescriptionPrice = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: blue;
     margin-top: 5%;
 `
 const Summary = styled.div`
@@ -163,7 +169,63 @@ const Amount = styled.div`
     font-weight: bold; 
     margin-right: 10%;
 `
-const FinalizarPagamento = styled.div`
+const CodeName = styled.div`
+    height: auto;
+    display: flex;
+    margin-top: 10%;
+    justify-content: space-between;
+`
+const Name = styled.div` 
+    input{
+    width: 150%;
+    height: 70%;
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black;
+    margin-top: 5%;
+    background-color: #F4F4F4;
+    border: none;
+    border-radius: 5px;
+    padding-left: 10px;
+        input::placeholder {
+        color: #000000; 
+        margin-right: 0px;
+        }
+        input:focus {
+        border: 1px solid black;
+        outline: none; 
+        }
+        p{
+        font-family: "Varela Round";
+        font-size: 20px;
+        color: black;
+        font-weight: bold; 
+        margin-right: 10%;
+        margin-bottom: 3%;
+        }}
+`
+const Code = styled.div`
+    width: 25%;
+    height: 100%;
+        p{
+        font-family: "Varela Round";
+        font-size: 20px;
+        color: black;
+        font-weight: bold; 
+        margin-right: 10%;
+        }
+        div{
+        width: 100%;
+        height: 70%;  
+        background-color: #F4F4F4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 9%;
+        border-radius: 5px;
+        }
+`
+const FinalizePayment = styled.div`
     width: 50%;
     height: auto;
     margin-top: 7%;
