@@ -289,7 +289,14 @@ export default function Home() {
 
                 <Finishing>
                     <RemoveOrderFromList onClick={() => cancel()} >Cancelar</RemoveOrderFromList>
-                    <AddProducttoList onClick={() => IWantThese()} >Finalizar pedido</AddProducttoList>
+                    {order.length > 0 &&(
+                        <AddProducttoList  
+                        style = {{backgroundColor: "#2E5D15", border:"2px solid #2E5D15"}}
+                         onClick={() => IWantThese()} >Finalizar pedido</AddProducttoList>
+                    )}
+                    {order.length === 0 &&(
+                        <AddProducttoList  style = {{backgroundColor: "#9F9F9F", border:"2px solid #9F9F9F"}}  >Finalizar pedido</AddProducttoList>
+                    )}
                 </Finishing>
             </All >
         )
@@ -508,7 +515,6 @@ const AddProducttoList = styled.div`
     width: 22%;
     height: 50px;
     margin-right: 5%;
-    background-color: #2E5D15;
     font-family: "Varela Round";
     font-size: 15px;
     color: black; 
