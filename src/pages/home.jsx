@@ -129,7 +129,11 @@ export default function Home() {
                             snacks.map((main) => (
                                 <>
                                     <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
-                                        <Select><CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} /></Select>
+                                        {ordereIds.includes(main.id) && (
+                                            <Select>
+                                                <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
+                                            </Select>
+                                        )}
                                         <img src={main.image} alt="" />
                                         <h1>{main.name}</h1>
                                         <h2>{main.description}</h2>
