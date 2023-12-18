@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useState } from "react";
 import styled from "styled-components"
 import { AuthContext } from "../context/authContext";
 import { HiOutlineX } from "react-icons/hi";
@@ -11,11 +10,15 @@ import Barvecue from "../assets/images/barbecue.png"
 
 
 export default function Revision() {
-
     const {
         products, id, showReview,
         setShowReview, counter, setCounter
     } = useContext(AuthContext);
+    const [baconSelected, setBaconSelected] = useState(false);
+    const [cheddarSelected, setCheddarSelected] = useState(false);
+    const [sauceSelected, setSauceSelected] = useState(false);
+
+
 
     console.log(counter);
     const ProductSpecific = products.find((product) => product.id === id);
@@ -68,7 +71,7 @@ export default function Revision() {
                     <Additional>
                         <h1>Adicionais</h1>
                         <h2>Selecione os ingredientes que voê quer adicionar a mais no seu lanche</h2>
-                        <Bacon>
+                        <Bacon onClick={() => setBaconSelected(!baconSelected)}>
                             <img src={Bacons} alt="" />
                             <NameQuantity>
                                 <h1>Bacon</h1>
@@ -77,11 +80,11 @@ export default function Revision() {
                             <Butons>
                                 <Select >
                                     <p>R$ 1.00</p>
-                                    <div></div>
+                                    <div style={{ backgroundColor: baconSelected ? "#2E5D15" : "#FFFFFF" }}></div>
                                 </Select>
                             </Butons>
                         </Bacon>
-                        <Cheddar>
+                        <Cheddar onClick={() => setCheddarSelected(!cheddarSelected)}>
                             <img src={Cheddars} alt="" />
                             <NameQuantity>
                                 <h1>Cheddar</h1>
@@ -90,11 +93,11 @@ export default function Revision() {
                             <Butons>
                                 <Select >
                                     <p>R$ 1.00</p>
-                                    <div></div>
+                                    <div style={{ backgroundColor: cheddarSelected ? "#2E5D15" : "#FFFFFF" }}></div>
                                 </Select>
                             </Butons>
                         </Cheddar>
-                        <Sauce>
+                        <Sauce onClick={() => setSauceSelected(!sauceSelected)}>
                             <img src={Barvecue} alt="" />
                             <NameQuantity>
                                 <h1>molho acompanhamento</h1>
@@ -103,7 +106,7 @@ export default function Revision() {
                             <Butons>
                                 <Select >
                                     <p>R$ 1.00</p>
-                                    <div></div>
+                                    <div style={{ backgroundColor: sauceSelected ? "#2E5D15" : "#FFFFFF" }}></div>
                                 </Select>
                             </Butons>
                         </Sauce>
