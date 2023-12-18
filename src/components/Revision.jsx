@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components"
 import { AuthContext } from "../context/authContext";
 import { HiOutlineX } from "react-icons/hi";
@@ -20,6 +20,24 @@ export default function Revision() {
     const [sauceSelected, setSauceSelected] = useState(false);
     const [observationText, setObservationText] = useState("");
     let followUp = [];
+
+
+    useEffect(() => {
+        checkingIfIDasAlreadyBeenSelected();
+    }, []);
+
+    function checkingIfIDasAlreadyBeenSelected() {
+        const corresponding = order.find((item) => item.ProductSpecific.id === id);
+        if (corresponding) {
+            setCounter(corresponding.counter);
+            setBaconSelected(corresponding.followUp.some((item) => item.id === 1));
+            setCheddarSelected(corresponding.followUp.some((item) => item.id === 2));
+            setSauceSelected(corresponding.followUp.some((item) => item.id === 3));
+            // remover item
+            const updatedOrder = order.filter((item) => item.ProductSpecific.id !== id);
+            setOrder(updatedOrder);
+        }
+    };
 
 
     const ProductSpecific = products.find((product) => product.id === id);
@@ -49,11 +67,13 @@ export default function Revision() {
         setSauceSelected(false);
         setObservationText("");
         setShowReview(false)
+        const updatedOrder = order.filter((item) => item.ProductSpecific.id !== id);
+        setOrder(updatedOrder);
     };
 
     function selectedSideDishes() {
         if (baconSelected === true) {
-            followUp = [...followUp, {id: 1, item: "1x Bacon 10g", price: "R$1.00" }];
+            followUp = [...followUp, { id: 1, item: "1x Bacon 10g", price: "R$1.00" }];
         };
         if (cheddarSelected === true) {
             followUp = [...followUp, { id: 2, item: "1x Cheddar 10g", price: "R$1.00" }];
