@@ -4,15 +4,18 @@ import React, { useContext, useEffect, useState } from 'react'
 import styled from "styled-components";
 import Combo from '../assets/images/Combo.jpeg';
 import dessert from '../assets/images/dessert.jpeg';
-import drinks from '../assets/images/drinks.png'
-import follow from '../assets/images/follow.jpg'
-import snack from '../assets/images/snacks.jpeg'
+import drinks from '../assets/images/drinks.png';
+import follow from '../assets/images/follow.jpg';
+import snack from '../assets/images/snacks.jpeg';
 import Revision from "../components/Revision";
+import { CgCheck } from "react-icons/cg";
 
 
 export default function Home() {
 
-    const { products, setProducts, setId, showReview, setShowReview } = useContext(AuthContext);
+    const { products, setProducts, setId,
+        showReview, setShowReview, order
+    } = useContext(AuthContext);
     const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
     const [follo, setFollow] = useState([]);
@@ -22,8 +25,9 @@ export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState();
     const [productFiltered, setProductFiltered] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
-
-
+    const [ordereIds, setOrdereIds] = useState([]);
+    console.log(ordereIds)
+    console.log(order)
     const url = `${import.meta.env.VITE_API_URL}/home`;
 
     useEffect(() => {
@@ -45,7 +49,12 @@ export default function Home() {
             console.log(err.response);
         });
 
-    }, []);
+        if (order && order.length > 0) {
+            const orderedIds = order.map(item => item.ProductSpecific.id);
+            setOrdereIds(orderedIds);
+        }
+
+    }, [order]);
 
     function ShowSpecific(parament) {
         setProductFiltered(true)
@@ -118,74 +127,122 @@ export default function Home() {
                     <Menu>
                         {(!productFiltered) && (
                             snacks.map((main) => (
-                                <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
-                                    <img src={main.image} alt="" />
-                                    <h1>{main.name}</h1>
-                                    <h2>{main.description}</h2>
-                                    <p>R$ {main.price.toFixed(2)}</p>
-                                </ProductBox>
+                                <>
+                                    <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
+                                        {ordereIds.includes(main.id) && (
+                                            <Select>
+                                                <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
+                                            </Select>
+                                        )}
+                                        <img src={main.image} alt="" />
+                                        <h1>{main.name}</h1>
+                                        <h2>{main.description}</h2>
+                                        <p>R$ {main.price.toFixed(2)}</p>
+                                    </ProductBox>
+                                </>
                             ))
                         )}
                         {productFiltered === true && (
                             <>
                                 {selectedCategory === "COMBOO" && (
                                     comboo.map((main) => (
-                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
-                                            <img src={main.image} alt="" />
-                                            <h1>{main.name}</h1>
-                                            <h2>{main.description}</h2>
-                                            <p>R$ {main.price.toFixed(2)}</p>
-                                        </ProductBox>
+                                        <>
+                                            <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
+                                                {ordereIds.includes(main.id) && (
+                                                    <Select>
+                                                        <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
+                                                    </Select>
+                                                )}
+                                                <img src={main.image} alt="" />
+                                                <h1>{main.name}</h1>
+                                                <h2>{main.description}</h2>
+                                                <p>R$ {main.price.toFixed(2)}</p>
+                                            </ProductBox>
+                                        </>
                                     ))
                                 )}
                                 {selectedCategory === "FOLLOW" && (
                                     follo.map((main) => (
-                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
-                                            <img src={main.image} alt="" />
-                                            <h1>{main.name}</h1>
-                                            <h2>{main.description}</h2>
-                                            <p>R$ {main.price.toFixed(2)}</p>
-                                        </ProductBox>
+                                        <>
+                                            <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
+                                                {ordereIds.includes(main.id) && (
+                                                    <Select>
+                                                        <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
+                                                    </Select>
+                                                )}
+                                                <img src={main.image} alt="" />
+                                                <h1>{main.name}</h1>
+                                                <h2>{main.description}</h2>
+                                                <p>R$ {main.price.toFixed(2)}</p>
+                                            </ProductBox>
+                                        </>
                                     ))
                                 )}
                                 {selectedCategory === "DESSERT" && (
                                     desser.map((main) => (
-                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
-                                            <img src={main.image} alt="" />
-                                            <h1>{main.name}</h1>
-                                            <h2>{main.description}</h2>
-                                            <p>R$ {main.price.toFixed(2)}</p>
-                                        </ProductBox>
+                                        <>
+                                            <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
+                                                {ordereIds.includes(main.id) && (
+                                                    <Select>
+                                                        <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
+                                                    </Select>
+                                                )}
+                                                <img src={main.image} alt="" />
+                                                <h1>{main.name}</h1>
+                                                <h2>{main.description}</h2>
+                                                <p>R$ {main.price.toFixed(2)}</p>
+                                            </ProductBox>
+                                        </>
                                     ))
                                 )}
                                 {selectedCategory === "SNACKS" && (
                                     snacks.map((main) => (
-                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
-                                            <img src={main.image} alt="" />
-                                            <h1>{main.name}</h1>
-                                            <h2>{main.description}</h2>
-                                            <p>R$ {main.price.toFixed(2)}</p>
-                                        </ProductBox>
+                                        <>
+                                            <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
+                                                {ordereIds.includes(main.id) && (
+                                                    <Select>
+                                                        <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
+                                                    </Select>
+                                                )}
+                                                <img src={main.image} alt="" />
+                                                <h1>{main.name}</h1>
+                                                <h2>{main.description}</h2>
+                                                <p>R$ {main.price.toFixed(2)}</p>
+                                            </ProductBox>
+                                        </>
                                     ))
                                 )}
                                 {selectedCategory === "DRINK" && (
                                     drink.map((main) => (
-                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
-                                            <img src={main.image} alt="" />
-                                            <h1>{main.name}</h1>
-                                            <h2>{main.description}</h2>
-                                            <p>R$ {main.price.toFixed(2)}</p>
-                                        </ProductBox>
+                                        <>
+                                            <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
+                                                {ordereIds.includes(main.id) && (
+                                                    <Select>
+                                                        <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
+                                                    </Select>
+                                                )}                                                <img src={main.image} alt="" />
+                                                <h1>{main.name}</h1>
+                                                <h2>{main.description}</h2>
+                                                <p>R$ {main.price.toFixed(2)}</p>
+                                            </ProductBox>
+                                        </>
                                     ))
                                 )}
                                 {search.length !== 0 && (
                                     searchResults.map((main) => (
-                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
-                                            <img src={main.image} alt="" />
-                                            <h1>{main.name}</h1>
-                                            <h2>{main.description}</h2>
-                                            <p>R$ {main.price.toFixed(2)}</p>
-                                        </ProductBox>
+                                        <>
+                                            <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
+                                                {ordereIds.includes(main.id) && (
+                                                    <Select>
+                                                        <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
+                                                    </Select>
+                                                )}
+                                                <img src={main.image} alt="" />
+                                                <h1>{main.name}</h1>
+                                                <h2>{main.description}</h2>
+                                                <p>R$ {main.price.toFixed(2)}</p>
+                                            </ProductBox>
+                                        </>
                                     ))
                                 )}
                             </>
@@ -196,6 +253,7 @@ export default function Home() {
         )
     };
 }
+
 
 const All = styled.div`
     width: 100%;
@@ -269,6 +327,7 @@ const Box = styled.div`
     border: none;
     border-radius: 10px;
     display: flex;
+    font-family: "Varela Round";
     flex-direction: column;
     text-align: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
@@ -283,23 +342,38 @@ const Menu = styled.div`
     flex-wrap: wrap;
     justify-content: flex-start;
 `
+const Select = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100% + 2.4%);
+    height: calc(100% + 2.4%);
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(53, 244, 53, 0.7);
+    z-index: 1;
+`
 const ProductBox = styled.div`
     width: calc(20% - 2.4%);
     max-width: 180px; 
-    height: 220px;
+    height: 250px;
     border: none;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     margin-top: 2.4%;
     margin-right: 2.4%; 
+    position: relative; 
+    z-index: 0;
         img {
         width: 100px;
-        margin-left: 23%;
-        margin-bottom: 3px;
-        margin-top: 10px;
         }
         h1 {
         font-family: "Varela Round";

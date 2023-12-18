@@ -1,5 +1,4 @@
-import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components"
 import { AuthContext } from "../context/authContext";
 import { HiOutlineX } from "react-icons/hi";
@@ -11,13 +10,36 @@ import Barvecue from "../assets/images/barbecue.png"
 
 
 export default function Revision() {
-
     const {
-        products, id, showReview,
-        setShowReview, counter, setCounter
+        products, id, setShowReview,
+        counter, setCounter, order,
+        setOrder
     } = useContext(AuthContext);
+    const [baconSelected, setBaconSelected] = useState(false);
+    const [cheddarSelected, setCheddarSelected] = useState(false);
+    const [sauceSelected, setSauceSelected] = useState(false);
+    const [observationText, setObservationText] = useState("");
+    let followUp = [];
 
-    console.log(counter);
+
+    useEffect(() => {
+        checkingIfIDasAlreadyBeenSelected();
+    }, []);
+
+    function checkingIfIDasAlreadyBeenSelected() {
+        const corresponding = order.find((item) => item.ProductSpecific.id === id);
+        if (corresponding) {
+            setCounter(corresponding.counter);
+            setBaconSelected(corresponding.followUp.some((item) => item.id === 1));
+            setCheddarSelected(corresponding.followUp.some((item) => item.id === 2));
+            setSauceSelected(corresponding.followUp.some((item) => item.id === 3));
+            // remover item
+            const updatedOrder = order.filter((item) => item.ProductSpecific.id !== id);
+            setOrder(updatedOrder);
+        }
+    };
+
+
     const ProductSpecific = products.find((product) => product.id === id);
 
     function backProducts() {
@@ -36,7 +58,48 @@ export default function Revision() {
             setCounter(counter - 1);
             console.log(counter)
         }
-    }
+    };
+
+    function removed() {
+        setCounter(1)
+        setBaconSelected(false)
+        setCheddarSelected(false);
+        setSauceSelected(false);
+        setObservationText("");
+        setShowReview(false)
+        const updatedOrder = order.filter((item) => item.ProductSpecific.id !== id);
+        setOrder(updatedOrder);
+    };
+
+    function selectedSideDishes() {
+        if (baconSelected === true) {
+            followUp = [...followUp, { id: 1, item: "1x Bacon 10g", price: "R$1.00" }];
+        };
+        if (cheddarSelected === true) {
+            followUp = [...followUp, { id: 2, item: "1x Cheddar 10g", price: "R$1.00" }];
+        };
+        if (sauceSelected === true) {
+            followUp = [...followUp, { id: 3, item: "1x Molho acompanhamento Barbecue", price: "R$1.00" }];
+        };
+    };
+
+    function IWantThese() {
+        selectedSideDishes();
+        const total = (
+            ProductSpecific.price * counter +
+            (baconSelected ? 1 : 0) + (cheddarSelected ? 1 : 0) + (sauceSelected ? 1 : 0)
+        ).toFixed(2);
+
+        const orderDetails = { ProductSpecific, counter, followUp, observationText, total };
+
+        const newOrder = [...order, orderDetails];
+        setOrder(newOrder);
+
+        setCounter(1)
+        setShowReview(false)
+    };
+
+
 
     if (products.length === 0) {
         return (
@@ -68,7 +131,7 @@ export default function Revision() {
                     <Additional>
                         <h1>Adicionais</h1>
                         <h2>Selecione os ingredientes que voê quer adicionar a mais no seu lanche</h2>
-                        <Bacon>
+                        <Bacon onClick={() => setBaconSelected(!baconSelected)}>
                             <img src={Bacons} alt="" />
                             <NameQuantity>
                                 <h1>Bacon</h1>
@@ -77,11 +140,11 @@ export default function Revision() {
                             <Butons>
                                 <Select >
                                     <p>R$ 1.00</p>
-                                    <div></div>
+                                    <div style={{ backgroundColor: baconSelected ? "#2E5D15" : "#FFFFFF" }}></div>
                                 </Select>
                             </Butons>
                         </Bacon>
-                        <Cheddar>
+                        <Cheddar onClick={() => setCheddarSelected(!cheddarSelected)}>
                             <img src={Cheddars} alt="" />
                             <NameQuantity>
                                 <h1>Cheddar</h1>
@@ -90,42 +153,73 @@ export default function Revision() {
                             <Butons>
                                 <Select >
                                     <p>R$ 1.00</p>
-                                    <div></div>
+                                    <div style={{ backgroundColor: cheddarSelected ? "#2E5D15" : "#FFFFFF" }}></div>
                                 </Select>
                             </Butons>
                         </Cheddar>
-                        <Sauce>
+                        <Sauce onClick={() => setSauceSelected(!sauceSelected)}>
                             <img src={Barvecue} alt="" />
                             <NameQuantity>
-                                <h1>molho acompanhamento</h1>
+                                <h1>Molho acompanhamento</h1>
                                 <h2>Barbecue</h2>
                             </NameQuantity>
                             <Butons>
                                 <Select >
                                     <p>R$ 1.00</p>
-                                    <div></div>
+                                    <div style={{ backgroundColor: sauceSelected ? "#2E5D15" : "#FFFFFF" }}></div>
                                 </Select>
                             </Butons>
                         </Sauce>
                     </Additional>
                     <Observation>
                         <h1>Observações</h1>
-                        <Search placeholder='Adicione uma observação ao pedido' type="text" ></Search>
+                        <Search placeholder='Adicione uma observação ao pedido'
+                            type="text"
+                            value={observationText}
+                            onChange={(e) => setObservationText(e.target.value)}
+                        ></Search>
                     </Observation>
                     <PurchaseSummary>
                         <DescriptionPrice>
-                            <Summary>1x {ProductSpecific.name}</Summary>
-                            <PriceDescription>R$ {ProductSpecific.price.toFixed(2)}</PriceDescription>
+                            <Summary>{counter}x {ProductSpecific.name}</Summary>
+                            <PriceDescription>R$ {(ProductSpecific.price * (counter)).toFixed(2)}</PriceDescription>
                         </DescriptionPrice>
+                        {baconSelected === true && (
+                            <DescriptionPrice>
+                                <Summary>
+                                    1x Bacon 10g</Summary>
+                                <PriceDescription>R$ 1.00</PriceDescription>
+                            </DescriptionPrice>
+                        )}
+                        {cheddarSelected === true && (
+                            <DescriptionPrice>
+                                <Summary>
+                                    1x Chedar 10g</Summary>
+                                <PriceDescription>R$ 1.00</PriceDescription>
+                            </DescriptionPrice>
+                        )}
+                        {sauceSelected === true && (
+                            <DescriptionPrice>
+                                <Summary>
+                                    1x Molho acompanhamento Barbecue</Summary>
+                                <PriceDescription>R$ 1.00</PriceDescription>
+                            </DescriptionPrice>
+                        )}
                         <Divider></Divider>
                         <FinalValue>
                             <h1>Total do pedido:</h1>
-                            <Amount>R$ 30,50</Amount>
+                            <Amount>R$ {(
+                                ProductSpecific.price * counter +
+                                (baconSelected ? 1 : 0) +
+                                (cheddarSelected ? 1 : 0) +
+                                (sauceSelected ? 1 : 0)
+                            ).toFixed(2)}
+                            </Amount>
                         </FinalValue>
                     </PurchaseSummary>
                     <Finishing>
-                        <RemoveOrderFromList>Remover procuto</RemoveOrderFromList>
-                        <AddProducttoList>Adicionar produto</AddProducttoList>
+                        <RemoveOrderFromList onClick={() => removed()} >Remover produto</RemoveOrderFromList>
+                        <AddProducttoList onClick={() => IWantThese()} >Adicionar produto</AddProducttoList>
                     </Finishing>
                 </BoxAll>
             </All>
@@ -145,6 +239,7 @@ const All = styled.div`
     align-items: center;
     justify-content: center;
     overflow-y: auto;
+    z-index: 2;
 `
 const BoxAll = styled.div`
     margin-top: 100%;
@@ -396,15 +491,16 @@ const PurchaseSummary = styled.div`
 const DescriptionPrice = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-top: 5%;
 `
 const Summary = styled.div`
-    margin: 10%;
+    margin-left: 10%;
     font-family: "Varela Round";
     font-size: 20px;
     color: black;
 `
 const PriceDescription = styled.div`
-    margin: 10%;
+    margin-right: 10%;
     font-family: "Varela Round";
     font-size: 20px;
     color: black;
