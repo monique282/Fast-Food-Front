@@ -21,7 +21,6 @@ export default function Revision() {
     const [observationText, setObservationText] = useState("");
     let followUp = [];
 
-
     useEffect(() => {
         checkingIfIDasAlreadyBeenSelected();
     }, []);
@@ -38,8 +37,7 @@ export default function Revision() {
             setOrder(updatedOrder);
         }
     };
-
-
+    
     const ProductSpecific = products.find((product) => product.id === id);
 
     function backProducts() {
