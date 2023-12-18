@@ -52,13 +52,13 @@ export default function Revision() {
 
     function selectedSideDishes() {
         if (baconSelected === true) {
-            followUp = [...followUp, { item: "1x Bacon 10g", price: "R$1.00" }];
+            followUp = [...followUp, {id: 1, item: "1x Bacon 10g", price: "R$1.00" }];
         };
         if (cheddarSelected === true) {
-            followUp = [...followUp, { item: "1x Cheddar 10g", price: "R$1.00" }];
+            followUp = [...followUp, { id: 1, item: "1x Cheddar 10g", price: "R$1.00" }];
         };
         if (sauceSelected === true) {
-            followUp = [...followUp, { item: "1x Molho acompanhamento Barbecue", price: "R$1.00" }];
+            followUp = [...followUp, { id: 1, item: "1x Molho acompanhamento Barbecue", price: "R$1.00" }];
         };
     };
 
@@ -218,6 +218,7 @@ const All = styled.div`
     align-items: center;
     justify-content: center;
     overflow-y: auto;
+    z-index: 2;
 `
 const BoxAll = styled.div`
     margin-top: 100%;
