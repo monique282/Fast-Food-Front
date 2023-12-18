@@ -40,7 +40,16 @@ export default function Revision() {
             setCounter(counter - 1);
             console.log(counter)
         }
-    }
+    };
+
+    function removed() {
+        setCounter(1)
+        setBaconSelected(false)
+        setCheddarSelected(false);
+        setSauceSelected(false);
+        setObservationText("");
+        setShowReview(false)
+    };
 
     if (products.length === 0) {
         return (
@@ -159,7 +168,7 @@ export default function Revision() {
                         </FinalValue>
                     </PurchaseSummary>
                     <Finishing>
-                        <RemoveOrderFromList>Remover procuto</RemoveOrderFromList>
+                        <RemoveOrderFromList onClick={() => removed()} >Remover produto</RemoveOrderFromList>
                         <AddProducttoList>Adicionar produto</AddProducttoList>
                     </Finishing>
                 </BoxAll>
