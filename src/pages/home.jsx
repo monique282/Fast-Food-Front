@@ -4,8 +4,9 @@ import React, { useContext, useEffect, useState } from 'react'
 import styled from "styled-components";
 import Combo from '../assets/images/Combo.jpeg';
 import dessert from '../assets/images/dessert.jpeg';
-import drinks from '../assets/images/drinks.png'
-import follow from '../assets/images/follow.jpg'
+import drinks from '../assets/images/drinks.png';
+import follow from '../assets/images/follow.jpg';
+import snack from '../assets/images/snacks.jpeg';
 
 
 export default function Home() {
