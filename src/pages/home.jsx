@@ -47,6 +47,20 @@ export default function Home() {
         setSelectedCategory(parament)
     };
 
+    function handleSearch(query) {
+        setSearch(query);
+        const filteredResults = products.filter((product) => {
+            const lowercaseQuery = query.toLowerCase();
+            const lowercaseName = product.name.toLowerCase();
+            const stringifiedId = String(product.id);
+            return lowercaseName.includes(lowercaseQuery) || stringifiedId.includes(lowercaseQuery);
+        });
+
+        setSearchResults(filteredResults);
+        setProductFiltered(query.length > 0);
+        setSelectedCategory();
+    };
+
     console.log(products)
     if (products.length === 0) {
         return (
@@ -56,7 +70,11 @@ export default function Home() {
         return (
             <All>
                 <Welcome>Seja bem Vindo(a)!</Welcome>
-                <Search placeholder='O que voê procura?' type="text" value={search} onChange={e => setSearch(e.target.value)} ></Search>
+                <Search placeholder='O que voê procura?'
+                    type="text"
+                    value={search}
+                    onChange={e => handleSearch(e.target.value)} >
+                </Search>
                 <Products>
                     <Title>Categorias</Title>
                     <Subtitle>Navegue por categorais</Subtitle>
