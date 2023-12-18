@@ -12,7 +12,7 @@ import Revision from "../components/Revision";
 
 export default function Home() {
 
-    const { products, setProducts } = useContext(AuthContext);
+    const { products, setProducts, setId } = useContext(AuthContext);
     const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
     const [follo, setFollow] = useState([]);
@@ -68,7 +68,8 @@ export default function Home() {
     };
 
     function ShowProductDetails(id) {
-        setShowReview(true)
+        setShowReview(true);
+        setId(id);
     }
 
     if (products.length === 0) {
