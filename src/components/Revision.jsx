@@ -12,12 +12,30 @@ import Barvecue from "../assets/images/barbecue.png"
 
 export default function Revision() {
 
-    const { products, id, showReview, setShowReview } = useContext(AuthContext);
+    const {
+        products, id, showReview,
+        setShowReview, counter, setCounter
+    } = useContext(AuthContext);
 
+    console.log(counter);
     const ProductSpecific = products.find((product) => product.id === id);
 
     function backProducts() {
         setShowReview(false);
+    };
+
+    function More() {
+        setCounter(counter + 1);
+        console.log(counter)
+    };
+
+    function Remove() {
+        if (counter === 1) {
+            setShowReview(false);
+        } else {
+            setCounter(counter - 1);
+            console.log(counter)
+        }
     }
 
     if (products.length === 0) {
@@ -40,9 +58,9 @@ export default function Revision() {
                             <h1>{ProductSpecific.name}</h1>
                             <h2>{ProductSpecific.description}</h2>
                             <AddQauntity>
-                                <Subtract><CgMathMinus style={{ fontSize: "40px", color: "#FCFDFC" }} /></Subtract>
-                                <p>1</p>
-                                <Add><CgMathPlus style={{ fontSize: "40px", color: "#FCFDFC" }} /></Add>
+                                <Subtract onClick={() => Remove()}><CgMathMinus style={{ fontSize: "40px", color: "#FCFDFC" }} /></Subtract>
+                                <p>{counter}</p>
+                                <Add onClick={() => More()} ><CgMathPlus style={{ fontSize: "40px", color: "#FCFDFC" }} /></Add>
                             </AddQauntity>
                         </NameDescriptionQuantity>
                         <Price>R$ {ProductSpecific.price.toFixed(2)}</Price>
