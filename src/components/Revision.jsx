@@ -11,17 +11,16 @@ import Barvecue from "../assets/images/barbecue.png"
 
 export default function Revision() {
     const {
-        products, id, showReview,
-        setShowReview, counter, setCounter
+        products, id, setShowReview,
+        counter, setCounter, order,
+        setOrder
     } = useContext(AuthContext);
     const [baconSelected, setBaconSelected] = useState(false);
     const [cheddarSelected, setCheddarSelected] = useState(false);
     const [sauceSelected, setSauceSelected] = useState(false);
     const [observationText, setObservationText] = useState("");
+    let followUp = [];
 
-
-
-    console.log(counter);
     const ProductSpecific = products.find((product) => product.id === id);
 
     function backProducts() {
@@ -50,6 +49,36 @@ export default function Revision() {
         setObservationText("");
         setShowReview(false)
     };
+
+    function selectedSideDishes() {
+        if (baconSelected === true) {
+            followUp = [...followUp, { item: "1x Bacon 10g", price: "R$1.00" }];
+        };
+        if (cheddarSelected === true) {
+            followUp = [...followUp, { item: "1x Cheddar 10g", price: "R$1.00" }];
+        };
+        if (sauceSelected === true) {
+            followUp = [...followUp, { item: "1x Molho acompanhamento Barbecue", price: "R$1.00" }];
+        };
+    };
+
+    function IWantThese() {
+        selectedSideDishes();
+        const total = (
+            ProductSpecific.price * counter +
+            (baconSelected ? 1 : 0) + (cheddarSelected ? 1 : 0) + (sauceSelected ? 1 : 0)
+        ).toFixed(2);
+
+        const orderDetails = { ProductSpecific, counter, followUp, observationText, total };
+
+        const newOrder = [...order, orderDetails];
+        setOrder(newOrder);
+
+        setCounter(1)
+        setShowReview(false)
+    };
+
+
 
     if (products.length === 0) {
         return (
@@ -169,7 +198,7 @@ export default function Revision() {
                     </PurchaseSummary>
                     <Finishing>
                         <RemoveOrderFromList onClick={() => removed()} >Remover produto</RemoveOrderFromList>
-                        <AddProducttoList>Adicionar produto</AddProducttoList>
+                        <AddProducttoList onClick={() => IWantThese()} >Adicionar produto</AddProducttoList>
                     </Finishing>
                 </BoxAll>
             </All>
