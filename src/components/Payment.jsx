@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
 import { HiOutlineCheck } from "react-icons/hi";
@@ -8,7 +8,17 @@ import { FaWallet } from "react-icons/fa6";
 import { FaMoneyBillAlt } from "react-icons/fa";
 
 export default function Payment() {
-    const { products } = useContext(AuthContext);
+
+    const { products,
+        setShowReview, order,
+        setShowPayment
+    } = useContext(AuthContext);
+    let sumTotal = 0;
+    if (order && order.length > 0) {
+        sumTotal = order.reduce((accumulator, item) => {
+            return accumulator + parseFloat(item.total.replace(',', '.'));
+        }, 0);
+    };
 
     if (products.length === 0) {
         <All>
@@ -22,17 +32,32 @@ export default function Payment() {
                         <p><FaWallet style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Pagamento</p>
                         <Order>
                             <p>Resumo da compra</p>
-                            <PurchaseSummary>
-                                <DescriptionPrice>
-                                    <Summary>1x {products[1].name}</Summary>
-                                    <PriceDescription>R$ {products[1].price.toFixed(2)}</PriceDescription>
-                                </DescriptionPrice>
-                                <Divider></Divider>
-                                <FinalValue>
-                                    <h1>Total do pedido:</h1>
-                                    <Amount>R$ 30,50</Amount>
-                                </FinalValue>
-                            </PurchaseSummary>
+                            {order && order.length > 0 && (
+                                <PurchaseSummary>
+                                    {order.map((main) => (
+                                        <React.Fragment key={main.ProductSpecific.id}>
+                                            <DescriptionPrice>
+                                                <Summary>{main.counter}x {main.ProductSpecific.name}</Summary>
+                                                <PriceDescription>R$ {((main.ProductSpecific.price) * main.counter).toFixed(2)}</PriceDescription>
+                                            </DescriptionPrice>
+                                            {main.followUp.length > 0 && (
+                                                main.followUp.map((followUpItem) => (
+                                                    <DescriptionPrice key={followUpItem.id}>
+                                                        <Summary>{followUpItem.item}</Summary>
+                                                        <PriceDescription>{followUpItem.price}</PriceDescription>
+                                                    </DescriptionPrice>
+                                                ))
+                                            )}
+                                        </React.Fragment>
+                                    ))}
+
+                                    <Divider></Divider>
+                                    <FinalValue>
+                                        <h1>Total do pedido:</h1>
+                                        <Amount>R$ {sumTotal.toFixed(2)}  </Amount>
+                                    </FinalValue>
+                                </PurchaseSummary>
+                            )}
                             <CodeName>
                                 <Name>
                                     <p>Nome do cliente</p>
@@ -93,14 +118,13 @@ const All = styled.div`
     background-color: #ffffff;
     display: flex;
     justify-content: center;
-    overflow-y: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    z-index: 3;
 `
 const BoxAll = styled.div`
     width: 100%;
-    height: auto;
+    height: 100%;
     display: flex;
+    overflow-y: auto;
 `
 const TotalPaymente = styled.div`
     width: 50%;
@@ -386,3 +410,4 @@ const AddProducttoList = styled.div`
 const vad = styled.div`
     
 `
+
