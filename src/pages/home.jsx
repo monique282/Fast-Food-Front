@@ -9,12 +9,14 @@ import follow from '../assets/images/follow.jpg';
 import snack from '../assets/images/snacks.jpeg';
 import Revision from "../components/Revision";
 import { CgCheck } from "react-icons/cg";
+import Payment from "../components/Payment";
 
 
 export default function Home() {
 
     const { products, setProducts, setId,
-        showReview, setShowReview, order, setOrder
+        showReview, setShowReview, order, 
+        showPayment, setShowPayment
     } = useContext(AuthContext);
     const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
@@ -91,6 +93,10 @@ export default function Home() {
         location.reload();
     };
 
+    function IWantThese(){
+        setShowPayment(true)
+    }
+
     if (products.length === 0) {
         return (
             <>carregando</>
@@ -101,6 +107,10 @@ export default function Home() {
                 {showReview === true && (
                     <Revision></Revision>
                 )}
+                {showPayment === true && (
+                    <Payment></Payment>
+                )}
+                
                 <Welcome>Seja bem Vindo(a)!</Welcome>
                 <Search placeholder='O que voê procura?'
                     type="text"
