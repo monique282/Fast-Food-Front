@@ -14,7 +14,7 @@ import { CgCheck } from "react-icons/cg";
 export default function Home() {
 
     const { products, setProducts, setId,
-        showReview, setShowReview, order
+        showReview, setShowReview, order, setOrder
     } = useContext(AuthContext);
     const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
@@ -26,8 +26,8 @@ export default function Home() {
     const [productFiltered, setProductFiltered] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [ordereIds, setOrdereIds] = useState([]);
-    console.log(ordereIds)
-    console.log(order)
+    let sumTotal = 0;
+
     const url = `${import.meta.env.VITE_API_URL}/home`;
 
     useEffect(() => {
@@ -81,11 +81,15 @@ export default function Home() {
         setId(id);
     };
 
-    const sumTotal = order.reduce((accumulator, item) => {
-        // Parse 'total' to a number and add it to the accumulator
-        return accumulator + parseFloat(item.total.replace(',', '.'));
-      }, 0);
-      console.log(sumTotal)
+    if (order && order.length > 0) {
+        sumTotal = order.reduce((accumulator, item) => {
+            return accumulator + parseFloat(item.total.replace(',', '.'));
+        }, 0);
+    };
+
+    function cancel() {
+        location.reload();
+    };
 
     if (products.length === 0) {
         return (
@@ -256,13 +260,13 @@ export default function Home() {
                         )}
                     </Menu>
                 </Products>
-                {order.length > 0 && (
+                {order && order.length > 0 && (
                     <PurchaseSummary>
                         {order.map((main) => (
                             <React.Fragment key={main.ProductSpecific.id}>
                                 <DescriptionPrice>
                                     <Summary>{main.counter}x {main.ProductSpecific.name}</Summary>
-                                    <PriceDescription>R$ {((main.ProductSpecific.price)*main.counter).toFixed(2)}</PriceDescription>
+                                    <PriceDescription>R$ {((main.ProductSpecific.price) * main.counter).toFixed(2)}</PriceDescription>
                                 </DescriptionPrice>
                                 {main.followUp.length > 0 && (
                                     main.followUp.map((followUpItem) => (
@@ -284,7 +288,7 @@ export default function Home() {
                 )}
 
                 <Finishing>
-                    <RemoveOrderFromList onClick={() => removed()} >Cancelar</RemoveOrderFromList>
+                    <RemoveOrderFromList onClick={() => cancel()} >Cancelar</RemoveOrderFromList>
                     <AddProducttoList onClick={() => IWantThese()} >Finalizar pedido</AddProducttoList>
                 </Finishing>
             </All >
