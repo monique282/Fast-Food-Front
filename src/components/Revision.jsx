@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 import { AuthContext } from "../context/authContext";
 import { HiOutlineX } from "react-icons/hi";
@@ -11,7 +12,13 @@ import Barvecue from "../assets/images/barbecue.png"
 
 export default function Revision() {
 
-    const { products } = useContext(AuthContext);
+    const { products, id, showReview, setShowReview } = useContext(AuthContext);
+
+    const ProductSpecific = products.find((product) => product.id === id);
+
+    function backProducts() {
+        setShowReview(false);
+    }
 
     if (products.length === 0) {
         return (
@@ -25,20 +32,20 @@ export default function Revision() {
                 <BoxAll>
                     <Header>
                         <p>Revise seu pedido!</p>
-                        <Exit><HiOutlineX style={{ width: "30px", height: "30px", color: "#9F9F9F", fontWeight: "bold" }} /></Exit>
+                        <Exit onClick={() => backProducts()}><HiOutlineX style={{ width: "30px", height: "30px", color: "#9F9F9F", fontWeight: "bold" }} /></Exit>
                     </Header>
                     <ProductOverview>
-                        <img src={products[1].image} alt=""></img>
+                        <img src={ProductSpecific.image} alt=""></img>
                         <NameDescriptionQuantity>
-                            <h1>{products[1].name}</h1>
-                            <h2>{products[1].description}</h2>
+                            <h1>{ProductSpecific.name}</h1>
+                            <h2>{ProductSpecific.description}</h2>
                             <AddQauntity>
                                 <Subtract><CgMathMinus style={{ fontSize: "40px", color: "#FCFDFC" }} /></Subtract>
                                 <p>1</p>
                                 <Add><CgMathPlus style={{ fontSize: "40px", color: "#FCFDFC" }} /></Add>
                             </AddQauntity>
                         </NameDescriptionQuantity>
-                        <Price>R$ {products[1].price.toFixed(2)}</Price>
+                        <Price>R$ {ProductSpecific.price.toFixed(2)}</Price>
                     </ProductOverview>
                     <Additional>
                         <h1>Adicionais</h1>
@@ -57,7 +64,7 @@ export default function Revision() {
                             </Butons>
                         </Bacon>
                         <Cheddar>
-                        <img src={Cheddars} alt="" />
+                            <img src={Cheddars} alt="" />
                             <NameQuantity>
                                 <h1>Cheddar</h1>
                                 <h2>10g</h2>
@@ -70,7 +77,7 @@ export default function Revision() {
                             </Butons>
                         </Cheddar>
                         <Sauce>
-                        <img src={Barvecue} alt="" />
+                            <img src={Barvecue} alt="" />
                             <NameQuantity>
                                 <h1>molho acompanhamento</h1>
                                 <h2>Barbecue</h2>
@@ -89,8 +96,8 @@ export default function Revision() {
                     </Observation>
                     <PurchaseSummary>
                         <DescriptionPrice>
-                            <Summary>1x {products[1].name}</Summary>
-                            <PriceDescription>R$ {products[1].price.toFixed(2)}</PriceDescription>
+                            <Summary>1x {ProductSpecific.name}</Summary>
+                            <PriceDescription>R$ {ProductSpecific.price.toFixed(2)}</PriceDescription>
                         </DescriptionPrice>
                         <Divider></Divider>
                         <FinalValue>
@@ -112,7 +119,6 @@ export default function Revision() {
 const All = styled.div`
     width: 100vw;
     height: 100vh;
-    border: 4px solid red;
     position: fixed;
     left: 0;
     top: 0;
