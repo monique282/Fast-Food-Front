@@ -79,7 +79,13 @@ export default function Home() {
     function ShowProductDetails(id) {
         setShowReview(true);
         setId(id);
-    }
+    };
+
+    const sumTotal = order.reduce((accumulator, item) => {
+        // Parse 'total' to a number and add it to the accumulator
+        return accumulator + parseFloat(item.total.replace(',', '.'));
+      }, 0);
+      console.log(sumTotal)
 
     if (products.length === 0) {
         return (
@@ -220,7 +226,8 @@ export default function Home() {
                                                     <Select>
                                                         <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
                                                     </Select>
-                                                )}                                                <img src={main.image} alt="" />
+                                                )}
+                                                <img src={main.image} alt="" />
                                                 <h1>{main.name}</h1>
                                                 <h2>{main.description}</h2>
                                                 <p>R$ {main.price.toFixed(2)}</p>
@@ -249,6 +256,37 @@ export default function Home() {
                         )}
                     </Menu>
                 </Products>
+                {order.length > 0 && (
+                    <PurchaseSummary>
+                        {order.map((main) => (
+                            <React.Fragment key={main.ProductSpecific.id}>
+                                <DescriptionPrice>
+                                    <Summary>{main.counter}x {main.ProductSpecific.name}</Summary>
+                                    <PriceDescription>R$ {((main.ProductSpecific.price)*main.counter).toFixed(2)}</PriceDescription>
+                                </DescriptionPrice>
+                                {main.followUp.length > 0 && (
+                                    main.followUp.map((followUpItem) => (
+                                        <DescriptionPrice key={followUpItem.id}>
+                                            <Summary>{followUpItem.item}</Summary>
+                                            <PriceDescription>{followUpItem.price}</PriceDescription>
+                                        </DescriptionPrice>
+                                    ))
+                                )}
+                            </React.Fragment>
+                        ))}
+
+                        <Divider></Divider>
+                        <FinalValue>
+                            <h1>Total do pedido:</h1>
+                            <Amount>R$ {sumTotal.toFixed(2)}  </Amount>
+                        </FinalValue>
+                    </PurchaseSummary>
+                )}
+
+                <Finishing>
+                    <RemoveOrderFromList onClick={() => removed()} >Cancelar</RemoveOrderFromList>
+                    <AddProducttoList onClick={() => IWantThese()} >Finalizar pedido</AddProducttoList>
+                </Finishing>
             </All >
         )
     };
@@ -395,6 +433,87 @@ const ProductBox = styled.div`
         margin-top: 5%;
         font-weight: bold;
         }
+`
+const PurchaseSummary = styled.div`
+    height: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 1px solid #D2D2D2;
+    border-radius: 5px;
+    margin-top: 5%;
+`
+const DescriptionPrice = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+`
+const Summary = styled.div`
+    margin-left: 10%;
+    font-family: "Varela Round";
+    font-size: 20px;
+    color: black;
+`
+const PriceDescription = styled.div`
+    margin-right: 10%;
+    font-family: "Varela Round";
+    font-size: 20px;
+    color: black;
+`
+const Divider = styled.div`
+    border-bottom: 2px dashed #C3C3C3; 
+    margin: 20px 20px; 
+`
+const FinalValue = styled.div`
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    h1{
+    font-family: "Varela Round";
+    font-size: 20px;
+    color: black;
+    }
+`
+const Amount = styled.div`
+    font-family: "Varela Round";
+    font-size: 40px;
+    color: black;
+    font-weight: bold; 
+    margin-top: 3%;
+`
+const Finishing = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+`
+const RemoveOrderFromList = styled.div`
+    width: 22%;
+    height: 50px;
+    margin-right: 5%;
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    border:2px solid #2E5D15 ;
+`
+const AddProducttoList = styled.div`
+    width: 22%;
+    height: 50px;
+    margin-right: 5%;
+    background-color: #2E5D15;
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    border:2px solid #2E5D15 ;
+    color: #FFFFFF;
 `
 
 
