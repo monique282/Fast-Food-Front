@@ -12,7 +12,8 @@ export default function AuthProvider({ children }) {
         <AuthContext.Provider value={{
             products, setProducts,
             id, setId,
-            showReview, setShowReview
+            showReview, setShowReview, 
+            counter, setCounter
         }}>
             {children}
         </AuthContext.Provider>
