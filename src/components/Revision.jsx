@@ -21,6 +21,7 @@ export default function Revision() {
     const [observationText, setObservationText] = useState("");
     let followUp = [];
 
+
     const ProductSpecific = products.find((product) => product.id === id);
 
     function backProducts() {
@@ -55,10 +56,10 @@ export default function Revision() {
             followUp = [...followUp, {id: 1, item: "1x Bacon 10g", price: "R$1.00" }];
         };
         if (cheddarSelected === true) {
-            followUp = [...followUp, { id: 1, item: "1x Cheddar 10g", price: "R$1.00" }];
+            followUp = [...followUp, { id: 2, item: "1x Cheddar 10g", price: "R$1.00" }];
         };
         if (sauceSelected === true) {
-            followUp = [...followUp, { id: 1, item: "1x Molho acompanhamento Barbecue", price: "R$1.00" }];
+            followUp = [...followUp, { id: 3, item: "1x Molho acompanhamento Barbecue", price: "R$1.00" }];
         };
     };
 
