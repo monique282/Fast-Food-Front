@@ -12,7 +12,7 @@ import Revision from "../components/Revision";
 
 export default function Home() {
 
-    const { products, setProducts, setId } = useContext(AuthContext);
+    const { products, setProducts, setId, showReview, setShowReview } = useContext(AuthContext);
     const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
     const [follo, setFollow] = useState([]);
@@ -22,7 +22,7 @@ export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState();
     const [productFiltered, setProductFiltered] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
-    const [showReview, setShowReview] = useState(false)
+
 
     const url = `${import.meta.env.VITE_API_URL}/home`;
 
@@ -294,7 +294,7 @@ const ProductBox = styled.div`
     text-align: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
     margin-top: 2.4%;
-    margin-left: 2.4%; 
+    margin-right: 2.4%; 
         img {
         width: 100px;
         margin-left: 23%;
