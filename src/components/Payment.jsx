@@ -4,8 +4,8 @@ import { AuthContext } from "../context/authContext";
 import { HiOutlineCheck } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
-
-
+import { FaWallet } from "react-icons/fa6";
+import { FaMoneyBillAlt } from "react-icons/fa";
 
 export default function Payment() {
     const { products } = useContext(AuthContext);
@@ -19,7 +19,7 @@ export default function Payment() {
             <All>
                 <BoxAll>
                     <TotalPaymente>
-                        <p><MdPayment style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Pagamento</p>
+                        <p><FaWallet style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Pagamento</p>
                         <Order>
                             <p>Resumo da compra</p>
                             <PurchaseSummary>
@@ -48,7 +48,33 @@ export default function Payment() {
                     <Sidebar></Sidebar>
                     <FinalizePayment>
                         <Order>
-
+                            <Title>Selecione a forma de pagamento</Title>
+                            <CreditDebitMoney>
+                                <p><MdPayment style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Credito</p>
+                                <div></div>
+                            </CreditDebitMoney>
+                            <CreditDebitMoney>
+                                <p><MdPayment style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Debito</p>
+                                <div></div>
+                            </CreditDebitMoney>
+                            <CreditDebitMoney>
+                                <p><FaMoneyBillAlt style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Dinheiro</p>
+                                <div></div>
+                            </CreditDebitMoney>
+                            <ValueChange>
+                                <Value>
+                                    <p>Valor entregue</p>
+                                    <input placeholder='Digite o Valor' type="text"></input>
+                                </Value>
+                                <Change>
+                                    <p>Troco</p>
+                                    <div>1</div>
+                                </Change>
+                            </ValueChange>
+                            <Finishing>
+                                <RemoveOrderFromList>Cancelar</RemoveOrderFromList>
+                                <AddProducttoList>Finalizar Pedido</AddProducttoList>
+                            </Finishing>
                         </Order>
                     </FinalizePayment>
                 </BoxAll>
@@ -178,7 +204,7 @@ const CodeName = styled.div`
 const Name = styled.div` 
     input{
     width: 150%;
-    height: 70%;
+    height: 40px;
     font-family: "Varela Round";
     font-size: 15px;
     color: black;
@@ -216,7 +242,7 @@ const Code = styled.div`
         }
         div{
         width: 100%;
-        height: 70%;  
+        height: 40px;  
         background-color: #F4F4F4;
         display: flex;
         justify-content: center;
@@ -235,4 +261,128 @@ const FinalizePayment = styled.div`
         color: black;
         font-weight: bold;
         }
+`
+const Title = styled.div`
+    font-family: "Varela Round";
+    font-size: 20px;
+    color: black;
+    font-weight: bold;
+    margin-top: 4.5%;
+`
+const CreditDebitMoney = styled.div`
+    width: 100%;
+    height: 50%;
+    border: 1px solid #D2D2D2;
+    border-radius: 5px;
+    margin-top: 1%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+        p{
+        margin: 6%;
+        display: flex;
+        align-items: center;
+        }
+        div{
+        width: 20px;
+        height: 20px; 
+        border :3px solid #2E5D15 ;
+        border-radius: 50px;
+        margin-right: 10%;
+        }
+`
+const ValueChange = styled.div`
+    height: 100%;
+    width: 100%;
+    display: flex;
+    margin-top: 4%;
+    justify-content: space-between;
+`
+const Value = styled.div` 
+    width: 100%;
+    height: 100%;
+        p{
+        font-family: "Varela Round";
+        font-size: 20px;
+        color: black;
+        font-weight: bold; 
+        margin-right: 10%;
+        }
+        input{
+        width: 50%;
+        height: 31px;
+        font-family: "Varela Round";
+        font-size: 15px;
+        color: black;
+        margin-top: 6%;
+        background-color: #F4F4F4;
+        border: none;
+        border-radius: 5px;
+        padding-left: 10px;
+            input::placeholder {
+            color: #000000; 
+            margin-right: 0px;
+            }
+            input:focus {
+            border: 1px solid black;
+            outline: none; 
+            }
+            }
+`
+const Change = styled.div`
+    width: 100%;
+    height: 100%;
+        p{
+        font-family: "Varela Round";
+        font-size: 20px;
+        color: black;
+        font-weight: bold; 
+        margin-right: 10%;
+        }
+        div{
+        width: 50%;
+        height: 33px;  
+        background-color: #F4F4F4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 6%;
+        border-radius: 5px;
+        }
+`
+const Finishing = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5%;
+    margin-bottom: 10%;
+`
+const RemoveOrderFromList = styled.div`
+    width: 50%;
+    height: 50px;
+    margin-right: 5%;
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border:2px solid #2E5D15 ;
+`
+const AddProducttoList = styled.div`
+    width: 50%;
+    height: 50px;
+    background-color: #2E5D15;
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    border:2px solid #2E5D15 ;
+    color: #FFFFFF;
+`
+const vad = styled.div`
+    
 `
