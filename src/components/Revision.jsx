@@ -101,7 +101,7 @@ export default function Revision() {
                         <Sauce onClick={() => setSauceSelected(!sauceSelected)}>
                             <img src={Barvecue} alt="" />
                             <NameQuantity>
-                                <h1>molho acompanhamento</h1>
+                                <h1>Molho acompanhamento</h1>
                                 <h2>Barbecue</h2>
                             </NameQuantity>
                             <Butons>
@@ -123,12 +123,39 @@ export default function Revision() {
                     <PurchaseSummary>
                         <DescriptionPrice>
                             <Summary>{counter}x {ProductSpecific.name}</Summary>
-                            <PriceDescription>R$ {(ProductSpecific.price*(counter)).toFixed(2)}</PriceDescription>
+                            <PriceDescription>R$ {(ProductSpecific.price * (counter)).toFixed(2)}</PriceDescription>
                         </DescriptionPrice>
+                        {baconSelected === true && (
+                            <DescriptionPrice>
+                                <Summary>
+                                    1x Bacon 10g</Summary>
+                                <PriceDescription>R$ 1.00</PriceDescription>
+                            </DescriptionPrice>
+                        )}
+                        {cheddarSelected === true && (
+                            <DescriptionPrice>
+                                <Summary>
+                                    1x Chedar 10g</Summary>
+                                <PriceDescription>R$ 1.00</PriceDescription>
+                            </DescriptionPrice>
+                        )}
+                        {sauceSelected === true && (
+                            <DescriptionPrice>
+                                <Summary>
+                                    1x Molho acompanhamento Barbecue</Summary>
+                                <PriceDescription>R$ 1.00</PriceDescription>
+                            </DescriptionPrice>
+                        )}
                         <Divider></Divider>
                         <FinalValue>
                             <h1>Total do pedido:</h1>
-                            <Amount>R$ {(ProductSpecific.price*(counter)).toFixed(2)}</Amount>
+                            <Amount>R$ {(
+                                ProductSpecific.price * counter +
+                                (baconSelected ? 1 : 0) +
+                                (cheddarSelected ? 1 : 0) +
+                                (sauceSelected ? 1 : 0)
+                            ).toFixed(2)}
+                            </Amount>
                         </FinalValue>
                     </PurchaseSummary>
                     <Finishing>
@@ -404,15 +431,16 @@ const PurchaseSummary = styled.div`
 const DescriptionPrice = styled.div`
     display: flex;
     justify-content: space-between;
+    margin-top: 5%;
 `
 const Summary = styled.div`
-    margin: 10%;
+    margin-left: 10%;
     font-family: "Varela Round";
     font-size: 20px;
     color: black;
 `
 const PriceDescription = styled.div`
-    margin: 10%;
+    margin-right: 10%;
     font-family: "Varela Round";
     font-size: 20px;
     color: black;
