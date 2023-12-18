@@ -7,6 +7,7 @@ import dessert from '../assets/images/dessert.jpeg';
 import drinks from '../assets/images/drinks.png'
 import follow from '../assets/images/follow.jpg'
 import snack from '../assets/images/snacks.jpeg'
+import Revision from "../components/Revision";
 
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
     const [selectedCategory, setSelectedCategory] = useState();
     const [productFiltered, setProductFiltered] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
+    const [showReview, setShowReview] = useState(false)
 
     const url = `${import.meta.env.VITE_API_URL}/home`;
 
@@ -65,6 +67,10 @@ export default function Home() {
         setSelectedCategory();
     };
 
+    function ShowProductDetails(id) {
+        setShowReview(true)
+    }
+
     if (products.length === 0) {
         return (
             <>carregando</>
@@ -72,6 +78,9 @@ export default function Home() {
     } else {
         return (
             <All>
+                {showReview === true && (
+                    <Revision></Revision>
+                )}
                 <Welcome>Seja bem Vindo(a)!</Welcome>
                 <Search placeholder='O que voê procura?'
                     type="text"
@@ -108,7 +117,7 @@ export default function Home() {
                     <Menu>
                         {(!productFiltered) && (
                             snacks.map((main) => (
-                                <ProductBox key={main.id}>
+                                <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
                                     <img src={main.image} alt="" />
                                     <h1>{main.name}</h1>
                                     <h2>{main.description}</h2>
@@ -120,7 +129,7 @@ export default function Home() {
                             <>
                                 {selectedCategory === "COMBOO" && (
                                     comboo.map((main) => (
-                                        <ProductBox key={main.id}>
+                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)} >
                                             <img src={main.image} alt="" />
                                             <h1>{main.name}</h1>
                                             <h2>{main.description}</h2>
@@ -130,7 +139,7 @@ export default function Home() {
                                 )}
                                 {selectedCategory === "FOLLOW" && (
                                     follo.map((main) => (
-                                        <ProductBox key={main.id}>
+                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
                                             <img src={main.image} alt="" />
                                             <h1>{main.name}</h1>
                                             <h2>{main.description}</h2>
@@ -140,7 +149,7 @@ export default function Home() {
                                 )}
                                 {selectedCategory === "DESSERT" && (
                                     desser.map((main) => (
-                                        <ProductBox key={main.id}>
+                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
                                             <img src={main.image} alt="" />
                                             <h1>{main.name}</h1>
                                             <h2>{main.description}</h2>
@@ -150,7 +159,7 @@ export default function Home() {
                                 )}
                                 {selectedCategory === "SNACKS" && (
                                     snacks.map((main) => (
-                                        <ProductBox key={main.id}>
+                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
                                             <img src={main.image} alt="" />
                                             <h1>{main.name}</h1>
                                             <h2>{main.description}</h2>
@@ -160,7 +169,7 @@ export default function Home() {
                                 )}
                                 {selectedCategory === "DRINK" && (
                                     drink.map((main) => (
-                                        <ProductBox key={main.id}>
+                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
                                             <img src={main.image} alt="" />
                                             <h1>{main.name}</h1>
                                             <h2>{main.description}</h2>
@@ -170,7 +179,7 @@ export default function Home() {
                                 )}
                                 {search.length !== 0 && (
                                     searchResults.map((main) => (
-                                        <ProductBox key={main.id}>
+                                        <ProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
                                             <img src={main.image} alt="" />
                                             <h1>{main.name}</h1>
                                             <h2>{main.description}</h2>
@@ -266,7 +275,6 @@ const Box = styled.div`
         width: 100px;
         margin-left: 25%;
         margin-bottom: 3px;
-        z-index: 0
         }
 `
 const Menu = styled.div`
