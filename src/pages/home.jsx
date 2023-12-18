@@ -18,6 +18,9 @@ export default function Home() {
     const [drink, setDrink] = useState([]);
     const [desser, setDesert] = useState([]);
     const [comboo, setCombo] = useState([]);
+    const [productFiltered, setProductFiltered] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState();
+    const [searchResults, setSearchResults] = useState([]);
 
     const url = `${import.meta.env.VITE_API_URL}/home`;
 
