@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components"
 import { AuthContext } from "../context/authContext";
 import { HiOutlineX } from "react-icons/hi";
@@ -11,9 +12,13 @@ import Barvecue from "../assets/images/barbecue.png"
 
 export default function Revision() {
 
-    const { products, id } = useContext(AuthContext);
+    const { products, id, showReview, setShowReview } = useContext(AuthContext);
 
     const ProductSpecific = products.find((product) => product.id === id);
+
+    function backProducts() {
+        setShowReview(false);
+    }
 
     if (products.length === 0) {
         return (
@@ -27,7 +32,7 @@ export default function Revision() {
                 <BoxAll>
                     <Header>
                         <p>Revise seu pedido!</p>
-                        <Exit><HiOutlineX style={{ width: "30px", height: "30px", color: "#9F9F9F", fontWeight: "bold" }} /></Exit>
+                        <Exit onClick={() => backProducts()}><HiOutlineX style={{ width: "30px", height: "30px", color: "#9F9F9F", fontWeight: "bold" }} /></Exit>
                     </Header>
                     <ProductOverview>
                         <img src={ProductSpecific.image} alt=""></img>
@@ -59,7 +64,7 @@ export default function Revision() {
                             </Butons>
                         </Bacon>
                         <Cheddar>
-                        <img src={Cheddars} alt="" />
+                            <img src={Cheddars} alt="" />
                             <NameQuantity>
                                 <h1>Cheddar</h1>
                                 <h2>10g</h2>
@@ -72,7 +77,7 @@ export default function Revision() {
                             </Butons>
                         </Cheddar>
                         <Sauce>
-                        <img src={Barvecue} alt="" />
+                            <img src={Barvecue} alt="" />
                             <NameQuantity>
                                 <h1>molho acompanhamento</h1>
                                 <h2>Barbecue</h2>
