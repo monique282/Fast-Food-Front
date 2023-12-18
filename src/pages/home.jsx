@@ -40,6 +40,12 @@ export default function Home() {
         });
     }, []);
 
+    function ShowSpecific(parament) {
+        setProductFiltered(true)
+        setSelectedCategory();
+        setSelectedCategory(parament)
+    };
+
     console.log(products)
     if (products.length === 0) {
         return (
@@ -54,19 +60,26 @@ export default function Home() {
                     <Title>Categorias</Title>
                     <Subtitle>Navegue por categorais</Subtitle>
                     <Categories>
-                        <Box>
+                        <Box onClick={() => ShowSpecific("COMBOO")}>
                             <img src={Combo} alt="" />
                             <p style={{ fontWeight: "bold" }}>Combos</p>
                         </Box>
-                        <Box>
+                        <Box onClick={() => ShowSpecific("SNACKS")}>
+                            <img src={snack} alt="" />
+                            <p style={{ fontWeight: "bold" }}>Lanches</p>
+                        </Box>
+                        <Box onClick={() => ShowSpecific("FOLLOW")}>
                             <img src={follow} alt="" />
-                            <p style={{ marginTop: "-5px", fontWeight: "bold" }}>Acompanhamentos</p></Box>
-                        <Box>
+                            <p style={{ marginTop: "-5px", fontWeight: "bold" }}>Acompanhamentos</p>
+                        </Box>
+                        <Box onClick={() => ShowSpecific("DRINK")}>
                             <img src={drinks} alt="" />
-                            <p style={{ fontWeight: "bold" }}>Bebidas</p></Box>
-                        <Box>
+                            <p style={{ fontWeight: "bold" }}>Bebidas</p>
+                        </Box>
+                        <Box onClick={() => ShowSpecific("DESSERT")}>
                             <img src={dessert} alt="" />
-                            <p style={{ fontWeight: "bold" }}>Sobremesas</p></Box>
+                            <p style={{ fontWeight: "bold" }}>Sobremesas</p>
+                        </Box>
                     </Categories>
                     <Title>Produtos</Title>
                     <Subtitle>Selecione um produto para adicioar ao seu pedido</Subtitle>
