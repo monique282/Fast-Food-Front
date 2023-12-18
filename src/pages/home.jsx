@@ -269,6 +269,7 @@ const Box = styled.div`
     border: none;
     border-radius: 10px;
     display: flex;
+    font-family: "Varela Round";
     flex-direction: column;
     text-align: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
