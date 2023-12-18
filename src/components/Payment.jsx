@@ -11,8 +11,9 @@ export default function Payment() {
 
     const { products,
         setShowReview, order,
-        setShowPayment
+        setShowPayment, nameClient, setNameClient
     } = useContext(AuthContext);
+   
     let sumTotal = 0;
     if (order && order.length > 0) {
         sumTotal = order.reduce((accumulator, item) => {
@@ -61,7 +62,11 @@ export default function Payment() {
                             <CodeName>
                                 <Name>
                                     <p>Nome do cliente</p>
-                                    <input placeholder='Primeiro nome' type="text"></input>
+                                    <input placeholder='Primeiro nome'
+                                        type="text"
+                                        value={nameClient}
+                                        onChange={(e) => setNameClient(e.target.value)}
+                                    ></input>
                                 </Name>
                                 <Code>
                                     <p>Código</p>
