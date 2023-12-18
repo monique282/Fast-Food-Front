@@ -17,6 +17,7 @@ export default function Revision() {
     const [baconSelected, setBaconSelected] = useState(false);
     const [cheddarSelected, setCheddarSelected] = useState(false);
     const [sauceSelected, setSauceSelected] = useState(false);
+    const [observationText, setObservationText] = useState("");
 
 
 
@@ -113,17 +114,21 @@ export default function Revision() {
                     </Additional>
                     <Observation>
                         <h1>Observações</h1>
-                        <Search placeholder='Adicione uma observação ao pedido' type="text" ></Search>
+                        <Search placeholder='Adicione uma observação ao pedido'
+                            type="text"
+                            value={observationText}
+                            onChange={(e) => setObservationText(e.target.value)}
+                        ></Search>
                     </Observation>
                     <PurchaseSummary>
                         <DescriptionPrice>
-                            <Summary>1x {ProductSpecific.name}</Summary>
-                            <PriceDescription>R$ {ProductSpecific.price.toFixed(2)}</PriceDescription>
+                            <Summary>{counter}x {ProductSpecific.name}</Summary>
+                            <PriceDescription>R$ {(ProductSpecific.price*(counter)).toFixed(2)}</PriceDescription>
                         </DescriptionPrice>
                         <Divider></Divider>
                         <FinalValue>
                             <h1>Total do pedido:</h1>
-                            <Amount>R$ 30,50</Amount>
+                            <Amount>R$ {(ProductSpecific.price*(counter)).toFixed(2)}</Amount>
                         </FinalValue>
                     </PurchaseSummary>
                     <Finishing>
