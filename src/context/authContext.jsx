@@ -7,7 +7,9 @@ export default function AuthProvider({ children }) {
     const [id, setId] = useState();
     const [showReview, setShowReview] = useState(false);
     const [counter, setCounter] = useState(1);
-    const [order, setOrder] = useState([])
+    const [order, setOrder] = useState([]);
+    const [showPayment, setShowPayment] = useState(false)
+
 
     return (
         <AuthContext.Provider value={{
@@ -15,7 +17,8 @@ export default function AuthProvider({ children }) {
             id, setId,
             showReview, setShowReview, 
             counter, setCounter,
-            order, setOrder
+            order, setOrder,
+            showPayment, setShowPayment
         }}>
             {children}
         </AuthContext.Provider>
