@@ -4,22 +4,22 @@ import React, { useContext, useEffect, useState } from 'react'
 import styled from "styled-components";
 import Combo from '../assets/images/Combo.jpeg';
 import dessert from '../assets/images/dessert.jpeg';
-import drinks from '../assets/images/drinks.png';
-import follow from '../assets/images/follow.jpg';
-import snack from '../assets/images/snacks.jpeg';
+import drinks from '../assets/images/drinks.png'
+import follow from '../assets/images/follow.jpg'
+import snack from '../assets/images/snacks.jpeg'
 
 
 export default function Home() {
 
     const { products, setProducts } = useContext(AuthContext);
-    const [search, setSearch] = useState();
+    const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
     const [follo, setFollow] = useState([]);
     const [drink, setDrink] = useState([]);
     const [desser, setDesert] = useState([]);
     const [comboo, setCombo] = useState([]);
-    const [productFiltered, setProductFiltered] = useState(false);
     const [selectedCategory, setSelectedCategory] = useState();
+    const [productFiltered, setProductFiltered] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
 
     const url = `${import.meta.env.VITE_API_URL}/home`;
@@ -42,6 +42,7 @@ export default function Home() {
         promise.catch(err => {
             console.log(err.response);
         });
+
     }, []);
 
     function ShowSpecific(parament) {
@@ -64,7 +65,6 @@ export default function Home() {
         setSelectedCategory();
     };
 
-    console.log(products)
     if (products.length === 0) {
         return (
             <>carregando</>
@@ -106,12 +106,80 @@ export default function Home() {
                     <Title>Produtos</Title>
                     <Subtitle>Selecione um produto para adicioar ao seu pedido</Subtitle>
                     <Menu>
-                        <ProductBox>
-                            <img src={products[1].image} alt="" />
-                            <h1>{products[1].name}</h1>
-                            <h2>{products[1].description}</h2>
-                            <p>R$ {products[1].price.toFixed(2)}</p>
-                        </ProductBox>
+                        {(!productFiltered) && (
+                            snacks.map((main) => (
+                                <ProductBox key={main.id}>
+                                    <img src={main.image} alt="" />
+                                    <h1>{main.name}</h1>
+                                    <h2>{main.description}</h2>
+                                    <p>R$ {main.price.toFixed(2)}</p>
+                                </ProductBox>
+                            ))
+                        )}
+                        {productFiltered === true && (
+                            <>
+                                {selectedCategory === "COMBOO" && (
+                                    comboo.map((main) => (
+                                        <ProductBox key={main.id}>
+                                            <img src={main.image} alt="" />
+                                            <h1>{main.name}</h1>
+                                            <h2>{main.description}</h2>
+                                            <p>R$ {main.price.toFixed(2)}</p>
+                                        </ProductBox>
+                                    ))
+                                )}
+                                {selectedCategory === "FOLLOW" && (
+                                    follo.map((main) => (
+                                        <ProductBox key={main.id}>
+                                            <img src={main.image} alt="" />
+                                            <h1>{main.name}</h1>
+                                            <h2>{main.description}</h2>
+                                            <p>R$ {main.price.toFixed(2)}</p>
+                                        </ProductBox>
+                                    ))
+                                )}
+                                {selectedCategory === "DESSERT" && (
+                                    desser.map((main) => (
+                                        <ProductBox key={main.id}>
+                                            <img src={main.image} alt="" />
+                                            <h1>{main.name}</h1>
+                                            <h2>{main.description}</h2>
+                                            <p>R$ {main.price.toFixed(2)}</p>
+                                        </ProductBox>
+                                    ))
+                                )}
+                                {selectedCategory === "SNACKS" && (
+                                    snacks.map((main) => (
+                                        <ProductBox key={main.id}>
+                                            <img src={main.image} alt="" />
+                                            <h1>{main.name}</h1>
+                                            <h2>{main.description}</h2>
+                                            <p>R$ {main.price.toFixed(2)}</p>
+                                        </ProductBox>
+                                    ))
+                                )}
+                                {selectedCategory === "DRINK" && (
+                                    drink.map((main) => (
+                                        <ProductBox key={main.id}>
+                                            <img src={main.image} alt="" />
+                                            <h1>{main.name}</h1>
+                                            <h2>{main.description}</h2>
+                                            <p>R$ {main.price.toFixed(2)}</p>
+                                        </ProductBox>
+                                    ))
+                                )}
+                                {search.length !== 0 && (
+                                    searchResults.map((main) => (
+                                        <ProductBox key={main.id}>
+                                            <img src={main.image} alt="" />
+                                            <h1>{main.name}</h1>
+                                            <h2>{main.description}</h2>
+                                            <p>R$ {main.price.toFixed(2)}</p>
+                                        </ProductBox>
+                                    ))
+                                )}
+                            </>
+                        )}
                     </Menu>
                 </Products>
             </All >
@@ -198,12 +266,17 @@ const Box = styled.div`
         width: 100px;
         margin-left: 25%;
         margin-bottom: 3px;
+        z-index: 0
         }
 `
 const Menu = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
 `
 const ProductBox = styled.div`
-    width: 180px;
+    width: calc(20% - 2.4%);
+    max-width: 180px; 
     height: 220px;
     border: none;
     border-radius: 10px;
@@ -211,35 +284,35 @@ const ProductBox = styled.div`
     flex-direction: column;
     text-align: center;
     box-shadow: 0 1px 4px rgba(0,0,0,0.15);
-    margin-top: 2%;
-        img{
+    margin-top: 2.4%;
+    margin-left: 2.4%; 
+        img {
         width: 100px;
         margin-left: 23%;
         margin-bottom: 3px;
         margin-top: 10px;
         }
-        h1{
+        h1 {
         font-family: "Varela Round";
         font-size: 20px;
         color: black;
         margin-top: 5%;
         font-weight: bold;
         }
-        h2{
+        h2 {
         font-family: "Varela Round";
         font-size: 11px;
         color: black;
         margin-top: 5%;
         }
-        p{
+        p {
         font-family: "Varela Round";
         font-size: 17px;
         color: black;
-        margin-top: 5%; 
-        font-weight: bold; 
+        margin-top: 5%;
+        font-weight: bold;
         }
 `
-const sdv = styled.div`
-`
+
 
 
