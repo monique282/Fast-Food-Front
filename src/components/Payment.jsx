@@ -1,19 +1,31 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
-import { HiOutlineCheck } from "react-icons/hi";
-import { HiOutlineX } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaWallet } from "react-icons/fa6";
 import { FaMoneyBillAlt } from "react-icons/fa";
+import axios from "axios";
 
 export default function Payment() {
 
     const { products,
-        setShowReview, order,
-        setShowPayment, nameClient, setNameClient
+        order, setShowPayment,
+        nameClient, setNameClient
     } = useContext(AuthContext);
-   
+
+    const url = `${import.meta.env.VITE_API_URL}/code`;
+
+    useEffect(() => {
+        const promise = axios.get(url);
+        promise.then(response => {
+            console.log(response.data)
+        })
+        promise.catch(err => {
+            console.log(err.response);
+        });
+
+    }, []);
+
     let sumTotal = 0;
     if (order && order.length > 0) {
         sumTotal = order.reduce((accumulator, item) => {
