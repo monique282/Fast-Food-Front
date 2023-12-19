@@ -12,7 +12,7 @@ export default function Payment() {
     const { products,
         order, setShowPayment,
         nameClient, setNameClient,
-        code, setCode, setOrder
+        code, setCode, setOrder, showSuccess, setShowSuccess
     } = useContext(AuthContext);
     const [abilitCard, setAbilitCard] = useState(false); 4
     const [amountForPayment, setAmountForPayment] = useState(0);
@@ -36,7 +36,6 @@ export default function Payment() {
         const urlrequest = `${import.meta.env.VITE_API_URL}/request`;
         console.log(order)
         const promiseOrder = axios.post(urlrequest, order) 
-           
         promiseOrder.then(response => {
             console.log(response.data)
         })
@@ -61,15 +60,9 @@ export default function Payment() {
 
         setOrder(order)
         console.log(order);
-        setUpdateCode(true)
-
+        setUpdateCode(true);
+        setShowSuccess(true)
     }
-
-    function set(){
-        
-    }
-
-
 
     if (products.length === 0) {
         <All>
@@ -78,7 +71,9 @@ export default function Payment() {
     } else {
         return (
             <All>
-                <Success></Success>
+                {showSuccess === true && (
+                    <Success></Success>
+                )}
                 <BoxAll>
                     <TotalPaymente>
                         <p><FaWallet style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Pagamento</p>
