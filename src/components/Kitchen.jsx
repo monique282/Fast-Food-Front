@@ -8,17 +8,12 @@ import { HiOutlineX } from "react-icons/hi";
 export default function Kitchen() {
     const { products } = useContext(AuthContext);
 
-    if (products.length === 0) {
-        <All>
-            Carregando
-        </All>
-    } else {
         return (
             <All>
                 <Preparing>
                     <p>Preparando:</p>
                     <Order>
-                        <img src={products[1].image} alt="" />
+                        <img src="" alt="" />
                         <NameCode>
                             <h1>201 - Monique</h1>
                             <h2>Descrução do que foi pedido</h2>
@@ -33,28 +28,26 @@ export default function Kitchen() {
                 <Ready>
                     <p>Pronto:</p>
                     <Order>
-                        <img src={products[1].image} alt="" />
+                        <img src="" alt="" />
                         <NameCode>
                             <h1>201 - Monique</h1>
                             <h2>Descrução do que foi pedido</h2>
                         </NameCode>
                         <Butons>
                             <Not ><HiOutlineX style={{ width: "30px", height: "30px", color: "#CF3C29" }} /></Not>
-                            {/* <Ok><HiOutlineCheck style={{ width: "30px", height: "30px", color: "#56A211" }} /></Ok> */}
                         </Butons>
                     </Order>
                 </Ready>
             </All>
         )
     }
-};
+
 
 const All = styled.div`
     width: 100%;
     height: 100%;
     background-color: #FFFFFF;
     display: flex;
-    
 `
 const Preparing = styled.div`
     width: 50%;

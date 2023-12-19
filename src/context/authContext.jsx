@@ -30,7 +30,8 @@ export default function AuthProvider({ children }) {
             baconSelected, setBaconSelected,
             cheddarSelected, setCheddarSelected,
             sauceSelected, setSauceSelected,
-            observationText, setObservationText
+            observationText, setObservationText,
+            showSuccess, setShowSuccess
         }}>
             {children}
         </AuthContext.Provider>
