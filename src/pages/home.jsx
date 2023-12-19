@@ -15,8 +15,9 @@ import Payment from "../components/Payment";
 export default function Home() {
 
     const { products, setProducts, setId,
-        showReview, setShowReview, order, 
-        showPayment, setShowPayment
+        showReview, setShowReview, order,
+        showPayment, setShowPayment,
+        code, setCode
     } = useContext(AuthContext);
     const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
@@ -30,10 +31,23 @@ export default function Home() {
     const [ordereIds, setOrdereIds] = useState([]);
     let sumTotal = 0;
 
-    const url = `${import.meta.env.VITE_API_URL}/home`;
+    const urlHome = `${import.meta.env.VITE_API_URL}/home`;
+    const urlCode = `${import.meta.env.VITE_API_URL}/code`;
 
     useEffect(() => {
-        const promise = axios.get(url);
+        const promise = axios.get(urlCode);
+        promise.then(response => {
+            console.log(response.data)
+            setCode(response.data)
+        })
+        promise.catch(err => {
+            console.log(err.response);
+        });
+
+    }, [])
+
+    useEffect(() => {
+        const promise = axios.get(urlHome);
         promise.then(response => {
             setProducts(response.data);
             const follo = response.data.filter(product => product.category === 'FOLLOW');
@@ -93,7 +107,7 @@ export default function Home() {
         location.reload();
     };
 
-    function IWantThese(){
+    function IWantThese() {
         setShowPayment(true)
     }
 
@@ -110,7 +124,7 @@ export default function Home() {
                 {showPayment === true && (
                     <Payment></Payment>
                 )}
-                
+
                 <Welcome>Seja bem Vindo(a)!</Welcome>
                 <Search placeholder='O que voê procura?'
                     type="text"
@@ -299,13 +313,13 @@ export default function Home() {
 
                 <Finishing>
                     <RemoveOrderFromList onClick={() => cancel()} >Cancelar</RemoveOrderFromList>
-                    {order.length > 0 &&(
-                        <AddProducttoList  
-                        style = {{backgroundColor: "#2E5D15", border:"2px solid #2E5D15"}}
-                         onClick={() => IWantThese()} >Finalizar pedido</AddProducttoList>
+                    {order.length > 0 && (
+                        <AddProducttoList
+                            style={{ backgroundColor: "#2E5D15", border: "2px solid #2E5D15" }}
+                            onClick={() => IWantThese()} >Finalizar pedido</AddProducttoList>
                     )}
-                    {order.length === 0 &&(
-                        <AddProducttoList  style = {{backgroundColor: "#9F9F9F", border:"2px solid #9F9F9F"}}  >Finalizar pedido</AddProducttoList>
+                    {order.length === 0 && (
+                        <AddProducttoList style={{ backgroundColor: "#9F9F9F", border: "2px solid #9F9F9F" }}  >Finalizar pedido</AddProducttoList>
                     )}
                 </Finishing>
             </All >
