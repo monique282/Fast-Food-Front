@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
 import { MdPayment } from "react-icons/md";
@@ -13,6 +13,7 @@ export default function Payment() {
         nameClient, setNameClient,
         code, setCode
     } = useContext(AuthContext);
+    const [abilitCard, setAbilitCard] = useState(false);
 
     const url = `${import.meta.env.VITE_API_URL}/code`;
 
@@ -104,10 +105,16 @@ export default function Payment() {
                                 <p><MdPayment style={{ color: "#9F9F9F", marginRight: "3%", width: "30px", height: "30px" }} />Debito</p>
                                 <div style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}></div>
                             </CreditDebitMoney>
-                            <CreditDebitMoney>
-                                <p><FaMoneyBillAlt style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Dinheiro</p>
-                                <div style={{ border: "3px solid #2E5D15" }}></div>
-                            </CreditDebitMoney>
+                            {abilitCard === false && (
+                                <CreditDebitMoney onClick={() => setAbilitCard(true)}>
+                                    <p ><FaMoneyBillAlt style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Dinheiro</p>
+                                    <div style={{ border: "3px solid #2E5D15", backgroundColor: "#FFFFFF" }}></div>
+                                </CreditDebitMoney>)}
+                            {abilitCard === true && (
+                                <CreditDebitMoney onClick={() => setAbilitCard(false)} style={{ border: "1px solid #2E5D15" }} >
+                                    <p ><FaMoneyBillAlt style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Dinheiro</p>
+                                    <div style={{ border: "3px solid #2E5D15", backgroundColor: "#2E5D15" }}></div>
+                                </CreditDebitMoney>)}
                             <ValueChange>
                                 <Value>
                                     <p>Valor entregue</p>
