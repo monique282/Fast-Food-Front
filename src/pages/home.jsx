@@ -9,12 +9,15 @@ import follow from '../assets/images/follow.jpg';
 import snack from '../assets/images/snacks.jpeg';
 import Revision from "../components/Revision";
 import { CgCheck } from "react-icons/cg";
+import Payment from "../components/Payment";
 
 
 export default function Home() {
 
     const { products, setProducts, setId,
-        showReview, setShowReview, order
+        showReview, setShowReview, order,
+        showPayment, setShowPayment,
+        setCode, code
     } = useContext(AuthContext);
     const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
@@ -26,12 +29,25 @@ export default function Home() {
     const [productFiltered, setProductFiltered] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
     const [ordereIds, setOrdereIds] = useState([]);
-    console.log(ordereIds)
-    console.log(order)
-    const url = `${import.meta.env.VITE_API_URL}/home`;
+    let sumTotal = 0;
+
+    const urlHome = `${import.meta.env.VITE_API_URL}/home`;
+
+    const urlCode = `${import.meta.env.VITE_API_URL}/code`;
 
     useEffect(() => {
-        const promise = axios.get(url);
+        const promise = axios.get(urlCode);
+        promise.then(response => {
+            setCode(response.data)
+        })
+        promise.catch(err => {
+            console.log(err.response);
+        });
+
+    }, [code]);
+
+    useEffect(() => {
+        const promise = axios.get(urlHome);
         promise.then(response => {
             setProducts(response.data);
             const follo = response.data.filter(product => product.category === 'FOLLOW');
@@ -79,6 +95,20 @@ export default function Home() {
     function ShowProductDetails(id) {
         setShowReview(true);
         setId(id);
+    };
+
+    if (order && order.length > 0) {
+        sumTotal = order.reduce((accumulator, item) => {
+            return accumulator + parseFloat(item.total.replace(',', '.'));
+        }, 0);
+    };
+
+    function cancel() {
+        location.reload();
+    };
+
+    function IWantThese() {
+        setShowPayment(true)
     }
 
     if (products.length === 0) {
@@ -91,6 +121,10 @@ export default function Home() {
                 {showReview === true && (
                     <Revision></Revision>
                 )}
+                {showPayment === true && (
+                    <Payment></Payment>
+                )}
+
                 <Welcome>Seja bem Vindo(a)!</Welcome>
                 <Search placeholder='O que voê procura?'
                     type="text"
@@ -220,7 +254,8 @@ export default function Home() {
                                                     <Select>
                                                         <CgCheck style={{ fontSize: "70px", color: "#FCFDFC" }} />
                                                     </Select>
-                                                )}                                                <img src={main.image} alt="" />
+                                                )}
+                                                <img src={main.image} alt="" />
                                                 <h1>{main.name}</h1>
                                                 <h2>{main.description}</h2>
                                                 <p>R$ {main.price.toFixed(2)}</p>
@@ -249,6 +284,44 @@ export default function Home() {
                         )}
                     </Menu>
                 </Products>
+                {order && order.length > 0 && (
+                    <PurchaseSummary>
+                        {order.map((main) => (
+                            <React.Fragment key={main.ProductSpecific.id}>
+                                <DescriptionPrice>
+                                    <Summary>{main.counter}x {main.ProductSpecific.name}</Summary>
+                                    <PriceDescription>R$ {((main.ProductSpecific.price) * main.counter).toFixed(2)}</PriceDescription>
+                                </DescriptionPrice>
+                                {main.followUp.length > 0 && (
+                                    main.followUp.map((followUpItem) => (
+                                        <DescriptionPrice key={followUpItem.id}>
+                                            <Summary>{followUpItem.item}</Summary>
+                                            <PriceDescription>{followUpItem.price}</PriceDescription>
+                                        </DescriptionPrice>
+                                    ))
+                                )}
+                            </React.Fragment>
+                        ))}
+
+                        <Divider></Divider>
+                        <FinalValue>
+                            <h1>Total do pedido:</h1>
+                            <Amount>R$ {sumTotal.toFixed(2)}  </Amount>
+                        </FinalValue>
+                    </PurchaseSummary>
+                )}
+
+                <Finishing>
+                    <RemoveOrderFromList onClick={() => cancel()} >Cancelar</RemoveOrderFromList>
+                    {order.length > 0 && (
+                        <AddProducttoList
+                            style={{ backgroundColor: "#2E5D15", border: "2px solid #2E5D15" }}
+                            onClick={() => IWantThese()} >Finalizar pedido</AddProducttoList>
+                    )}
+                    {order.length === 0 && (
+                        <AddProducttoList style={{ backgroundColor: "#9F9F9F", border: "2px solid #9F9F9F" }}  >Finalizar pedido</AddProducttoList>
+                    )}
+                </Finishing>
             </All >
         )
     };
@@ -395,6 +468,86 @@ const ProductBox = styled.div`
         margin-top: 5%;
         font-weight: bold;
         }
+`
+const PurchaseSummary = styled.div`
+    height: 100%;
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 1px solid #D2D2D2;
+    border-radius: 5px;
+    margin-top: 5%;
+`
+const DescriptionPrice = styled.div`
+    display: flex;
+    justify-content: space-between;
+    margin-top: 5%;
+`
+const Summary = styled.div`
+    margin-left: 10%;
+    font-family: "Varela Round";
+    font-size: 20px;
+    color: black;
+`
+const PriceDescription = styled.div`
+    margin-right: 10%;
+    font-family: "Varela Round";
+    font-size: 20px;
+    color: black;
+`
+const Divider = styled.div`
+    border-bottom: 2px dashed #C3C3C3; 
+    margin: 20px 20px; 
+`
+const FinalValue = styled.div`
+    margin-top: 5%;
+    margin-left: 10%;
+    margin-bottom: 5%;
+    h1{
+    font-family: "Varela Round";
+    font-size: 20px;
+    color: black;
+    }
+`
+const Amount = styled.div`
+    font-family: "Varela Round";
+    font-size: 40px;
+    color: black;
+    font-weight: bold; 
+    margin-top: 3%;
+`
+const Finishing = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 10%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+`
+const RemoveOrderFromList = styled.div`
+    width: 22%;
+    height: 50px;
+    margin-right: 5%;
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    border:2px solid #2E5D15 ;
+`
+const AddProducttoList = styled.div`
+    width: 22%;
+    height: 50px;
+    margin-right: 5%;
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px;
+    border:2px solid #2E5D15 ;
+    color: #FFFFFF;
 `
 
 

@@ -1,14 +1,75 @@
-import { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
-import { HiOutlineCheck } from "react-icons/hi";
-import { HiOutlineX } from "react-icons/hi";
 import { MdPayment } from "react-icons/md";
 import { FaWallet } from "react-icons/fa6";
 import { FaMoneyBillAlt } from "react-icons/fa";
+import axios from "axios";
+import Success from "../components/Success";
 
 export default function Payment() {
-    const { products } = useContext(AuthContext);
+
+    const { products,
+        order, setShowPayment,
+        nameClient, setNameClient,
+        code, setCode, setOrder
+    } = useContext(AuthContext);
+    const [abilitCard, setAbilitCard] = useState(false); 4
+    const [amountForPayment, setAmountForPayment] = useState(0);
+    const [updateCode, setUpdateCode] = useState(false)
+
+
+
+    useEffect(() => {
+        const urlCode = `${import.meta.env.VITE_API_URL}/update`;
+        const data = {
+            idcode: (code[0].idcode +1)
+        }
+        const promise = axios.post(urlCode, data);
+        promise.then(response => {
+            console.log(response.data)
+        })
+        promise.catch(err => {
+            console.log(err.response);
+        });
+
+        const urlrequest = `${import.meta.env.VITE_API_URL}/request`;
+        console.log(order)
+        const promiseOrder = axios.post(urlrequest, order) 
+           
+        promiseOrder.then(response => {
+            console.log(response.data)
+        })
+        promiseOrder.catch(err => {
+            console.log(err.response);
+        });
+
+}, [updateCode]);
+
+    let sumTotal = 0;
+    if (order && order.length > 0) {
+        sumTotal = order.reduce((accumulator, item) => {
+            return accumulator + parseFloat(item.total.replace(',', '.'));
+        }, 0);
+    };
+
+    function finishPayment() {
+        for (let i = 0; i < order.length; i++) {
+            order[i].nameClient = nameClient;
+            order[i].code = (code[0].idcode);
+        }
+
+        setOrder(order)
+        console.log(order);
+        setUpdateCode(true)
+
+    }
+
+    function set(){
+        
+    }
+
+
 
     if (products.length === 0) {
         <All>
@@ -17,30 +78,54 @@ export default function Payment() {
     } else {
         return (
             <All>
+                <Success></Success>
                 <BoxAll>
                     <TotalPaymente>
                         <p><FaWallet style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Pagamento</p>
                         <Order>
                             <p>Resumo da compra</p>
-                            <PurchaseSummary>
-                                <DescriptionPrice>
-                                    <Summary>1x {products[1].name}</Summary>
-                                    <PriceDescription>R$ {products[1].price.toFixed(2)}</PriceDescription>
-                                </DescriptionPrice>
-                                <Divider></Divider>
-                                <FinalValue>
-                                    <h1>Total do pedido:</h1>
-                                    <Amount>R$ 30,50</Amount>
-                                </FinalValue>
-                            </PurchaseSummary>
+                            {order && order.length > 0 && (
+                                <PurchaseSummary>
+                                    {order.map((main) => (
+                                        <React.Fragment key={main.ProductSpecific.id}>
+                                            <DescriptionPrice>
+                                                <Summary>{main.counter}x {main.ProductSpecific.name}</Summary>
+                                                <PriceDescription>R$ {((main.ProductSpecific.price) * main.counter).toFixed(2)}</PriceDescription>
+                                            </DescriptionPrice>
+                                            {main.followUp.length > 0 && (
+                                                main.followUp.map((followUpItem) => (
+                                                    <DescriptionPrice key={followUpItem.id}>
+                                                        <Summary>{followUpItem.item}</Summary>
+                                                        <PriceDescription>{followUpItem.price}</PriceDescription>
+                                                    </DescriptionPrice>
+                                                ))
+                                            )}
+                                        </React.Fragment>
+                                    ))}
+
+                                    <Divider></Divider>
+                                    <FinalValue>
+                                        <h1>Total do pedido:</h1>
+                                        <Amount>R$ {sumTotal.toFixed(2)}  </Amount>
+                                    </FinalValue>
+                                </PurchaseSummary>
+                            )}
                             <CodeName>
                                 <Name>
                                     <p>Nome do cliente</p>
-                                    <input placeholder='Primeiro nome' type="text"></input>
+                                    <input placeholder='Primeiro nome'
+                                        type="text"
+                                        value={nameClient}
+                                        onChange={(e) => setNameClient(e.target.value)}
+                                    ></input>
                                 </Name>
                                 <Code>
                                     <p>Código</p>
-                                    <div>1</div>
+                                    {!code[0].idcode === 1 ? (
+                                        <div>1</div>
+                                    ) : (
+                                        <div>{code[0].idcode}</div>
+                                    )}
                                 </Code>
                             </CodeName>
                         </Order>
@@ -50,30 +135,53 @@ export default function Payment() {
                         <Order>
                             <Title>Selecione a forma de pagamento</Title>
                             <CreditDebitMoney>
-                                <p><MdPayment style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Credito</p>
-                                <div></div>
+                                <p><MdPayment style={{ color: "#9F9F9F", marginRight: "3%", width: "30px", height: "30px" }} />Credito</p>
+                                <div style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}></div>
                             </CreditDebitMoney>
                             <CreditDebitMoney>
-                                <p><MdPayment style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Debito</p>
-                                <div></div>
+                                <p><MdPayment style={{ color: "#9F9F9F", marginRight: "3%", width: "30px", height: "30px" }} />Debito</p>
+                                <div style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}></div>
                             </CreditDebitMoney>
-                            <CreditDebitMoney>
-                                <p><FaMoneyBillAlt style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Dinheiro</p>
-                                <div></div>
-                            </CreditDebitMoney>
+                            {abilitCard === false && (
+                                <CreditDebitMoney onClick={() => setAbilitCard(true)}>
+                                    <p ><FaMoneyBillAlt style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Dinheiro</p>
+                                    <div style={{ border: "3px solid #2E5D15", backgroundColor: "#FFFFFF" }}></div>
+                                </CreditDebitMoney>)}
+                            {abilitCard === true && (
+                                <CreditDebitMoney onClick={() => setAbilitCard(false)} style={{ border: "1px solid #2E5D15" }} >
+                                    <p ><FaMoneyBillAlt style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Dinheiro</p>
+                                    <div style={{ border: "3px solid #2E5D15", backgroundColor: "#2E5D15" }}></div>
+                                </CreditDebitMoney>)}
                             <ValueChange>
                                 <Value>
                                     <p>Valor entregue</p>
-                                    <input placeholder='Digite o Valor' type="text"></input>
+                                    <input placeholder='Digite o Valor' type="number"
+                                        value={amountForPayment}
+                                        onChange={(e) => setAmountForPayment(e.target.value)} />
                                 </Value>
-                                <Change>
+                                {amountForPayment < sumTotal && (<Change>
                                     <p>Troco</p>
-                                    <div>1</div>
+                                    <div></div>
                                 </Change>
+                                )}
+                                {amountForPayment > sumTotal && (
+                                    <Change>
+                                        <p>Troco</p>
+                                        <div>R${(amountForPayment - sumTotal).toFixed(2)}</div>
+                                    </Change>
+                                )}
                             </ValueChange>
                             <Finishing>
-                                <RemoveOrderFromList>Cancelar</RemoveOrderFromList>
-                                <AddProducttoList>Finalizar Pedido</AddProducttoList>
+                                <RemoveOrderFromList onClick={() => setShowPayment(false)}>Cancelar</RemoveOrderFromList>
+                                {(amountForPayment > sumTotal && abilitCard && nameClient.length !== 0) ? (
+                                    <AddProducttoList onClick={() => finishPayment()} style={{ border: "3px solid #2E5D15", backgroundColor: "#2E5D15" }}>
+                                        Finalizar Pedido
+                                    </AddProducttoList>
+                                ) : (
+                                    <AddProducttoList style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}>
+                                        Finalizar Pedido
+                                    </AddProducttoList>
+                                )}
                             </Finishing>
                         </Order>
                     </FinalizePayment>
@@ -93,14 +201,13 @@ const All = styled.div`
     background-color: #ffffff;
     display: flex;
     justify-content: center;
-    overflow-y: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
+    z-index: 3;
 `
 const BoxAll = styled.div`
     width: 100%;
-    height: auto;
+    height: 100%;
     display: flex;
+    overflow-y: auto;
 `
 const TotalPaymente = styled.div`
     width: 50%;
@@ -372,7 +479,6 @@ const RemoveOrderFromList = styled.div`
 const AddProducttoList = styled.div`
     width: 50%;
     height: 50px;
-    background-color: #2E5D15;
     font-family: "Varela Round";
     font-size: 15px;
     color: black; 
@@ -380,9 +486,9 @@ const AddProducttoList = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    border:2px solid #2E5D15 ;
     color: #FFFFFF;
 `
 const vad = styled.div`
     
 `
+

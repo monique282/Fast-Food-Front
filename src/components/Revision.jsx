@@ -13,14 +13,13 @@ export default function Revision() {
     const {
         products, id, setShowReview,
         counter, setCounter, order,
-        setOrder
+        setOrder, baconSelected, setBaconSelected,
+        cheddarSelected, setCheddarSelected,
+        sauceSelected, setSauceSelected,
+        observationText, setObservationText
     } = useContext(AuthContext);
-    const [baconSelected, setBaconSelected] = useState(false);
-    const [cheddarSelected, setCheddarSelected] = useState(false);
-    const [sauceSelected, setSauceSelected] = useState(false);
-    const [observationText, setObservationText] = useState("");
+    
     let followUp = [];
-
 
     useEffect(() => {
         checkingIfIDasAlreadyBeenSelected();
@@ -33,12 +32,12 @@ export default function Revision() {
             setBaconSelected(corresponding.followUp.some((item) => item.id === 1));
             setCheddarSelected(corresponding.followUp.some((item) => item.id === 2));
             setSauceSelected(corresponding.followUp.some((item) => item.id === 3));
+            // remover item
             const updatedOrder = order.filter((item) => item.ProductSpecific.id !== id);
             setOrder(updatedOrder);
         }
     };
-
-
+    
     const ProductSpecific = products.find((product) => product.id === id);
 
     function backProducts() {
