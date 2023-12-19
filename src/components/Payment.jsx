@@ -83,10 +83,9 @@ export default function Payment() {
                                 </Name>
                                 <Code>
                                     <p>Código</p>
-                                    {code.length === 0 && (
+                                    {!code || code.length === 0 ? (
                                         <div>1</div>
-                                    )}
-                                    {code.length !== 0 && (
+                                    ) : (
                                         <div>{code}</div>
                                     )}
                                 </Code>
@@ -98,16 +97,16 @@ export default function Payment() {
                         <Order>
                             <Title>Selecione a forma de pagamento</Title>
                             <CreditDebitMoney>
-                                <p><MdPayment style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Credito</p>
-                                <div></div>
+                                <p><MdPayment style={{ color: "#9F9F9F", marginRight: "3%", width: "30px", height: "30px" }} />Credito</p>
+                                <div style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}></div>
                             </CreditDebitMoney>
                             <CreditDebitMoney>
-                                <p><MdPayment style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Debito</p>
-                                <div></div>
+                                <p><MdPayment style={{ color: "#9F9F9F", marginRight: "3%", width: "30px", height: "30px" }} />Debito</p>
+                                <div style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}></div>
                             </CreditDebitMoney>
                             <CreditDebitMoney>
                                 <p><FaMoneyBillAlt style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Dinheiro</p>
-                                <div></div>
+                                <div style={{ border: "3px solid #2E5D15" }}></div>
                             </CreditDebitMoney>
                             <ValueChange>
                                 <Value>
