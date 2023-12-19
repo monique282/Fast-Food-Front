@@ -10,7 +10,8 @@ export default function Payment() {
 
     const { products,
         order, setShowPayment,
-        nameClient, setNameClient
+        nameClient, setNameClient,
+        code, setCode
     } = useContext(AuthContext);
 
     const url = `${import.meta.env.VITE_API_URL}/code`;
@@ -18,7 +19,7 @@ export default function Payment() {
     useEffect(() => {
         const promise = axios.get(url);
         promise.then(response => {
-            console.log(response.data)
+            setCode(response.data)
         })
         promise.catch(err => {
             console.log(err.response);
@@ -82,7 +83,12 @@ export default function Payment() {
                                 </Name>
                                 <Code>
                                     <p>Código</p>
-                                    <div>1</div>
+                                    {code.length === 0 && (
+                                        <div>1</div>
+                                    )}
+                                    {code.length !== 0 && (
+                                        <div>{code}</div>
+                                    )}
                                 </Code>
                             </CodeName>
                         </Order>
