@@ -13,7 +13,8 @@ export default function Payment() {
         nameClient, setNameClient,
         code, setCode
     } = useContext(AuthContext);
-    const [abilitCard, setAbilitCard] = useState(false);
+    const [abilitCard, setAbilitCard] = useState(false); 4
+    const [amountForPayment, setAmountForPayment] = useState(0)
 
     const url = `${import.meta.env.VITE_API_URL}/code`;
 
@@ -118,12 +119,22 @@ export default function Payment() {
                             <ValueChange>
                                 <Value>
                                     <p>Valor entregue</p>
-                                    <input placeholder='Digite o Valor' type="text"></input>
+                                    <input placeholder='Digite o Valor' type="number"
+                                        value={amountForPayment}
+                                        onChange={(e) => setAmountForPayment(e.target.value)} />
                                 </Value>
-                                <Change>
+                                {amountForPayment < sumTotal && (<Change>
                                     <p>Troco</p>
-                                    <div>1</div>
+                                    <div></div>
                                 </Change>
+                                )}
+                                {amountForPayment > sumTotal && (
+                                    <Change>
+                                        <p>Troco</p>
+                                        <div>R${(amountForPayment - sumTotal).toFixed(2)}</div>
+                                    </Change>
+                                )}
+
                             </ValueChange>
                             <Finishing>
                                 <RemoveOrderFromList>Cancelar</RemoveOrderFromList>
