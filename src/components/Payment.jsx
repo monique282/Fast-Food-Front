@@ -134,11 +134,18 @@ export default function Payment() {
                                         <div>R${(amountForPayment - sumTotal).toFixed(2)}</div>
                                     </Change>
                                 )}
-
                             </ValueChange>
                             <Finishing>
-                                <RemoveOrderFromList>Cancelar</RemoveOrderFromList>
-                                <AddProducttoList>Finalizar Pedido</AddProducttoList>
+                                <RemoveOrderFromList onClick={() => setShowPayment(false)}>Cancelar</RemoveOrderFromList>
+                                {(amountForPayment > sumTotal && abilitCard && nameClient.length !== 0) ? (
+                                <AddProducttoList style={{ border: "3px solid #2E5D15", backgroundColor: "#2E5D15" }}>
+                                    Finalizar Pedido
+                                </AddProducttoList>
+                                ) : (
+                                <AddProducttoList style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}>
+                                    Finalizar Pedido
+                                </AddProducttoList>
+                                )}
                             </Finishing>
                         </Order>
                     </FinalizePayment>
@@ -436,7 +443,6 @@ const RemoveOrderFromList = styled.div`
 const AddProducttoList = styled.div`
     width: 50%;
     height: 50px;
-    background-color: #2E5D15;
     font-family: "Varela Round";
     font-size: 15px;
     color: black; 
@@ -444,7 +450,6 @@ const AddProducttoList = styled.div`
     align-items: center;
     justify-content: center;
     border-radius: 20px;
-    border:2px solid #2E5D15 ;
     color: #FFFFFF;
 `
 const vad = styled.div`
