@@ -10,7 +10,7 @@ export default function AuthProvider({ children }) {
     const [order, setOrder] = useState([]);
     const [showPayment, setShowPayment] = useState(false);
     const [nameClient, setNameClient] = useState("");
-    const [code, setCode] = useState()
+    const [code, setCode] = useState([])
 
 
     return (

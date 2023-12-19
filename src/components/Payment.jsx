@@ -11,23 +11,39 @@ export default function Payment() {
     const { products,
         order, setShowPayment,
         nameClient, setNameClient,
-        code, setCode
+        code, setCode, setOrder
     } = useContext(AuthContext);
     const [abilitCard, setAbilitCard] = useState(false); 4
-    const [amountForPayment, setAmountForPayment] = useState(0)
+    const [amountForPayment, setAmountForPayment] = useState(0);
+    const [updateCode, setUpdateCode] = useState(false)
 
-    const url = `${import.meta.env.VITE_API_URL}/code`;
+
 
     useEffect(() => {
-        const promise = axios.get(url);
+        const urlCode = `${import.meta.env.VITE_API_URL}/update`;
+        const data = {
+            idcode: (code[0].idcode +1)
+        }
+        const promise = axios.post(urlCode, data);
         promise.then(response => {
-            setCode(response.data)
+            console.log(response.data)
         })
         promise.catch(err => {
             console.log(err.response);
         });
 
-    }, []);
+        const urlrequest = `${import.meta.env.VITE_API_URL}/request`;
+        console.log(order)
+        const promiseOrder = axios.post(urlrequest, order) 
+           
+        promiseOrder.then(response => {
+            console.log(response.data)
+        })
+        promiseOrder.catch(err => {
+            console.log(err.response);
+        });
+
+}, [updateCode]);
 
     let sumTotal = 0;
     if (order && order.length > 0) {
@@ -35,6 +51,24 @@ export default function Payment() {
             return accumulator + parseFloat(item.total.replace(',', '.'));
         }, 0);
     };
+
+    function finishPayment() {
+        for (let i = 0; i < order.length; i++) {
+            order[i].nameClient = nameClient;
+            order[i].code = (code[0].idcode);
+        }
+
+        setOrder(order)
+        console.log(order);
+        setUpdateCode(true)
+
+    }
+
+    function set(){
+        
+    }
+
+
 
     if (products.length === 0) {
         <All>
@@ -85,10 +119,10 @@ export default function Payment() {
                                 </Name>
                                 <Code>
                                     <p>Código</p>
-                                    {!code || code.length === 0 ? (
+                                    {!code[0].idcode === 1 ? (
                                         <div>1</div>
                                     ) : (
-                                        <div>{code}</div>
+                                        <div>{code[0].idcode}</div>
                                     )}
                                 </Code>
                             </CodeName>
@@ -138,13 +172,13 @@ export default function Payment() {
                             <Finishing>
                                 <RemoveOrderFromList onClick={() => setShowPayment(false)}>Cancelar</RemoveOrderFromList>
                                 {(amountForPayment > sumTotal && abilitCard && nameClient.length !== 0) ? (
-                                <AddProducttoList style={{ border: "3px solid #2E5D15", backgroundColor: "#2E5D15" }}>
-                                    Finalizar Pedido
-                                </AddProducttoList>
+                                    <AddProducttoList onClick={() => finishPayment()} style={{ border: "3px solid #2E5D15", backgroundColor: "#2E5D15" }}>
+                                        Finalizar Pedido
+                                    </AddProducttoList>
                                 ) : (
-                                <AddProducttoList style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}>
-                                    Finalizar Pedido
-                                </AddProducttoList>
+                                    <AddProducttoList style={{ border: "3px solid #9F9F9F", backgroundColor: "#9F9F9F" }}>
+                                        Finalizar Pedido
+                                    </AddProducttoList>
                                 )}
                             </Finishing>
                         </Order>
