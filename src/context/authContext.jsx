@@ -10,6 +10,7 @@ export default function AuthProvider({ children }) {
     const [order, setOrder] = useState([]);
     const [showPayment, setShowPayment] = useState(false);
     const [nameClient, setNameClient] = useState("");
+    const [code, seCode] = useState()
 
 
     return (
@@ -20,7 +21,8 @@ export default function AuthProvider({ children }) {
             counter, setCounter,
             order, setOrder,
             showPayment, setShowPayment,
-            nameClient, setNameClient
+            nameClient, setNameClient,
+            code, seCode
         }}>
             {children}
         </AuthContext.Provider>
