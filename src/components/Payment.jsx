@@ -5,6 +5,7 @@ import { MdPayment } from "react-icons/md";
 import { FaWallet } from "react-icons/fa6";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import axios from "axios";
+import Success from "../components/Success";
 
 export default function Payment() {
 
@@ -77,6 +78,7 @@ export default function Payment() {
     } else {
         return (
             <All>
+                <Success></Success>
                 <BoxAll>
                     <TotalPaymente>
                         <p><FaWallet style={{ color: "#2E5D15", marginRight: "3%", width: "30px", height: "30px" }} />Pagamento</p>

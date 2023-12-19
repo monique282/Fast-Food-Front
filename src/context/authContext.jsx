@@ -10,8 +10,12 @@ export default function AuthProvider({ children }) {
     const [order, setOrder] = useState([]);
     const [showPayment, setShowPayment] = useState(false);
     const [nameClient, setNameClient] = useState("");
-    const [code, setCode] = useState([])
-
+    const [code, setCode] = useState([]);
+    const [baconSelected, setBaconSelected] = useState(false);
+    const [cheddarSelected, setCheddarSelected] = useState(false);
+    const [sauceSelected, setSauceSelected] = useState(false);
+    const [observationText, setObservationText] = useState("");
+    const [showSuccess, setShowSuccess] = useState(false);
 
     return (
         <AuthContext.Provider value={{
@@ -22,7 +26,11 @@ export default function AuthProvider({ children }) {
             order, setOrder,
             showPayment, setShowPayment,
             nameClient, setNameClient,
-            code, setCode
+            code, setCode,
+            baconSelected, setBaconSelected,
+            cheddarSelected, setCheddarSelected,
+            sauceSelected, setSauceSelected,
+            observationText, setObservationText
         }}>
             {children}
         </AuthContext.Provider>
