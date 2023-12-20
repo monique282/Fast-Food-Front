@@ -13,30 +13,28 @@ export default function Kitchen() {
   const [showOnly2hours, setShowOnly2hours] = useState([]);
 
   useEffect(() => {
-    function requisition(){
-        const urlRequest = `${import.meta.env.VITE_API_URL}/request`;
+    function requisition() {
+      const urlRequest = `${import.meta.env.VITE_API_URL}/request`;
 
-    const promise = axios.get(urlRequest);
-    promise.then((response) => {
-      setShowRequest(response.data);
-      setNotReadyRequests(showRequest.filter((item) => item.ready === false));
-      setLoading(false);
-      theLastTwoHours(showRequest.filter((item) => item.ready === true));
-      console.log("aqui")
-    });
-    promise.catch((err) => {
-      console.log(err.response);
-      setLoading(false);
-    });
+      const promise = axios.get(urlRequest);
+      promise.then((response) => {
+        setShowRequest(response.data);
+        setNotReadyRequests(showRequest.filter((item) => item.ready === false));
+        setLoading(false);
+        theLastTwoHours(showRequest.filter((item) => item.ready === true));
+        console.log("aqui");
+      });
+      promise.catch((err) => {
+        console.log(err.response);
+        setLoading(false);
+      });
     }
-    requisition(); 
+    requisition();
 
     const intervalId = setInterval(requisition, 30 * 1000);
 
-
     return () => clearInterval(intervalId);
   }, [order, loading]);
-
 
   function theLastTwoHours(readyRequests) {
     const twoHoursInMilliseconds = 2 * 60 * 60 * 1000;
@@ -46,13 +44,13 @@ export default function Kitchen() {
       return now - dateCreation <= twoHoursInMilliseconds;
     });
 
- const orderedByDate = ordersInLastTwoHours.sort((a, b) => {
-    const dataA = new Date(a.createdAt);
-    const dataB = new Date(b.createdAt);
-    return dataB - dataA;
-  });
+    const orderedByDate = ordersInLastTwoHours.sort((a, b) => {
+      const dataA = new Date(a.createdAt);
+      const dataB = new Date(b.createdAt);
+      return dataB - dataA;
+    });
 
-  setShowOnly2hours(orderedByDate);
+    setShowOnly2hours(orderedByDate);
   }
 
   function ready(code) {
