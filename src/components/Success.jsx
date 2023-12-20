@@ -60,6 +60,7 @@ const BoxAll = styled(Link)`
   border-radius: 20px;
   background-color: #ffffff;
   margin-bottom: 20%;
+  margin-top: 20%;
   img {
     width: 100%;
     border-radius: 20px;
