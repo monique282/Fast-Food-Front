@@ -22,7 +22,6 @@ export default function Kitchen() {
         setNotReadyRequests(showRequest.filter((item) => item.ready === false));
         setLoading(false);
         theLastTwoHours(showRequest.filter((item) => item.ready === true));
-     
       });
       promise.catch((err) => {
         console.log(err.response);
