@@ -17,7 +17,7 @@ export default function Home() {
     const { products, setProducts, setId,
         showReview, setShowReview, order,
         showPayment, setShowPayment,
-        code, setCode
+        setCode, code
     } = useContext(AuthContext);
     const [search, setSearch] = useState([]);
     const [snacks, setSnacks] = useState([]);
@@ -32,19 +32,19 @@ export default function Home() {
     let sumTotal = 0;
 
     const urlHome = `${import.meta.env.VITE_API_URL}/home`;
+
     const urlCode = `${import.meta.env.VITE_API_URL}/code`;
 
     useEffect(() => {
         const promise = axios.get(urlCode);
         promise.then(response => {
-            console.log(response.data)
             setCode(response.data)
         })
         promise.catch(err => {
             console.log(err.response);
         });
 
-    }, [])
+    }, [code]);
 
     useEffect(() => {
         const promise = axios.get(urlHome);

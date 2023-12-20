@@ -13,12 +13,12 @@ export default function Revision() {
     const {
         products, id, setShowReview,
         counter, setCounter, order,
-        setOrder
+        setOrder, baconSelected, setBaconSelected,
+        cheddarSelected, setCheddarSelected,
+        sauceSelected, setSauceSelected,
+        observationText, setObservationText
     } = useContext(AuthContext);
-    const [baconSelected, setBaconSelected] = useState(false);
-    const [cheddarSelected, setCheddarSelected] = useState(false);
-    const [sauceSelected, setSauceSelected] = useState(false);
-    const [observationText, setObservationText] = useState("");
+    
     let followUp = [];
 
     useEffect(() => {
