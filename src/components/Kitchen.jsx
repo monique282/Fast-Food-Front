@@ -22,7 +22,7 @@ export default function Kitchen() {
         setNotReadyRequests(showRequest.filter((item) => item.ready === false));
         setLoading(false);
         theLastTwoHours(showRequest.filter((item) => item.ready === true));
-        console.log("aqui");
+     
       });
       promise.catch((err) => {
         console.log(err.response);
@@ -54,7 +54,6 @@ export default function Kitchen() {
   }
 
   function ready(code) {
-    console.log(code);
     const urlRequest = `${import.meta.env.VITE_API_URL}/updateReady`;
     const data = {
       code,

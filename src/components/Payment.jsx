@@ -19,7 +19,6 @@ export default function Payment() {
     const [updateCode, setUpdateCode] = useState(false)
 
 
-
     useEffect(() => {
         const urlCode = `${import.meta.env.VITE_API_URL}/update`;
         const data = {
@@ -27,14 +26,14 @@ export default function Payment() {
         }
         const promise = axios.post(urlCode, data);
         promise.then(response => {
-            console.log(response.data)
+    
         })
         promise.catch(err => {
             console.log(err.response);
         });
 
         const urlrequest = `${import.meta.env.VITE_API_URL}/request`;
-        console.log(order)
+
         const promiseOrder = axios.post(urlrequest, order) 
         promiseOrder.then(response => {
             console.log(response.data)
@@ -59,7 +58,6 @@ export default function Payment() {
         }
 
         setOrder(order)
-        console.log(order);
         setUpdateCode(true);
         setShowSuccess(true)
     }
