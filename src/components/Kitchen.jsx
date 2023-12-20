@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
 import { HiOutlineCheck } from "react-icons/hi";
@@ -22,24 +22,34 @@ export default function Kitchen() {
     setShowRequest,
   } = useContext(AuthContext);
 
+  const [notReadyRequests, setNotReadyRequests] = useState([]);
+  const [readyRequests, setReadyRequests] = useState([]);
+
   useEffect(() => {
     const urlRequest = `${import.meta.env.VITE_API_URL}/request`;
 
     const promise = axios.get(urlRequest);
     promise.then((response) => {
       setShowRequest(response.data);
+      filtering();
     });
     promise.catch((err) => {
       console.log(err.response);
     });
   }, [order]);
-  console.log(showRequest)
 
+  function filtering() {
+    setNotReadyRequests(showRequest.filter((item) => item.ready === false));
+    setReadyRequests(showRequest.filter((item) => item.ready === true));
+    console.log("preparando", notReadyRequests);
+    console.log(readyRequests);
+  };
+  
   return (
     <All>
       <Preparing>
         <p>Preparando:</p>
-        {showRequest.map((main) => (
+        {notReadyRequests.map((main) => (
           <Order key={main.idR}>
             <img src={main.image} alt="" />
             <NameCode>
@@ -66,20 +76,24 @@ export default function Kitchen() {
       <Sidebar></Sidebar>
       <Ready>
         <p>Pronto:</p>
-        <Order>
-          <img src="" alt="" />
-          <NameCode>
-            <h1>201 - Monique</h1>
-            <h2>Descrução do que foi pedido</h2>
-          </NameCode>
-          <Butons>
-            <Not>
-              <HiOutlineX
-                style={{ width: "30px", height: "30px", color: "#CF3C29" }}
-              />
-            </Not>
-          </Butons>
-        </Order>
+        {readyRequests.map((main) => (
+          <Order key={main.idR}>
+            <img src={main.image} alt="" />
+            <NameCode>
+              <h1>
+                {main.code} - {main.nameClient}
+              </h1>
+              <h2>{main.name}</h2>
+            </NameCode>
+            <Butons>
+              <Not>
+                <HiOutlineX
+                  style={{ width: "30px", height: "30px", color: "#CF3C29" }}
+                />
+              </Not>
+            </Butons>
+          </Order>
+        ))}
       </Ready>
     </All>
   );
@@ -95,7 +109,8 @@ const Preparing = styled.div`
   width: 50%;
   height: 100%;
   margin-top: 7%;
-  margin-left: 7%;
+  margin-left: 7%; 
+  margin-bottom: 7%;
   p {
     font-family: "Varela Round";
     font-size: 24px;
@@ -116,6 +131,7 @@ const Ready = styled.div`
   height: 100%;
   margin-top: 7%;
   margin-left: 4%;
+  margin-bottom: 7%;
   p {
     font-family: "Varela Round";
     font-size: 24px;
