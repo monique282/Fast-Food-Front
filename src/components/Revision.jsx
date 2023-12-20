@@ -46,7 +46,6 @@ export default function Revision() {
 
     function More() {
         setCounter(counter + 1);
-        console.log(counter)
     };
 
     function Remove() {
