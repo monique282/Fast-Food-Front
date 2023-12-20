@@ -16,6 +16,7 @@ export default function AuthProvider({ children }) {
     const [sauceSelected, setSauceSelected] = useState(false);
     const [observationText, setObservationText] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
+    const [showRequest, setShowRequest] = useState([]);
 
     return (
         <AuthContext.Provider value={{
@@ -31,7 +32,8 @@ export default function AuthProvider({ children }) {
             cheddarSelected, setCheddarSelected,
             sauceSelected, setSauceSelected,
             observationText, setObservationText,
-            showSuccess, setShowSuccess
+            showSuccess, setShowSuccess,
+            showRequest, setShowRequest
         }}>
             {children}
         </AuthContext.Provider>
