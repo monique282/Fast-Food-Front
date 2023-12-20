@@ -1,12 +1,30 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
 import { HiOutlineCheck } from "react-icons/hi";
 import { HiOutlineX } from "react-icons/hi";
+import axios from "axios";
 
 
-export default function Kitchen() {
-    const { products } = useContext(AuthContext);
+export default function Kitchen() {   
+    const { products, setProducts, setId,
+    showReview, setShowReview, order,
+    showPayment, setShowPayment,
+    setCode, code, setOrder
+} = useContext(AuthContext);
+
+    useEffect(() => {
+        const urlRequest = `${import.meta.env.VITE_API_URL}/request`;
+
+        const promise = axios.get(urlRequest);
+        promise.then(response => {
+        console.log(response.data)
+        })
+        promise.catch(err => {
+            console.log(err.response);
+        });
+
+    }, [order]);
 
         return (
             <All>
