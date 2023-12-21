@@ -19,6 +19,7 @@ export default function Kitchen() {
       const promise = axios.get(urlRequest);
       promise.then((response) => {
         setShowRequest(response.data);
+        console.log(response.data);
         setNotReadyRequests(showRequest.filter((item) => item.ready === false));
         setLoading(false);
         theLastTwoHours(showRequest.filter((item) => item.ready === true));
@@ -75,27 +76,41 @@ export default function Kitchen() {
       <Preparing>
         <p>Preparando:</p>
         {notReadyRequests.map((main) => (
-          <Order key={main.idR}>
-            <img src={main.image} alt="" />
-            <NameCode>
-              <h1>
-                {main.code} - {main.nameClient}
-              </h1>
-              <h2>{main.name}</h2>
-            </NameCode>
-            <Butons>
-              <Not>
-                <HiOutlineX
-                  style={{ width: "30px", height: "30px", color: "#CF3C29" }}
-                />
-              </Not>
-              <Ok onClick={() => ready(main.code)}>
-                <HiOutlineCheck
-                  style={{ width: "30px", height: "30px", color: "#56A211" }}
-                />
-              </Ok>
-            </Butons>
-          </Order>
+          <AllRequest>
+            <Order key={main.idR}>
+              <img src={main.image} alt="" />
+              <NameCode>
+                <h1>
+                  {main.code} - {main.nameClient}
+                </h1>
+                <h2>{main.name}</h2>
+                {main.followUps.length !== 0 &&
+                  main.followUps.map((followUp) => (
+                    <h2 key={followUp.id}>{followUp.item}</h2>
+                  ))}
+              </NameCode>
+              <Butons>
+                <Not>
+                  <HiOutlineX
+                    style={{ width: "30px", height: "30px", color: "#CF3C29" }}
+                  />
+                </Not>
+                <Ok onClick={() => ready(main.code)}>
+                  <HiOutlineCheck
+                    style={{ width: "30px", height: "30px", color: "#56A211" }}
+                  />
+                </Ok>
+              </Butons>
+            </Order>
+            {main.observationText.length !== 0 && (
+              <>
+                <OB>Observações:</OB>
+                <Observation>
+                  <P>{main.observationText}</P>
+                </Observation>
+              </>
+            )}
+          </AllRequest>
         ))}
       </Preparing>
       <Sidebar></Sidebar>
@@ -151,7 +166,6 @@ const Sidebar = styled.div`
   margin-top: 7%;
   border-radius: 10px;
 `;
-
 const Ready = styled.div`
   width: 50%;
   height: 100%;
@@ -165,7 +179,6 @@ const Ready = styled.div`
     font-weight: bold;
   }
 `;
-
 const OrderReady = styled.div`
   width: 90%;
   height: 100%;
@@ -183,14 +196,22 @@ const OrderReady = styled.div`
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   }
 `;
-const Order = styled.div`
+const AllRequest = styled.div`
   width: 90%;
   height: 100%;
   border: none;
   border-radius: 20px;
   display: flex;
-  text-align: center;
+  flex-direction: column;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+`;
+const Order = styled.div`
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 20px;
+  display: flex;
+  text-align: center;
   margin-top: 5%;
   img {
     width: 100px;
@@ -199,6 +220,41 @@ const Order = styled.div`
     border-radius: 10px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   }
+`;
+const OB = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-top: 2%;
+  font-family: "Varela Round";
+  font-size: 15px;
+  color: black;
+  font-weight: bold;
+  margin-left: 3%;
+`;
+const Observation = styled.div`
+  width: 92%;
+  height: 90%;
+  border: 1px solid #a4a4a4;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  margin-top: 1%;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-left: 3%;
+`;
+const P = styled.div`
+  width: 95%;
+  height: 90%;
+  font-family: "Varela Round";
+  font-size: 15px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin-top: 3%;
+  padding-bottom: 5%;
+  margin-bottom: 10px;
 `;
 const NameCode = styled.div`
   width: 200%;
@@ -210,12 +266,14 @@ const NameCode = styled.div`
     color: black;
     font-weight: bold;
     margin-top: 5%;
+    margin-bottom: 5%;
   }
   h2 {
     font-family: "Varela Round";
     font-size: 15px;
     color: black;
-    margin-top: 5%;
+    margin-top: 2%;
+    margin-bottom: 3%;
   }
 `;
 const Butons = styled.div`
