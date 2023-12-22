@@ -67,6 +67,21 @@ export default function Kitchen() {
     });
   }
 
+  function error(code) {
+    ready(code);
+    const urlError = `${import.meta.env.VITE_API_URL}/updateError`;
+    const data = {
+      code,
+    };
+    const promise = axios.post(urlError, data);
+    promise.then((response) => {
+      setLoading(true);
+    });
+    promise.catch((err) => {
+      console.log(err.response);
+    });
+  }
+
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -90,7 +105,7 @@ export default function Kitchen() {
                   ))}
               </NameCode>
               <Butons>
-                <Not>
+                <Not onClick={() => error(main.code)}>
                   <HiOutlineX
                     style={{ width: "30px", height: "30px", color: "#CF3C29" }}
                   />
@@ -117,22 +132,66 @@ export default function Kitchen() {
       <Ready>
         <p>Pronto:</p>
         {showOnly2hours.map((main) => (
-          <OrderReady key={main.idR}>
-            <img src={main.image} alt="" />
-            <NameCode>
-              <h1>
-                {main.code} - {main.nameClient}
-              </h1>
-              <h2>{main.name}</h2>
-            </NameCode>
-            <Butons>
-              <Not>
-                <HiOutlineX
-                  style={{ width: "30px", height: "30px", color: "#CF3C29" }}
-                />
-              </Not>
-            </Butons>
-          </OrderReady>
+          <>
+            {main.error === false && (
+              <OrderReady
+                key={main.idR}
+                style={{ border: "1px solid #67ad68" }}
+              >
+                <img src={main.image} alt="" />
+                <NameCode>
+                  <h1>
+                    {main.code} - {main.nameClient}
+                  </h1>
+                  <h2>{main.name}</h2>
+                </NameCode>
+                <Butons>
+                  <Not>
+                    <HiOutlineX
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        color: "#CF3C29",
+                      }}
+                    />
+                  </Not>
+                </Butons>
+              </OrderReady>
+            )}
+
+            {main.error === true && (
+              <OrderReady
+                key={main.idR}
+                style={{
+                  border: "1px solid #ec5f27",
+                  backgroundColor: "#fae5e5",
+                }}
+              >
+                <img src={main.image} alt="" />
+                <NameCode>
+                  <h1>
+                    {main.code} - {main.nameClient}
+                  </h1>
+                  <h1 style={{ color: "red" }}>
+                    Desculpe, seu pedido <h2>{main.name}</h2> não foi
+                    preparado, entre em contato com o estabelecimento para
+                    solucionar o problema.
+                  </h1>
+                </NameCode>
+                <Butons>
+                  <Not>
+                    <HiOutlineX
+                      style={{
+                        width: "30px",
+                        height: "30px",
+                        color: "#CF3C29",
+                      }}
+                    />
+                  </Not>
+                </Butons>
+              </OrderReady>
+            )}
+          </>
         ))}
       </Ready>
     </All>
@@ -182,7 +241,6 @@ const Ready = styled.div`
 const OrderReady = styled.div`
   width: 90%;
   height: 100%;
-  border: 1px solid #67ad68;
   border-radius: 20px;
   display: flex;
   text-align: center;
