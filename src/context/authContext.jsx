@@ -17,6 +17,8 @@ export default function AuthProvider({ children }) {
     const [observationText, setObservationText] = useState("");
     const [showSuccess, setShowSuccess] = useState(false);
     const [showRequest, setShowRequest] = useState([]);
+    const [notReadyRequests, setNotReadyRequests] = useState([]);
+    const [showOnly2hours, setShowOnly2hours] = useState([]);
 
     return (
         <AuthContext.Provider value={{
@@ -33,7 +35,9 @@ export default function AuthProvider({ children }) {
             sauceSelected, setSauceSelected,
             observationText, setObservationText,
             showSuccess, setShowSuccess,
-            showRequest, setShowRequest
+            showRequest, setShowRequest,
+            notReadyRequests, setNotReadyRequests,
+            showOnly2hours, setShowOnly2hours
         }}>
             {children}
         </AuthContext.Provider>

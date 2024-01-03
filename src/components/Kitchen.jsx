@@ -6,11 +6,16 @@ import { HiOutlineX } from "react-icons/hi";
 import axios from "axios";
 
 export default function Kitchen() {
-  const { showRequest, setShowRequest, order } = useContext(AuthContext);
-
-  const [notReadyRequests, setNotReadyRequests] = useState([]);
+  const {
+    showRequest,
+    setShowRequest,
+    order,
+    notReadyRequests,
+    setNotReadyRequests,
+    showOnly2hours,
+    setShowOnly2hours,
+  } = useContext(AuthContext);
   const [loading, setLoading] = useState(true);
-  const [showOnly2hours, setShowOnly2hours] = useState([]);
 
   useEffect(() => {
     function requisition() {
@@ -173,9 +178,9 @@ export default function Kitchen() {
                     {main.code} - {main.nameClient}
                   </h1>
                   <h1 style={{ color: "red" }}>
-                    Desculpe, seu pedido <h2>{main.name}</h2> não foi
-                    preparado, entre em contato com o estabelecimento para
-                    solucionar o problema.
+                    Desculpe, seu pedido <h2>{main.name}</h2> não foi preparado,
+                    entre em contato com o estabelecimento para solucionar o
+                    problema.
                   </h1>
                 </NameCode>
                 <Butons>
