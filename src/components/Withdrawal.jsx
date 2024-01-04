@@ -1,7 +1,14 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
-
+import {
+  All,
+  Preparing,
+  Sidebar,
+  Ready,
+  Name,
+  ReadyName,
+} from "../assets/StylesPages/success";
 export default function Withdrawal() {
   const { products, notReadyRequests, showOnly2hours } =
     useContext(AuthContext);
@@ -30,9 +37,8 @@ export default function Withdrawal() {
               <ReadyName key={main.idR}>
                 <p style={{ color: "#CF3C29" }}>{main.nameClient}</p>
                 <h1 style={{ color: "#CF3C29" }}>
-                  Desculpe, seu pedido não foi preparado,
-                  entre em contato com o estabelecimento para solucionar o
-                  problema.
+                  Desculpe, seu pedido não foi preparado, entre em contato com o
+                  estabelecimento para solucionar o problema.
                 </h1>
               </ReadyName>
             )}
@@ -42,89 +48,3 @@ export default function Withdrawal() {
     </All>
   );
 }
-
-const All = styled.div`
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff;
-  display: flex;
-`;
-const Preparing = styled.div`
-  width: 50%;
-  height: 100%;
-  margin-top: 7%;
-  margin-left: 7%;
-  p {
-    font-family: "Varela Round";
-    font-size: 24px;
-    color: black;
-    font-weight: bold;
-  }
-`;
-const Sidebar = styled.div`
-  width: 1px;
-  background-color: black;
-  color: #ffffff;
-  padding: 2px;
-  margin-top: 7%;
-  border-radius: 10px;
-`;
-const Ready = styled.div`
-  width: 50%;
-  height: 100%;
-  margin-top: 7%;
-  margin-left: 4%;
-  p {
-    font-family: "Varela Round";
-    font-size: 24px;
-    color: black;
-    font-weight: bold;
-  }
-`;
-const Name = styled.div`
-  width: 90%;
-  height: 100%;
-  border: none;
-  border-radius: 10px;
-  display: flex;
-  margin-top: 5%;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  p {
-    margin-top: 2%;
-    font-family: "Varela Round";
-    font-size: 50px;
-    color: #9f9f9f;
-  }
-`;
-const ReadyName = styled.div`
-  width: 90%;
-  height: 100%;
-  border: none;
-  border-radius: 10px;
-  display: flex;
-  margin-top: 5%;
-  font-weight: bold;
-  flex-direction: column;
-  p {
-    margin-top: 2%;
-    font-family: "Varela Round";
-    font-size: 50px;
-  }
-  h1 {
-    font-family: "Varela Round";
-    font-size: 15px;
-    color: black;
-    font-weight: bold;
-    margin-top: 1%;
-    margin-bottom: 5%;
-  }
-  h2 {
-    font-family: "Varela Round";
-    font-size: 15px;
-    color: black;
-    margin-top: 1%;
-    margin-bottom: 1%;
-  }
-`;
