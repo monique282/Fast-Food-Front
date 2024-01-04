@@ -24,7 +24,6 @@ export default function Kitchen() {
       const promise = axios.get(urlRequest);
       promise.then((response) => {
         setShowRequest(response.data);
-        console.log(response.data);
         setNotReadyRequests(showRequest.filter((item) => item.ready === false));
         setLoading(false);
         theLastTwoHours(showRequest.filter((item) => item.ready === true));
