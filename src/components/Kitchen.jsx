@@ -24,7 +24,6 @@ export default function Kitchen() {
       const promise = axios.get(urlRequest);
       promise.then((response) => {
         setShowRequest(response.data);
-        console.log(response.data);
         setNotReadyRequests(showRequest.filter((item) => item.ready === false));
         setLoading(false);
         theLastTwoHours(showRequest.filter((item) => item.ready === true));
@@ -73,12 +72,25 @@ export default function Kitchen() {
   }
 
   function error(code) {
-    ready(code);
     const urlError = `${import.meta.env.VITE_API_URL}/updateError`;
     const data = {
       code,
     };
     const promise = axios.post(urlError, data);
+    promise.then((response) => {
+      setLoading(true);
+    });
+    promise.catch((err) => {
+      console.log(err.response);
+    });
+  }
+
+  function delet(code) {
+    const urlDelete = `${import.meta.env.VITE_API_URL}/updateDelete`;
+    const data = {
+      code,
+    };
+    const promise = axios.delete(urlDelete, {data});
     promise.then((response) => {
       setLoading(true);
     });
@@ -151,7 +163,7 @@ export default function Kitchen() {
                   <h2>{main.name}</h2>
                 </NameCode>
                 <Butons>
-                  <Not>
+                  <Not onClick={() => delet(main.code)}>
                     <HiOutlineX
                       style={{
                         width: "30px",
@@ -184,7 +196,7 @@ export default function Kitchen() {
                   </h1>
                 </NameCode>
                 <Butons>
-                  <Not>
+                  <Not onClick={() => delet(main.code)}>
                     <HiOutlineX
                       style={{
                         width: "30px",
