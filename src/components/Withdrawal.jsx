@@ -1,5 +1,4 @@
 import { useContext } from "react";
-import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
 import {
   All,
@@ -8,7 +7,7 @@ import {
   Ready,
   Name,
   ReadyName,
-} from "../assets/StylesPages/success";
+} from "../assets/StylesPages/withdrawal";
 export default function Withdrawal() {
   const { products, notReadyRequests, showOnly2hours } =
     useContext(AuthContext);

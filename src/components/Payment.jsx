@@ -122,9 +122,7 @@ export default function Payment() {
                         </Summary>
                         <PriceDescription>
                           R${" "}
-                          {(main.ProductSpecific.price * main.counter).toFixed(
-                            2
-                          )}
+                          {(main.ProductSpecific.price * main.counter).toFixed(2)}
                         </PriceDescription>
                       </DescriptionPrice>
                       {main.followUp.length > 0 &&
