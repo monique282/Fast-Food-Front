@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
 import { MdPayment } from "react-icons/md";
 import { FaWallet } from "react-icons/fa6";
@@ -41,13 +40,11 @@ export default function Payment() {
     nameClient,
     setNameClient,
     code,
-    setCode,
     setOrder,
     showSuccess,
     setShowSuccess,
   } = useContext(AuthContext);
   const [abilitCard, setAbilitCard] = useState(false);
-  4;
   const [amountForPayment, setAmountForPayment] = useState(0);
   const [updateCode, setUpdateCode] = useState(false);
 
@@ -122,7 +119,9 @@ export default function Payment() {
                         </Summary>
                         <PriceDescription>
                           R${" "}
-                          {(main.ProductSpecific.price * main.counter).toFixed(2)}
+                          {(main.ProductSpecific.price * main.counter).toFixed(
+                            2
+                          )}
                         </PriceDescription>
                       </DescriptionPrice>
                       {main.followUp.length > 0 &&
@@ -156,7 +155,7 @@ export default function Payment() {
                 </Name>
                 <Code>
                   <p>Código</p>
-                  {!code[0].idcode === 1 ? (
+                  {!code[0].idcode == 1 ? (
                     <div>1</div>
                   ) : (
                     <div>{code[0].idcode}</div>
