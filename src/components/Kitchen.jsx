@@ -1,8 +1,6 @@
 import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import { AuthContext } from "../context/authContext";
-import { HiOutlineCheck } from "react-icons/hi";
-import { HiOutlineX } from "react-icons/hi";
+import { HiOutlineCheck, HiOutlineX } from "react-icons/hi";
 import axios from "axios";
 import {
   All,
@@ -124,8 +122,8 @@ export default function Kitchen() {
       <Preparing>
         <p>Preparando:</p>
         {notReadyRequests.map((main) => (
-          <AllRequest>
-            <Order key={main.idR}>
+          <AllRequest key={main.idR}>
+            <Order >
               <img src={main.image} alt="" />
               <NameCode>
                 <h1>
