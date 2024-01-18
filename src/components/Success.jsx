@@ -1,7 +1,5 @@
 import { useContext } from "react";
-import styled from "styled-components";
 import orderPlaced from "../assets/images/orderPlaced.png";
-import { Link } from "react-router-dom";
 import { AuthContext } from "../context/authContext";
 import { All, BoxAll } from "../assets/StylesPages/success";
 export default function Success() {
