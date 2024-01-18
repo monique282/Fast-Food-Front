@@ -20,6 +20,7 @@ import {
 } from "../assets/StylesPages/kitchen";
 import updateError from "../Functionality/ErrorKitchen";
 import updateReady from "../Functionality/ReadyKitchen";
+import updateDelete from "../Functionality/DeletKitchen";
 
 
 export default function Kitchen() {
@@ -83,17 +84,7 @@ export default function Kitchen() {
   }
 
   function delet(code) {
-    const urlDelete = `${import.meta.env.VITE_API_URL}/updateDelete`;
-    const data = {
-      code,
-    };
-    const promise = axios.delete(urlDelete, { data });
-    promise.then((response) => {
-      setLoading(true);
-    });
-    promise.catch((err) => {
-      console.log(err.response);
-    });
+    updateDelete(code, setLoading);
   }
 
   if (loading) {
