@@ -10,7 +10,7 @@ import {
   OrderReady,
   AllRequest,
   Order,
-  OB,
+  Ob,
   Observation,
   P,
   NameCode,
@@ -18,6 +18,8 @@ import {
   Not,
   Ok,
 } from "../assets/StylesPages/kitchen";
+import updateError from "../Functionality/ErrorKitchen";
+
 
 export default function Kitchen() {
   const {
@@ -86,17 +88,7 @@ export default function Kitchen() {
   }
 
   function error(code) {
-    const urlError = `${import.meta.env.VITE_API_URL}/updateError`;
-    const data = {
-      code,
-    };
-    const promise = axios.post(urlError, data);
-    promise.then((response) => {
-      setLoading(true);
-    });
-    promise.catch((err) => {
-      console.log(err.response);
-    });
+    updateError(code, setLoading, ready);
   }
 
   function delet(code) {
@@ -150,7 +142,7 @@ export default function Kitchen() {
             </Order>
             {main.observationText.length !== 0 && (
               <>
-                <OB>Observações:</OB>
+                <Ob>Observações:</Ob>
                 <Observation>
                   <P>{main.observationText}</P>
                 </Observation>
