@@ -89,7 +89,7 @@ export default function Payment() {
   }
 
   if (products.length === 0) {
-    <All>Carregando</All>;
+    return <All>Carregando</All>;
   } else {
     return (
       <All>
