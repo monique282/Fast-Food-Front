@@ -1,9 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
 import { HiOutlineX } from "react-icons/hi";
-import { CgMathMinus } from "react-icons/cg";
-import { CgMathPlus } from "react-icons/cg";
+import { CgMathMinus, CgMathPlus } from "react-icons/cg";
 import Bacons from "../assets/images/bacon.png";
 import Cheddars from "../assets/images/cheddar.png";
 import Barvecue from "../assets/images/barbecue.png";
@@ -157,7 +155,7 @@ export default function Revision() {
   if (products.length === 0) {
     return (
       <All>
-        <>carregando</>
+       carregando
       </All>
     );
   } else {
