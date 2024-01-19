@@ -60,23 +60,23 @@ export default function Kitchen() {
 
   function theLastTwoHours(readyRequests) {
     theLastTwoHoursKitchen(readyRequests, setShowOnly2hours);
-  }
+  };
 
   function ready(code) {
     updateReady(code, setLoading);
-  }
+  };
 
   function error(code) {
     updateError(code, setLoading, ready);
-  }
+  };
 
   function delet(code) {
     updateDelete(code, setLoading);
-  }
+  };
 
   if (loading) {
     return <p>Carregando...</p>;
-  }
+  };
 
   return (
     <All>
