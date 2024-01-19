@@ -21,7 +21,7 @@ import {
 import updateError from "../Functionality/ErrorKitchen";
 import updateReady from "../Functionality/ReadyKitchen";
 import updateDelete from "../Functionality/DeletKitchen";
-
+import theLastTwoHoursKitchen from "../Functionality/TheLastTwoHoursKitchen";
 
 export default function Kitchen() {
   const {
@@ -59,20 +59,7 @@ export default function Kitchen() {
   }, [order, loading]);
 
   function theLastTwoHours(readyRequests) {
-    const twoHoursInMilliseconds = 2 * 60 * 60 * 1000;
-    const now = new Date();
-    const ordersInLastTwoHours = readyRequests.filter((pedido) => {
-      const dateCreation = new Date(pedido.createdAt);
-      return now - dateCreation <= twoHoursInMilliseconds;
-    });
-
-    const orderedByDate = ordersInLastTwoHours.sort((a, b) => {
-      const dataA = new Date(a.createdAt);
-      const dataB = new Date(b.createdAt);
-      return dataB - dataA;
-    });
-
-    setShowOnly2hours(orderedByDate);
+    theLastTwoHoursKitchen(readyRequests, setShowOnly2hours);
   }
 
   function ready(code) {
@@ -97,7 +84,7 @@ export default function Kitchen() {
         <p>Preparando:</p>
         {notReadyRequests.map((main) => (
           <AllRequest key={main.idR}>
-            <Order >
+            <Order>
               <img src={main.image} alt="" />
               <NameCode>
                 <h1>
@@ -201,4 +188,4 @@ export default function Kitchen() {
       </Ready>
     </All>
   );
-}
+};
