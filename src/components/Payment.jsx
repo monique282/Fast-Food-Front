@@ -89,7 +89,7 @@ export default function Payment() {
   }
 
   if (products.length === 0) {
-    <All>Carregando</All>;
+    return <All>Carregando</All>;
   } else {
     return (
       <All>
@@ -155,7 +155,7 @@ export default function Payment() {
                 </Name>
                 <Code>
                   <p>Código</p>
-                  {!code[0].idcode == 1 ? (
+                  {!code[0].idcode === 1 ? (
                     <div>1</div>
                   ) : (
                     <div>{code[0].idcode}</div>

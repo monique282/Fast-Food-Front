@@ -81,7 +81,7 @@ export const Order = styled.div`
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   }
 `;
-export const OB = styled.div`
+export const Ob = styled.div`
   width: 100%;
   height: 100%;
   margin-top: 2%;

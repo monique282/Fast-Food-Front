@@ -9,7 +9,7 @@ import {
   ReadyName,
 } from "../assets/StylesPages/withdrawal";
 export default function Withdrawal() {
-  const { products, notReadyRequests, showOnly2hours } =
+  const { notReadyRequests, showOnly2hours } =
     useContext(AuthContext);
 
   return (

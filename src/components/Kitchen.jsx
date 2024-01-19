@@ -10,7 +10,7 @@ import {
   OrderReady,
   AllRequest,
   Order,
-  OB,
+  Ob,
   Observation,
   P,
   NameCode,
@@ -18,6 +18,10 @@ import {
   Not,
   Ok,
 } from "../assets/StylesPages/kitchen";
+import updateError from "../Functionality/ErrorKitchen";
+import updateReady from "../Functionality/ReadyKitchen";
+import updateDelete from "../Functionality/DeletKitchen";
+import theLastTwoHoursKitchen from "../Functionality/TheLastTwoHoursKitchen";
 
 export default function Kitchen() {
   const {
@@ -55,67 +59,24 @@ export default function Kitchen() {
   }, [order, loading]);
 
   function theLastTwoHours(readyRequests) {
-    const twoHoursInMilliseconds = 2 * 60 * 60 * 1000;
-    const now = new Date();
-    const ordersInLastTwoHours = readyRequests.filter((pedido) => {
-      const dateCreation = new Date(pedido.createdAt);
-      return now - dateCreation <= twoHoursInMilliseconds;
-    });
-
-    const orderedByDate = ordersInLastTwoHours.sort((a, b) => {
-      const dataA = new Date(a.createdAt);
-      const dataB = new Date(b.createdAt);
-      return dataB - dataA;
-    });
-
-    setShowOnly2hours(orderedByDate);
-  }
+    theLastTwoHoursKitchen(readyRequests, setShowOnly2hours);
+  };
 
   function ready(code) {
-    const urlRequest = `${import.meta.env.VITE_API_URL}/updateReady`;
-    const data = {
-      code,
-    };
-    const promise = axios.post(urlRequest, data);
-    promise.then((response) => {
-      setLoading(true);
-    });
-    promise.catch((err) => {
-      console.log(err.response);
-    });
-  }
+    updateReady(code, setLoading);
+  };
 
   function error(code) {
-    const urlError = `${import.meta.env.VITE_API_URL}/updateError`;
-    const data = {
-      code,
-    };
-    const promise = axios.post(urlError, data);
-    promise.then((response) => {
-      setLoading(true);
-    });
-    promise.catch((err) => {
-      console.log(err.response);
-    });
-  }
+    updateError(code, setLoading, ready);
+  };
 
   function delet(code) {
-    const urlDelete = `${import.meta.env.VITE_API_URL}/updateDelete`;
-    const data = {
-      code,
-    };
-    const promise = axios.delete(urlDelete, { data });
-    promise.then((response) => {
-      setLoading(true);
-    });
-    promise.catch((err) => {
-      console.log(err.response);
-    });
-  }
+    updateDelete(code, setLoading);
+  };
 
   if (loading) {
     return <p>Carregando...</p>;
-  }
+  };
 
   return (
     <All>
@@ -123,7 +84,7 @@ export default function Kitchen() {
         <p>Preparando:</p>
         {notReadyRequests.map((main) => (
           <AllRequest key={main.idR}>
-            <Order >
+            <Order>
               <img src={main.image} alt="" />
               <NameCode>
                 <h1>
@@ -150,7 +111,7 @@ export default function Kitchen() {
             </Order>
             {main.observationText.length !== 0 && (
               <>
-                <OB>Observações:</OB>
+                <Ob>Observações:</Ob>
                 <Observation>
                   <P>{main.observationText}</P>
                 </Observation>
@@ -227,4 +188,4 @@ export default function Kitchen() {
       </Ready>
     </All>
   );
-}
+};
