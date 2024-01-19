@@ -1,7 +1,6 @@
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import Combo from "../assets/images/Combo.jpeg";
 import dessert from "../assets/images/dessert.jpeg";
 import drinks from "../assets/images/drinks.png";
@@ -33,6 +32,7 @@ import {
   RemoveOrderFromList,
   AddProducttoList,
 } from "../assets/StylesPages/home";
+import handleSearchHome from "../Functionality/HandleSearchHome";
 
 export default function Home() {
   const {
@@ -110,24 +110,11 @@ export default function Home() {
     setProductFiltered(true);
     setSelectedCategory();
     setSelectedCategory(parament);
-  }
+  };
 
   function handleSearch(query) {
-    setSearch(query);
-    const filteredResults = products.filter((product) => {
-      const lowercaseQuery = query.toLowerCase();
-      const lowercaseName = product.name.toLowerCase();
-      const stringifiedId = String(product.id);
-      return (
-        lowercaseName.includes(lowercaseQuery) ||
-        stringifiedId.includes(lowercaseQuery)
-      );
-    });
-
-    setSearchResults(filteredResults);
-    setProductFiltered(query.length > 0);
-    setSelectedCategory();
-  }
+    handleSearchHome(query, setSearch, setSearchResults, setProductFiltered,setSelectedCategory )
+  };
 
   function ShowProductDetails(id) {
     setShowReview(true);
