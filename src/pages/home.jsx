@@ -1,14 +1,12 @@
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
 import React, { useContext, useEffect, useState } from "react";
-import styled from "styled-components";
 import Combo from "../assets/images/Combo.jpeg";
 import dessert from "../assets/images/dessert.jpeg";
 import drinks from "../assets/images/drinks.png";
 import follow from "../assets/images/follow.jpg";
 import snack from "../assets/images/snacks.jpeg";
 import Revision from "../components/Revision";
-import { CgCheck } from "react-icons/cg";
 import Payment from "../components/Payment";
 import {
   All,
@@ -33,6 +31,8 @@ import {
   RemoveOrderFromList,
   AddProducttoList,
 } from "../assets/StylesPages/home";
+import handleSearchHome from "../Functionality/HandleSearchHome";
+import ProcuctBoxHome from "../Functionality/ProductBoxHome";
 
 export default function Home() {
   const {
@@ -113,20 +113,13 @@ export default function Home() {
   }
 
   function handleSearch(query) {
-    setSearch(query);
-    const filteredResults = products.filter((product) => {
-      const lowercaseQuery = query.toLowerCase();
-      const lowercaseName = product.name.toLowerCase();
-      const stringifiedId = String(product.id);
-      return (
-        lowercaseName.includes(lowercaseQuery) ||
-        stringifiedId.includes(lowercaseQuery)
-      );
-    });
-
-    setSearchResults(filteredResults);
-    setProductFiltered(query.length > 0);
-    setSelectedCategory();
+    handleSearchHome(
+      query,
+      setSearch,
+      setSearchResults,
+      setProductFiltered,
+      setSelectedCategory
+    );
   }
 
   function ShowProductDetails(id) {
@@ -195,152 +188,68 @@ export default function Home() {
           <Menu>
             {!productFiltered &&
               snacks.map((main) => (
-                <>
-                  <ProductBox
-                    key={main.id}
-                    onClick={() => ShowProductDetails(main.id)}
-                  >
-                    {ordereIds.includes(main.id) && (
-                      <Select>
-                        <CgCheck
-                          style={{ fontSize: "70px", color: "#FCFDFC" }}
-                        />
-                      </Select>
-                    )}
-                    <img src={main.image} alt="" />
-                    <h1>{main.name}</h1>
-                    <h2>{main.description}</h2>
-                    <p>R$ {main.price.toFixed(2)}</p>
-                  </ProductBox>
-                </>
+                <ProcuctBoxHome
+                  key={main.id}
+                  main={main}
+                  ordereIds={ordereIds}
+                  ShowProductDetails={ShowProductDetails}
+                />
               ))}
             {productFiltered === true && (
               <>
                 {selectedCategory === "COMBOO" &&
                   comboo.map((main) => (
-                    <>
-                      <ProductBox
-                        key={main.id}
-                        onClick={() => ShowProductDetails(main.id)}
-                      >
-                        {ordereIds.includes(main.id) && (
-                          <Select>
-                            <CgCheck
-                              style={{ fontSize: "70px", color: "#FCFDFC" }}
-                            />
-                          </Select>
-                        )}
-                        <img src={main.image} alt="" />
-                        <h1>{main.name}</h1>
-                        <h2>{main.description}</h2>
-                        <p>R$ {main.price.toFixed(2)}</p>
-                      </ProductBox>
-                    </>
+                    <ProcuctBoxHome
+                      key={main.id}
+                      main={main}
+                      ordereIds={ordereIds}
+                      ShowProductDetails={ShowProductDetails}
+                    />
                   ))}
                 {selectedCategory === "FOLLOW" &&
                   follo.map((main) => (
-                    <>
-                      <ProductBox
-                        key={main.id}
-                        onClick={() => ShowProductDetails(main.id)}
-                      >
-                        {ordereIds.includes(main.id) && (
-                          <Select>
-                            <CgCheck
-                              style={{ fontSize: "70px", color: "#FCFDFC" }}
-                            />
-                          </Select>
-                        )}
-                        <img src={main.image} alt="" />
-                        <h1>{main.name}</h1>
-                        <h2>{main.description}</h2>
-                        <p>R$ {main.price.toFixed(2)}</p>
-                      </ProductBox>
-                    </>
+                    <ProcuctBoxHome
+                      key={main.id}
+                      main={main}
+                      ordereIds={ordereIds}
+                      ShowProductDetails={ShowProductDetails}
+                    />
                   ))}
                 {selectedCategory === "DESSERT" &&
                   desser.map((main) => (
-                    <>
-                      <ProductBox
-                        key={main.id}
-                        onClick={() => ShowProductDetails(main.id)}
-                      >
-                        {ordereIds.includes(main.id) && (
-                          <Select>
-                            <CgCheck
-                              style={{ fontSize: "70px", color: "#FCFDFC" }}
-                            />
-                          </Select>
-                        )}
-                        <img src={main.image} alt="" />
-                        <h1>{main.name}</h1>
-                        <h2>{main.description}</h2>
-                        <p>R$ {main.price.toFixed(2)}</p>
-                      </ProductBox>
-                    </>
+                    <ProcuctBoxHome
+                      key={main.id}
+                      main={main}
+                      ordereIds={ordereIds}
+                      ShowProductDetails={ShowProductDetails}
+                    />
                   ))}
                 {selectedCategory === "SNACKS" &&
                   snacks.map((main) => (
-                    <>
-                      <ProductBox
-                        key={main.id}
-                        onClick={() => ShowProductDetails(main.id)}
-                      >
-                        {ordereIds.includes(main.id) && (
-                          <Select>
-                            <CgCheck
-                              style={{ fontSize: "70px", color: "#FCFDFC" }}
-                            />
-                          </Select>
-                        )}
-                        <img src={main.image} alt="" />
-                        <h1>{main.name}</h1>
-                        <h2>{main.description}</h2>
-                        <p>R$ {main.price.toFixed(2)}</p>
-                      </ProductBox>
-                    </>
+                    <ProcuctBoxHome
+                      key={main.id}
+                      main={main}
+                      ordereIds={ordereIds}
+                      ShowProductDetails={ShowProductDetails}
+                    />
                   ))}
                 {selectedCategory === "DRINK" &&
                   drink.map((main) => (
-                    <>
-                      <ProductBox
-                        key={main.id}
-                        onClick={() => ShowProductDetails(main.id)}
-                      >
-                        {ordereIds.includes(main.id) && (
-                          <Select>
-                            <CgCheck
-                              style={{ fontSize: "70px", color: "#FCFDFC" }}
-                            />
-                          </Select>
-                        )}
-                        <img src={main.image} alt="" />
-                        <h1>{main.name}</h1>
-                        <h2>{main.description}</h2>
-                        <p>R$ {main.price.toFixed(2)}</p>
-                      </ProductBox>
-                    </>
+                    <ProcuctBoxHome
+                      key={main.id}
+                      main={main}
+                      ordereIds={ordereIds}
+                      ShowProductDetails={ShowProductDetails}
+                    />
                   ))}
                 {search.length !== 0 &&
                   searchResults.map((main) => (
-                    <>
-                      <ProductBox
-                        key={main.id}
-                        onClick={() => ShowProductDetails(main.id)}
-                      >
-                        {ordereIds.includes(main.id) && (
-                          <Select>
-                            <CgCheck
-                              style={{ fontSize: "70px", color: "#FCFDFC" }}
-                            />
-                          </Select>
-                        )}
-                        <img src={main.image} alt="" />
-                        <h1>{main.name}</h1>
-                        <h2>{main.description}</h2>
-                        <p>R$ {main.price.toFixed(2)}</p>
-                      </ProductBox>
-                    </>
+                    <ProcuctBoxHome
+                      key={main.id}
+                      main={main}
+                      ordereIds={ordereIds}
+                      ShowProductDetails={ShowProductDetails}
+                    />
                   ))}
               </>
             )}
