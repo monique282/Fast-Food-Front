@@ -18,8 +18,6 @@ import {
   Categories,
   Box,
   Menu,
-  Select,
-  ProductBox,
   PurchaseSummary,
   DescriptionPrice,
   Summary,
@@ -110,7 +108,7 @@ export default function Home() {
     setProductFiltered(true);
     setSelectedCategory();
     setSelectedCategory(parament);
-  }
+  };
 
   function handleSearch(query) {
     handleSearchHome(
@@ -120,26 +118,26 @@ export default function Home() {
       setProductFiltered,
       setSelectedCategory
     );
-  }
+  };
 
   function ShowProductDetails(id) {
     setShowReview(true);
     setId(id);
-  }
+  };
 
   if (order && order.length > 0) {
     sumTotal = order.reduce((accumulator, item) => {
       return accumulator + parseFloat(item.total.replace(",", "."));
     }, 0);
-  }
+  };
 
   function cancel() {
     location.reload();
-  }
+  };
 
   function IWantThese() {
     setShowPayment(true);
-  }
+  };
 
   if (products.length === 0) {
     return <>carregando</>;
