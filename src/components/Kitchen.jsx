@@ -1,27 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
-import { HiOutlineX } from "react-icons/hi";
 import axios from "axios";
-import {
-  All,
-  Preparing,
-  Sidebar,
-  Ready,
-  OrderReady,
-  AllRequest,
-  Order,
-  Ob,
-  Observation,
-  P,
-  NameCode,
-  Butons,
-  Not,
-  Ok,
-} from "../assets/StylesPages/kitchen";
-import updateDelete from "../Functionality/DeletKitchen";
+import { All, Preparing, Sidebar, Ready } from "../assets/StylesPages/kitchen";
 import theLastTwoHoursKitchen from "../Functionality/TheLastTwoHoursKitchen";
 import AllRequestKitchen from "../Return/AllRquestKitchen";
 import OrderReadyFalseKitchen from "../Return/OrderReadyFalseKitcehn";
+import OrderReadyTrueKitchen from "../Return/OrderReadyTrueKitchen";
 
 export default function Kitchen() {
   const {
@@ -64,7 +48,6 @@ export default function Kitchen() {
   if (loading) {
     return <p>Carregando...</p>;
   }
-
   return (
     <All>
       <Preparing>
@@ -90,44 +73,15 @@ export default function Kitchen() {
               />
             )}
             {main.error === true && (
-              <OrderReady
+              <OrderReadyTrueKitchen
                 key={main.idR}
-                style={{
-                  border: "1px solid #ec5f27",
-                  backgroundColor: "#fae5e5",
-                }}
-              >
-                <img src={main.image} alt="" />
-                <NameCode>
-                  <h1>
-                    {main.code} - {main.nameClient}
-                  </h1>
-                  <h1 style={{ color: "red" }}>
-                    Desculpe, seu pedido <h2>{main.name}</h2> não foi preparado,
-                    entre em contato com o estabelecimento para solucionar o
-                    problema.
-                  </h1>
-                </NameCode>
-                <Butons>
-                  <Not
-                    onClick={() => {
-                      updateDelete(main.code, setLoading);
-                    }}
-                  >
-                    <HiOutlineX
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        color: "#CF3C29",
-                      }}
-                    />
-                  </Not>
-                </Butons>
-              </OrderReady>
+                main={main}
+                setLoading={setLoading}
+              />
             )}
           </>
         ))}
       </Ready>
     </All>
   );
-}
+};
