@@ -1,7 +1,7 @@
 import React from "react";
-import { OrderReady, NameCode, Butons, Not } from "../assets/StylesPages/kitchen";
+import { OrderReady, NameCode, Butons, Not } from "../../assets/StylesPages/kitchen";
 import { HiOutlineX } from "react-icons/hi";
-import updateDelete from "../Functionality/DeletKitchen";
+import updateDelete from "../../Functionality/DeletKitchen";
 
 function OrderReadyTrueKitchen({  }) {
   return (
