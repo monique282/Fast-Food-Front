@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
-import { HiOutlineCheck, HiOutlineX } from "react-icons/hi";
+import {  HiOutlineX } from "react-icons/hi";
 import axios from "axios";
 import {
   All,
@@ -8,20 +8,13 @@ import {
   Sidebar,
   Ready,
   OrderReady,
-  AllRequest,
-  Order,
-  Ob,
-  Observation,
-  P,
   NameCode,
   Butons,
   Not,
-  Ok,
 } from "../assets/StylesPages/kitchen";
-import updateError from "../Functionality/ErrorKitchen";
-import updateReady from "../Functionality/ReadyKitchen";
 import updateDelete from "../Functionality/DeletKitchen";
 import theLastTwoHoursKitchen from "../Functionality/TheLastTwoHoursKitchen";
+import AllRequestKitchen from "../Return/AllRquestKitchen";
 
 export default function Kitchen() {
   const {
@@ -44,7 +37,10 @@ export default function Kitchen() {
         setShowRequest(response.data);
         setNotReadyRequests(showRequest.filter((item) => item.ready === false));
         setLoading(false);
-        theLastTwoHoursKitchen((showRequest.filter((item) => item.ready === true)), setShowOnly2hours);
+        theLastTwoHoursKitchen(
+          showRequest.filter((item) => item.ready === true),
+          setShowOnly2hours
+        );
       });
       promise.catch((err) => {
         console.log(err.response);
@@ -58,7 +54,6 @@ export default function Kitchen() {
     return () => clearInterval(intervalId);
   }, [order, loading]);
 
-
   if (loading) {
     return <p>Carregando...</p>;
   }
@@ -68,48 +63,7 @@ export default function Kitchen() {
       <Preparing>
         <p>Preparando:</p>
         {notReadyRequests.map((main) => (
-          <AllRequest key={main.idR}>
-            <Order>
-              <img src={main.image} alt="" />
-              <NameCode>
-                <h1>
-                  {main.code} - {main.nameClient}
-                </h1>
-                <h2>{main.name}</h2>
-                {main.followUps.length !== 0 &&
-                  main.followUps.map((followUp) => (
-                    <h2 key={followUp.id}>{followUp.item}</h2>
-                  ))}
-              </NameCode>
-              <Butons>
-                <Not onClick={() => {
-                   updateError(main.code, setLoading);
-                   updateReady(main.code, setLoading);
-                }}>
-                  <HiOutlineX
-                    style={{ width: "30px", height: "30px", color: "#CF3C29" }}
-                  />
-                </Not>
-                <Ok
-                  onClick={() => {
-                    updateReady(main.code, setLoading);
-                  }}
-                >
-                  <HiOutlineCheck
-                    style={{ width: "30px", height: "30px", color: "#56A211" }}
-                  />
-                </Ok>
-              </Butons>
-            </Order>
-            {main.observationText.length !== 0 && (
-              <>
-                <Ob>Observações:</Ob>
-                <Observation>
-                  <P>{main.observationText}</P>
-                </Observation>
-              </>
-            )}
-          </AllRequest>
+        <AllRequestKitchen key={main.idR} main={main} setLoading={setLoading} />
         ))}
       </Preparing>
       <Sidebar></Sidebar>
@@ -130,9 +84,11 @@ export default function Kitchen() {
                   <h2>{main.name}</h2>
                 </NameCode>
                 <Butons>
-                  <Not onClick={() => {
-                        updateDelete(main.code, setLoading);
-                  }}>
+                  <Not
+                    onClick={() => {
+                      updateDelete(main.code, setLoading);
+                    }}
+                  >
                     <HiOutlineX
                       style={{
                         width: "30px",
