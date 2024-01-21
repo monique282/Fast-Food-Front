@@ -1,27 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
-import { HiOutlineCheck, HiOutlineX } from "react-icons/hi";
 import axios from "axios";
-import {
-  All,
-  Preparing,
-  Sidebar,
-  Ready,
-  OrderReady,
-  AllRequest,
-  Order,
-  Ob,
-  Observation,
-  P,
-  NameCode,
-  Butons,
-  Not,
-  Ok,
-} from "../assets/StylesPages/kitchen";
-import updateError from "../Functionality/ErrorKitchen";
-import updateReady from "../Functionality/ReadyKitchen";
-import updateDelete from "../Functionality/DeletKitchen";
+import { All, Preparing, Sidebar, Ready } from "../assets/StylesPages/kitchen";
 import theLastTwoHoursKitchen from "../Functionality/TheLastTwoHoursKitchen";
+import AllRequestKitchen from "../Return/AllRquestKitchen";
+import OrderReadyFalseKitchen from "../Return/OrderReadyFalseKitcehn";
+import OrderReadyTrueKitchen from "../Return/OrderReadyTrueKitchen";
 
 export default function Kitchen() {
   const {
@@ -44,7 +28,10 @@ export default function Kitchen() {
         setShowRequest(response.data);
         setNotReadyRequests(showRequest.filter((item) => item.ready === false));
         setLoading(false);
-        theLastTwoHours(showRequest.filter((item) => item.ready === true));
+        theLastTwoHoursKitchen(
+          showRequest.filter((item) => item.ready === true),
+          setShowOnly2hours
+        );
       });
       promise.catch((err) => {
         console.log(err.response);
@@ -58,66 +45,19 @@ export default function Kitchen() {
     return () => clearInterval(intervalId);
   }, [order, loading]);
 
-  function theLastTwoHours(readyRequests) {
-    theLastTwoHoursKitchen(readyRequests, setShowOnly2hours);
-  };
-
-  function ready(code) {
-    updateReady(code, setLoading);
-  };
-
-  function error(code) {
-    updateError(code, setLoading, ready);
-  };
-
-  function delet(code) {
-    updateDelete(code, setLoading);
-  };
-
   if (loading) {
     return <p>Carregando...</p>;
-  };
-
+  }
   return (
     <All>
       <Preparing>
         <p>Preparando:</p>
         {notReadyRequests.map((main) => (
-          <AllRequest key={main.idR}>
-            <Order>
-              <img src={main.image} alt="" />
-              <NameCode>
-                <h1>
-                  {main.code} - {main.nameClient}
-                </h1>
-                <h2>{main.name}</h2>
-                {main.followUps.length !== 0 &&
-                  main.followUps.map((followUp) => (
-                    <h2 key={followUp.id}>{followUp.item}</h2>
-                  ))}
-              </NameCode>
-              <Butons>
-                <Not onClick={() => error(main.code)}>
-                  <HiOutlineX
-                    style={{ width: "30px", height: "30px", color: "#CF3C29" }}
-                  />
-                </Not>
-                <Ok onClick={() => ready(main.code)}>
-                  <HiOutlineCheck
-                    style={{ width: "30px", height: "30px", color: "#56A211" }}
-                  />
-                </Ok>
-              </Butons>
-            </Order>
-            {main.observationText.length !== 0 && (
-              <>
-                <Ob>Observações:</Ob>
-                <Observation>
-                  <P>{main.observationText}</P>
-                </Observation>
-              </>
-            )}
-          </AllRequest>
+          <AllRequestKitchen
+            key={main.idR}
+            main={main}
+            setLoading={setLoading}
+          />
         ))}
       </Preparing>
       <Sidebar></Sidebar>
@@ -126,62 +66,18 @@ export default function Kitchen() {
         {showOnly2hours.map((main) => (
           <>
             {main.error === false && (
-              <OrderReady
+              <OrderReadyFalseKitchen
                 key={main.idR}
-                style={{ border: "1px solid #67ad68" }}
-              >
-                <img src={main.image} alt="" />
-                <NameCode>
-                  <h1>
-                    {main.code} - {main.nameClient}
-                  </h1>
-                  <h2>{main.name}</h2>
-                </NameCode>
-                <Butons>
-                  <Not onClick={() => delet(main.code)}>
-                    <HiOutlineX
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        color: "#CF3C29",
-                      }}
-                    />
-                  </Not>
-                </Butons>
-              </OrderReady>
+                main={main}
+                setLoading={setLoading}
+              />
             )}
-
             {main.error === true && (
-              <OrderReady
+              <OrderReadyTrueKitchen
                 key={main.idR}
-                style={{
-                  border: "1px solid #ec5f27",
-                  backgroundColor: "#fae5e5",
-                }}
-              >
-                <img src={main.image} alt="" />
-                <NameCode>
-                  <h1>
-                    {main.code} - {main.nameClient}
-                  </h1>
-                  <h1 style={{ color: "red" }}>
-                    Desculpe, seu pedido <h2>{main.name}</h2> não foi preparado,
-                    entre em contato com o estabelecimento para solucionar o
-                    problema.
-                  </h1>
-                </NameCode>
-                <Butons>
-                  <Not onClick={() => delet(main.code)}>
-                    <HiOutlineX
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        color: "#CF3C29",
-                      }}
-                    />
-                  </Not>
-                </Butons>
-              </OrderReady>
+                main={main}
+                setLoading={setLoading}
+              />
             )}
           </>
         ))}
