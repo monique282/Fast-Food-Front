@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
-import {  HiOutlineX } from "react-icons/hi";
+import { HiOutlineX } from "react-icons/hi";
 import axios from "axios";
 import {
   All,
@@ -8,13 +8,20 @@ import {
   Sidebar,
   Ready,
   OrderReady,
+  AllRequest,
+  Order,
+  Ob,
+  Observation,
+  P,
   NameCode,
   Butons,
   Not,
+  Ok,
 } from "../assets/StylesPages/kitchen";
 import updateDelete from "../Functionality/DeletKitchen";
 import theLastTwoHoursKitchen from "../Functionality/TheLastTwoHoursKitchen";
 import AllRequestKitchen from "../Return/AllRquestKitchen";
+import OrderReadyFalseKitchen from "../Return/OrderReadyFalseKitcehn";
 
 export default function Kitchen() {
   const {
@@ -63,7 +70,11 @@ export default function Kitchen() {
       <Preparing>
         <p>Preparando:</p>
         {notReadyRequests.map((main) => (
-        <AllRequestKitchen key={main.idR} main={main} setLoading={setLoading} />
+          <AllRequestKitchen
+            key={main.idR}
+            main={main}
+            setLoading={setLoading}
+          />
         ))}
       </Preparing>
       <Sidebar></Sidebar>
@@ -72,35 +83,12 @@ export default function Kitchen() {
         {showOnly2hours.map((main) => (
           <>
             {main.error === false && (
-              <OrderReady
+              <OrderReadyFalseKitchen
                 key={main.idR}
-                style={{ border: "1px solid #67ad68" }}
-              >
-                <img src={main.image} alt="" />
-                <NameCode>
-                  <h1>
-                    {main.code} - {main.nameClient}
-                  </h1>
-                  <h2>{main.name}</h2>
-                </NameCode>
-                <Butons>
-                  <Not
-                    onClick={() => {
-                      updateDelete(main.code, setLoading);
-                    }}
-                  >
-                    <HiOutlineX
-                      style={{
-                        width: "30px",
-                        height: "30px",
-                        color: "#CF3C29",
-                      }}
-                    />
-                  </Not>
-                </Butons>
-              </OrderReady>
+                main={main}
+                setLoading={setLoading}
+              />
             )}
-
             {main.error === true && (
               <OrderReady
                 key={main.idR}
@@ -121,7 +109,11 @@ export default function Kitchen() {
                   </h1>
                 </NameCode>
                 <Butons>
-                  <Not onClick={() => delet(main.code)}>
+                  <Not
+                    onClick={() => {
+                      updateDelete(main.code, setLoading);
+                    }}
+                  >
                     <HiOutlineX
                       style={{
                         width: "30px",
