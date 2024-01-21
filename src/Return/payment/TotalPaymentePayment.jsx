@@ -1,4 +1,5 @@
 import React from "react";
+import { FaWallet } from "react-icons/fa6";
 import {
   TotalPaymente,
   Order,
@@ -8,7 +9,13 @@ import {
 } from "../../assets/StylesPages/payment";
 import PurchaseSummaryPayment from "./PurchaseSummaryPayment";
 
-function TotalPaymentePayment({ order, sumTotal }) {
+function TotalPaymentePayment({
+  order,
+  nameClient,
+  code,
+  sumTotal,
+  setNameClient,
+}) {
   return (
     <TotalPaymente>
       <p>

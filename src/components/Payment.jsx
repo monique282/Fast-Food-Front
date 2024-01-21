@@ -5,33 +5,9 @@ import { FaWallet } from "react-icons/fa6";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import axios from "axios";
 import Success from "../components/Success";
-import {
-  All,
-  BoxAll,
-  TotalPaymente,
-  Sidebar,
-  Order,
-  PurchaseSummary,
-  DescriptionPrice,
-  Summary,
-  PriceDescription,
-  Divider,
-  FinalValue,
-  Amount,
-  CodeName,
-  Name,
-  Code,
-  FinalizePayment,
-  Title,
-  CreditDebitMoney,
-  ValueChange,
-  Value,
-  Change,
-  Finishing,
-  RemoveOrderFromList,
-  AddProducttoList,
-} from "../assets/StylesPages/payment";
+import { All, BoxAll, Sidebar } from "../assets/StylesPages/payment";
 import TotalPaymentePayment from "../Return/payment/TotalPaymentePayment";
+import FinalizePaymentPayment from "../Return/payment/FinalizePaymentPayment";
 
 export default function Payment() {
   const {
@@ -78,17 +54,6 @@ export default function Payment() {
     }, 0);
   }
 
-  function finishPayment() {
-    for (let i = 0; i < order.length; i++) {
-      order[i].nameClient = nameClient;
-      order[i].code = code[0].idcode;
-    }
-
-    setOrder(order);
-    setUpdateCode(true);
-    setShowSuccess(true);
-  }
-
   if (products.length === 0) {
     return <All>Carregando</All>;
   } else {
@@ -96,152 +61,33 @@ export default function Payment() {
       <All>
         {showSuccess === true && <Success></Success>}
         <BoxAll>
-        <TotalPaymentePayment
-        order={order}
-        nameClient={nameClient}
-        code={code}
-        sumTotal={sumTotal}
-        setNameClient={setNameClient}
-      />
+          <TotalPaymentePayment
+            order={order}
+            nameClient={nameClient}
+            code={code}
+            sumTotal={sumTotal}
+            setNameClient={setNameClient}
+          />
           <Sidebar></Sidebar>
-          <FinalizePayment>
-            <Order>
-              <Title>Selecione a forma de pagamento</Title>
-              <CreditDebitMoney>
-                <p>
-                  <MdPayment
-                    style={{
-                      color: "#9F9F9F",
-                      marginRight: "3%",
-                      width: "30px",
-                      height: "30px",
-                    }}
-                  />
-                  Credito
-                </p>
-                <div
-                  style={{
-                    border: "3px solid #9F9F9F",
-                    backgroundColor: "#9F9F9F",
-                  }}
-                ></div>
-              </CreditDebitMoney>
-              <CreditDebitMoney>
-                <p>
-                  <MdPayment
-                    style={{
-                      color: "#9F9F9F",
-                      marginRight: "3%",
-                      width: "30px",
-                      height: "30px",
-                    }}
-                  />
-                  Debito
-                </p>
-                <div
-                  style={{
-                    border: "3px solid #9F9F9F",
-                    backgroundColor: "#9F9F9F",
-                  }}
-                ></div>
-              </CreditDebitMoney>
-              {abilitCard === false && (
-                <CreditDebitMoney onClick={() => setAbilitCard(true)}>
-                  <p>
-                    <FaMoneyBillAlt
-                      style={{
-                        color: "#2E5D15",
-                        marginRight: "3%",
-                        width: "30px",
-                        height: "30px",
-                      }}
-                    />
-                    Dinheiro
-                  </p>
-                  <div
-                    style={{
-                      border: "3px solid #2E5D15",
-                      backgroundColor: "#FFFFFF",
-                    }}
-                  ></div>
-                </CreditDebitMoney>
-              )}
-              {abilitCard === true && (
-                <CreditDebitMoney
-                  onClick={() => setAbilitCard(false)}
-                  style={{ border: "1px solid #2E5D15" }}
-                >
-                  <p>
-                    <FaMoneyBillAlt
-                      style={{
-                        color: "#2E5D15",
-                        marginRight: "3%",
-                        width: "30px",
-                        height: "30px",
-                      }}
-                    />
-                    Dinheiro
-                  </p>
-                  <div
-                    style={{
-                      border: "3px solid #2E5D15",
-                      backgroundColor: "#2E5D15",
-                    }}
-                  ></div>
-                </CreditDebitMoney>
-              )}
-              <ValueChange>
-                <Value>
-                  <p>Valor entregue</p>
-                  <input
-                    placeholder="Digite o Valor"
-                    type="number"
-                    value={amountForPayment}
-                    onChange={(e) => setAmountForPayment(e.target.value)}
-                  />
-                </Value>
-                {amountForPayment < sumTotal && (
-                  <Change>
-                    <p>Troco</p>
-                    <div></div>
-                  </Change>
-                )}
-                {amountForPayment > sumTotal && (
-                  <Change>
-                    <p>Troco</p>
-                    <div>R${(amountForPayment - sumTotal).toFixed(2)}</div>
-                  </Change>
-                )}
-              </ValueChange>
-              <Finishing>
-                <RemoveOrderFromList onClick={() => setShowPayment(false)}>
-                  Cancelar
-                </RemoveOrderFromList>
-                {amountForPayment > sumTotal &&
-                abilitCard &&
-                nameClient.length !== 0 ? (
-                  <AddProducttoList
-                    onClick={() => finishPayment()}
-                    style={{
-                      border: "3px solid #2E5D15",
-                      backgroundColor: "#2E5D15",
-                    }}
-                  >
-                    Finalizar Pedido
-                  </AddProducttoList>
-                ) : (
-                  <AddProducttoList
-                    style={{
-                      border: "3px solid #9F9F9F",
-                      backgroundColor: "#9F9F9F",
-                    }}
-                  >
-                    Finalizar Pedido
-                  </AddProducttoList>
-                )}
-              </Finishing>
-            </Order>
-          </FinalizePayment>
+          <FinalizePaymentPayment
+            order={order}
+            sumTotal={sumTotal}
+            amountForPayment={amountForPayment}
+            setAmountForPayment={setAmountForPayment}
+            abilitCard={abilitCard}
+            setAbilitCard={setAbilitCard}
+            nameClient={nameClient}
+            setShowPayment={setShowPayment}
+            finishPayment={() => {
+              for (let i = 0; i < order.length; i++) {
+                order[i].nameClient = nameClient;
+                order[i].code = code[0].idcode;
+              }
+              setOrder(order);
+              setUpdateCode(true);
+              setShowSuccess(true);
+            }}
+          />
         </BoxAll>
       </All>
     );
