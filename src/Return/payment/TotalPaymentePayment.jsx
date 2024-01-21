@@ -2,25 +2,13 @@ import React from "react";
 import {
   TotalPaymente,
   Order,
-  PurchaseSummary,
-  DescriptionPrice,
-  Summary,
-  PriceDescription,
-  Divider,
-  FinalValue,
-  Amount,
   CodeName,
   Name,
   Code,
-} from "../assets/StylesPages/payment";
+} from "../../assets/StylesPages/payment";
+import PurchaseSummaryPayment from "./PurchaseSummaryPayment";
 
-function TotalPaymentePayment({
-  order,
-  nameClient,
-  code,
-  sumTotal,
-  setNameClient,
-}) {
+function TotalPaymentePayment({ order, sumTotal }) {
   return (
     <TotalPaymente>
       <p>
@@ -37,33 +25,7 @@ function TotalPaymentePayment({
       <Order>
         <p>Resumo da compra</p>
         {order && order.length > 0 && (
-          <PurchaseSummary>
-            {order.map((main) => (
-              <React.Fragment key={main.ProductSpecific.id}>
-                <DescriptionPrice>
-                  <Summary>
-                    {main.counter}x {main.ProductSpecific.name}
-                  </Summary>
-                  <PriceDescription>
-                    R$ {(main.ProductSpecific.price * main.counter).toFixed(2)}
-                  </PriceDescription>
-                </DescriptionPrice>
-                {main.followUp.length > 0 &&
-                  main.followUp.map((followUpItem) => (
-                    <DescriptionPrice key={followUpItem.id}>
-                      <Summary>{followUpItem.item}</Summary>
-                      <PriceDescription>{followUpItem.price}</PriceDescription>
-                    </DescriptionPrice>
-                  ))}
-              </React.Fragment>
-            ))}
-
-            <Divider></Divider>
-            <FinalValue>
-              <h1>Total do pedido:</h1>
-              <Amount>R$ {sumTotal.toFixed(2)} </Amount>
-            </FinalValue>
-          </PurchaseSummary>
+          <PurchaseSummaryPayment order={order} sumTotal={sumTotal} />
         )}
         <CodeName>
           <Name>
