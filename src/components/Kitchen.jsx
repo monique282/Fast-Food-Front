@@ -44,7 +44,7 @@ export default function Kitchen() {
         setShowRequest(response.data);
         setNotReadyRequests(showRequest.filter((item) => item.ready === false));
         setLoading(false);
-        theLastTwoHours(showRequest.filter((item) => item.ready === true));
+        theLastTwoHoursKitchen((showRequest.filter((item) => item.ready === true)), setShowOnly2hours);
       });
       promise.catch((err) => {
         console.log(err.response);
@@ -58,25 +58,10 @@ export default function Kitchen() {
     return () => clearInterval(intervalId);
   }, [order, loading]);
 
-  function theLastTwoHours(readyRequests) {
-    theLastTwoHoursKitchen(readyRequests, setShowOnly2hours);
-  };
-
-  function ready(code) {
-    updateReady(code, setLoading);
-  };
-
-  function error(code) {
-    updateError(code, setLoading, ready);
-  };
-
-  function delet(code) {
-    updateDelete(code, setLoading);
-  };
 
   if (loading) {
     return <p>Carregando...</p>;
-  };
+  }
 
   return (
     <All>
@@ -97,12 +82,19 @@ export default function Kitchen() {
                   ))}
               </NameCode>
               <Butons>
-                <Not onClick={() => error(main.code)}>
+                <Not onClick={() => {
+                   updateError(main.code, setLoading);
+                   updateReady(main.code, setLoading);
+                }}>
                   <HiOutlineX
                     style={{ width: "30px", height: "30px", color: "#CF3C29" }}
                   />
                 </Not>
-                <Ok onClick={() => ready(main.code)}>
+                <Ok
+                  onClick={() => {
+                    updateReady(main.code, setLoading);
+                  }}
+                >
                   <HiOutlineCheck
                     style={{ width: "30px", height: "30px", color: "#56A211" }}
                   />
@@ -138,7 +130,9 @@ export default function Kitchen() {
                   <h2>{main.name}</h2>
                 </NameCode>
                 <Butons>
-                  <Not onClick={() => delet(main.code)}>
+                  <Not onClick={() => {
+                        updateDelete(main.code, setLoading);
+                  }}>
                     <HiOutlineX
                       style={{
                         width: "30px",
@@ -188,4 +182,4 @@ export default function Kitchen() {
       </Ready>
     </All>
   );
-};
+}
