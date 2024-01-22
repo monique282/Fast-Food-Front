@@ -3,7 +3,8 @@ export default function handleSearchHome(
   setSearch,
   setSearchResults,
   setProductFiltered,
-  setSelectedCategory
+  setSelectedCategory,
+  products
 ) {
   setSearch(query);
   const filteredResults = products.filter((product) => {
