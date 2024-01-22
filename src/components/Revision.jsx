@@ -38,6 +38,7 @@ import {
 } from "../assets/StylesPages/revision";
 import checkingIfIDasAlreadyBeenSelected from "../Functionality/CheckingIfIDasAlreadyBeenSelected";
 import Remove from "../Functionality/Removed";
+import selectedSideDishes from "../Functionality/SelectedSideDishes";
 
 export default function Revision() {
   const {
@@ -75,29 +76,9 @@ export default function Revision() {
 
   const ProductSpecific = products.find((product) => product.id === id);
 
-  function selectedSideDishes() {
-    if (baconSelected === true) {
-      followUp = [
-        ...followUp,
-        { id: 1, item: "1x Bacon 10g", price: "R$1.00" },
-      ];
-    }
-    if (cheddarSelected === true) {
-      followUp = [
-        ...followUp,
-        { id: 2, item: "1x Cheddar 10g", price: "R$1.00" },
-      ];
-    }
-    if (sauceSelected === true) {
-      followUp = [
-        ...followUp,
-        { id: 3, item: "1x Molho acompanhamento Barbecue", price: "R$1.00" },
-      ];
-    }
-  }
 
   function IWantThese() {
-    selectedSideDishes();
+    selectedSideDishes(baconSelected, followUp, cheddarSelected, sauceSelected);
     const total = (
       ProductSpecific.price * counter +
       (baconSelected ? 1 : 0) +
@@ -149,7 +130,9 @@ export default function Revision() {
               <h1>{ProductSpecific.name}</h1>
               <h2>{ProductSpecific.description}</h2>
               <AddQauntity>
-                <Subtract onClick={() => Remove(setShowReview, counter, setCounter)}>
+                <Subtract
+                  onClick={() => Remove(setShowReview, counter, setCounter)}
+                >
                   <CgMathMinus style={{ fontSize: "40px", color: "#FCFDFC" }} />
                 </Subtract>
                 <p>{counter}</p>
@@ -285,7 +268,16 @@ export default function Revision() {
             >
               Remover produto
             </RemoveOrderFromList>
-            <AddProducttoList onClick={() => IWantThese()}>
+            <AddProducttoList
+              onClick={() =>
+                IWantThese(
+                  baconSelected,
+                  followUp,
+                  cheddarSelected,
+                  sauceSelected
+                )
+              }
+            >
               Adicionar produto
             </AddProducttoList>
           </Finishing>
