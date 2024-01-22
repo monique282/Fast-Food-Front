@@ -35,7 +35,7 @@ export default function Payment() {
     });
 
     const urlrequest = `${import.meta.env.VITE_API_URL}/request`;
-
+    console.log("aquui", order);
     const promiseOrder = axios.post(urlrequest, order);
     promiseOrder.then((response) => {
       console.log(response.data);
@@ -43,7 +43,7 @@ export default function Payment() {
     promiseOrder.catch((err) => {
       console.log(err.response);
     });
-  }, [updateCode]);
+  }, [updateCode, order]);
 
   let sumTotal = 0;
   if (order && order.length > 0) {
