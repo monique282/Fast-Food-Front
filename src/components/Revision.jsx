@@ -48,6 +48,7 @@ import PurchaseSummaryRevision from "../Return/revision/PurchaseSummaryRevision"
 import DescriptionPriceRevision from "../Return/revision/DescriptionPriceRevision";
 import DescriptionPriceFixedRevision from "../Return/revision/DescriptionPriceFixedRevision";
 import FinalValueRevision from "../Return/revision/FinalValueRevision";
+import FinishingRevision from "../Return/revision/FinishingRevision";
 
 export default function Revision() {
   const {
@@ -136,45 +137,24 @@ export default function Revision() {
             ProductSpecific={ProductSpecific}
             counter={counter}
           />
-
-          <Finishing>
-            <RemoveOrderFromList
-              onClick={() => {
-                setCounter(1);
-                setBaconSelected(false);
-                setCheddarSelected(false);
-                setSauceSelected(false);
-                setObservationText("");
-                setShowReview(false);
-                const updatedOrder = order.filter(
-                  (item) => item.ProductSpecific.id !== id
-                );
-                setOrder(updatedOrder);
-              }}
-            >
-              Remover produto
-            </RemoveOrderFromList>
-            <AddProducttoList
-              onClick={() =>
-                IWantThese(
-                  baconSelected,
-                  followUp,
-                  order,
-                  setOrder,
-                  setCounter,
-                  setShowReview,
-                  cheddarSelected,
-                  sauceSelected,
-                  ProductSpecific,
-                  counter,
-                  observationText
-                )
-              }
-            >
-              Adicionar produto
-            </AddProducttoList>
-          </Finishing>
-
+          <FinishingRevision
+            baconSelected={baconSelected}
+            cheddarSelected={cheddarSelected}
+            sauceSelected={sauceSelected}
+            ProductSpecific={ProductSpecific}
+            counter={counter}
+            setCounter={setCounter}
+            setBaconSelected={setBaconSelected}
+            setCheddarSelected={setCheddarSelected}
+            setSauceSelected={setSauceSelected}
+            setObservationText={setObservationText}
+            setShowReview={setShowReview}
+            order={order}
+            id={id}
+            setOrder={setOrder}
+            followUp={followUp}
+            observationText={observationText}
+          />
         </BoxAll>
       </All>
     );
