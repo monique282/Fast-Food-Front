@@ -41,6 +41,7 @@ import Remove from "../Functionality/Removed";
 import IWantThese from "../Functionality/IWantThese";
 import HeaderRevision from "../Return/revision/HeaderRevision";
 import ExitRevision from "../Return/revision/ExitRevision";
+import ProductOverviewRevision from "../Return/revision/ProductOverviewRevision";
 
 export default function Revision() {
   const {
@@ -87,25 +88,12 @@ export default function Revision() {
           <HeaderRevision setShowReview={setShowReview} />
           <p>Revise seu pedido!</p>
           <ExitRevision setShowReview={setShowReview} />
-          <ProductOverview>
-            <img src={ProductSpecific.image} alt=""></img>
-            <NameDescriptionQuantity>
-              <h1>{ProductSpecific.name}</h1>
-              <h2>{ProductSpecific.description}</h2>
-              <AddQauntity>
-                <Subtract
-                  onClick={() => Remove(setShowReview, counter, setCounter)}
-                >
-                  <CgMathMinus style={{ fontSize: "40px", color: "#FCFDFC" }} />
-                </Subtract>
-                <p>{counter}</p>
-                <Add onClick={() => setCounter(counter + 1)}>
-                  <CgMathPlus style={{ fontSize: "40px", color: "#FCFDFC" }} />
-                </Add>
-              </AddQauntity>
-            </NameDescriptionQuantity>
-            <Price>R$ {ProductSpecific.price.toFixed(2)}</Price>
-          </ProductOverview>
+          <ProductOverviewRevision
+            ProductSpecific={ProductSpecific}
+            setShowReview={setShowReview}
+            counter={counter}
+            setCounter={setCounter}
+          />
           <Additional>
             <h1>Adicionais</h1>
             <h2>
