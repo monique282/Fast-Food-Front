@@ -1,4 +1,4 @@
-import { Observation, Search } from "../assets/StylesPages/revision";
+import { Observation, Search } from "../../assets/StylesPages/revision";
 
 export default function Observationrevision(
   observationText,
