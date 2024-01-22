@@ -7,7 +7,7 @@ import {
   Divider,
   FinalValue,
   Amount,
-} from "../../assets/StylesPages/payment";;
+} from "../../assets/StylesPages/payment";
 
 function PurchaseSummaryPayment({ order, sumTotal }) {
   return (
