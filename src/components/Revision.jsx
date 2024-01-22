@@ -38,7 +38,7 @@ import {
 } from "../assets/StylesPages/revision";
 import checkingIfIDasAlreadyBeenSelected from "../Functionality/CheckingIfIDasAlreadyBeenSelected";
 import Remove from "../Functionality/Removed";
-import selectedSideDishes from "../Functionality/SelectedSideDishes";
+import IWantThese from "../Functionality/IWantThese";
 
 export default function Revision() {
   const {
@@ -75,31 +75,6 @@ export default function Revision() {
   }, []);
 
   const ProductSpecific = products.find((product) => product.id === id);
-
-
-  function IWantThese() {
-    selectedSideDishes(baconSelected, followUp, cheddarSelected, sauceSelected);
-    const total = (
-      ProductSpecific.price * counter +
-      (baconSelected ? 1 : 0) +
-      (cheddarSelected ? 1 : 0) +
-      (sauceSelected ? 1 : 0)
-    ).toFixed(2);
-
-    const orderDetails = {
-      ProductSpecific,
-      counter,
-      followUp,
-      observationText,
-      total,
-    };
-
-    const newOrder = [...order, orderDetails];
-    setOrder(newOrder);
-
-    setCounter(1);
-    setShowReview(false);
-  }
 
   if (products.length === 0) {
     return <All>carregando</All>;
@@ -273,8 +248,15 @@ export default function Revision() {
                 IWantThese(
                   baconSelected,
                   followUp,
+                  order,
+                  setOrder,
+                  setCounter,
+                  setShowReview,
                   cheddarSelected,
-                  sauceSelected
+                  sauceSelected,
+                  ProductSpecific,
+                  counter,
+                  observationText
                 )
               }
             >
