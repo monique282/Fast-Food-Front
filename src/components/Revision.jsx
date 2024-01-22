@@ -36,6 +36,8 @@ import {
   RemoveOrderFromList,
   AddProducttoList,
 } from "../assets/StylesPages/revision";
+import checkingIfIDasAlreadyBeenSelected from "../Functionality/CheckingIfIDasAlreadyBeenSelected";
+import Remove from "../Functionality/Removed";
 
 export default function Revision() {
   const {
@@ -59,53 +61,19 @@ export default function Revision() {
   let followUp = [];
 
   useEffect(() => {
-    checkingIfIDasAlreadyBeenSelected();
+    checkingIfIDasAlreadyBeenSelected(
+      order,
+      setCounter,
+      setBaconSelected,
+      setCheddarSelected,
+      setSauceSelected,
+      setOrder,
+      id
+    ),
+      id;
   }, []);
 
-  function checkingIfIDasAlreadyBeenSelected() {
-    const corresponding = order.find((item) => item.ProductSpecific.id === id);
-    if (corresponding) {
-      setCounter(corresponding.counter);
-      setBaconSelected(corresponding.followUp.some((item) => item.id === 1));
-      setCheddarSelected(corresponding.followUp.some((item) => item.id === 2));
-      setSauceSelected(corresponding.followUp.some((item) => item.id === 3));
-      // remover item
-      const updatedOrder = order.filter(
-        (item) => item.ProductSpecific.id !== id
-      );
-      setOrder(updatedOrder);
-    }
-  }
-
   const ProductSpecific = products.find((product) => product.id === id);
-
-  function backProducts() {
-    setShowReview(false);
-  }
-
-  function More() {
-    setCounter(counter + 1);
-  }
-
-  function Remove() {
-    if (counter === 1) {
-      setShowReview(false);
-    } else {
-      setCounter(counter - 1);
-      console.log(counter);
-    }
-  }
-
-  function removed() {
-    setCounter(1);
-    setBaconSelected(false);
-    setCheddarSelected(false);
-    setSauceSelected(false);
-    setObservationText("");
-    setShowReview(false);
-    const updatedOrder = order.filter((item) => item.ProductSpecific.id !== id);
-    setOrder(updatedOrder);
-  }
 
   function selectedSideDishes() {
     if (baconSelected === true) {
@@ -153,18 +121,18 @@ export default function Revision() {
   }
 
   if (products.length === 0) {
-    return (
-      <All>
-       carregando
-      </All>
-    );
+    return <All>carregando</All>;
   } else {
     return (
       <All>
         <BoxAll>
           <Header>
             <p>Revise seu pedido!</p>
-            <Exit onClick={() => backProducts()}>
+            <Exit
+              onClick={() => {
+                setShowReview(false);
+              }}
+            >
               <HiOutlineX
                 style={{
                   width: "30px",
@@ -181,11 +149,11 @@ export default function Revision() {
               <h1>{ProductSpecific.name}</h1>
               <h2>{ProductSpecific.description}</h2>
               <AddQauntity>
-                <Subtract onClick={() => Remove()}>
+                <Subtract onClick={() => Remove(setShowReview, counter, setCounter)}>
                   <CgMathMinus style={{ fontSize: "40px", color: "#FCFDFC" }} />
                 </Subtract>
                 <p>{counter}</p>
-                <Add onClick={() => More()}>
+                <Add onClick={() => setCounter(counter + 1)}>
                   <CgMathPlus style={{ fontSize: "40px", color: "#FCFDFC" }} />
                 </Add>
               </AddQauntity>
@@ -301,7 +269,20 @@ export default function Revision() {
             </FinalValue>
           </PurchaseSummary>
           <Finishing>
-            <RemoveOrderFromList onClick={() => removed()}>
+            <RemoveOrderFromList
+              onClick={() => {
+                setCounter(1);
+                setBaconSelected(false);
+                setCheddarSelected(false);
+                setSauceSelected(false);
+                setObservationText("");
+                setShowReview(false);
+                const updatedOrder = order.filter(
+                  (item) => item.ProductSpecific.id !== id
+                );
+                setOrder(updatedOrder);
+              }}
+            >
               Remover produto
             </RemoveOrderFromList>
             <AddProducttoList onClick={() => IWantThese()}>
