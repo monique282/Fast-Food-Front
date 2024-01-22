@@ -40,6 +40,7 @@ import checkingIfIDasAlreadyBeenSelected from "../Functionality/CheckingIfIDasAl
 import Remove from "../Functionality/Removed";
 import IWantThese from "../Functionality/IWantThese";
 import HeaderRevision from "../Return/revision/HeaderRevision";
+import ExitRevision from "../Return/revision/ExitRevision";
 
 export default function Revision() {
   const {
@@ -83,23 +84,9 @@ export default function Revision() {
     return (
       <All>
         <BoxAll>
-          <HeaderRevision setShowReview={setShowReview}/>
-            <p>Revise seu pedido!</p>
-            <Exit
-              onClick={() => {
-                setShowReview(false);
-              }}
-            >
-              <HiOutlineX
-                style={{
-                  width: "30px",
-                  height: "30px",
-                  color: "#9F9F9F",
-                  fontWeight: "bold",
-                }}
-              />
-            </Exit>
-         
+          <HeaderRevision setShowReview={setShowReview} />
+          <p>Revise seu pedido!</p>
+          <ExitRevision setShowReview={setShowReview} />
           <ProductOverview>
             <img src={ProductSpecific.image} alt=""></img>
             <NameDescriptionQuantity>

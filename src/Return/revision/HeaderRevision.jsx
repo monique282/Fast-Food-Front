@@ -1,5 +1,6 @@
 import { HiOutlineX } from "react-icons/hi";
-import { Header, Exit } from "../assets/StylesPages/revision";
+import { Exit, Header } from "../../assets/StylesPages/revision";
+
 
 export default function HeaderRevision(setShowReview) {
   return (
