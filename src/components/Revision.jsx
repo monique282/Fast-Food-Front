@@ -39,6 +39,7 @@ import {
 import checkingIfIDasAlreadyBeenSelected from "../Functionality/CheckingIfIDasAlreadyBeenSelected";
 import Remove from "../Functionality/Removed";
 import IWantThese from "../Functionality/IWantThese";
+import HeaderRevision from "../Return/revision/HeaderRevision";
 
 export default function Revision() {
   const {
@@ -82,7 +83,7 @@ export default function Revision() {
     return (
       <All>
         <BoxAll>
-          <Header>
+          <HeaderRevision setShowReview={setShowReview}/>
             <p>Revise seu pedido!</p>
             <Exit
               onClick={() => {
@@ -98,7 +99,7 @@ export default function Revision() {
                 }}
               />
             </Exit>
-          </Header>
+         
           <ProductOverview>
             <img src={ProductSpecific.image} alt=""></img>
             <NameDescriptionQuantity>
