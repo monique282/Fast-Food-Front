@@ -7,7 +7,7 @@ import {
     Add,
     Subtract,
     Price
-  } from "../assets/StylesPages/revision";
+  } from "../../assets/StylesPages/revision";
 
 export default function ProductOverviewRevision(ProductSpecific,setShowReview, counter, setCounter ) {
   return (
