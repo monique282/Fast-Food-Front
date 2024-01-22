@@ -9,10 +9,10 @@ import {
   Butons,
   Not,
   Ok,
-} from "../assets/StylesPages/kitchen";
+} from "../../assets/StylesPages/kitchen";
 import { HiOutlineCheck, HiOutlineX } from "react-icons/hi";
-import updateError from "../Functionality/ErrorKitchen";
-import updateReady from "../Functionality/ReadyKitchen";
+import updateError from "../../Functionality/ErrorKitchen";
+import updateReady from "../../Functionality/ReadyKitchen";
 
 function AllRequestKitchen({ main, setLoading }) {
   return (

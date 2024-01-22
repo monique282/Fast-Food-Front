@@ -3,9 +3,9 @@ import { AuthContext } from "../context/authContext";
 import axios from "axios";
 import { All, Preparing, Sidebar, Ready } from "../assets/StylesPages/kitchen";
 import theLastTwoHoursKitchen from "../Functionality/TheLastTwoHoursKitchen";
-import AllRequestKitchen from "../Return/AllRquestKitchen";
-import OrderReadyFalseKitchen from "../Return/OrderReadyFalseKitcehn";
-import OrderReadyTrueKitchen from "../Return/OrderReadyTrueKitchen";
+import AllRequestKitchen from "../Return/kitchen/AllRquestKitchen";
+import OrderReadyFalseKitchen from "../Return/kitchen/OrderReadyFalseKitcehn";
+import OrderReadyTrueKitchen from "../Return/kitchen/OrderReadyTrueKitchen";
 
 export default function Kitchen() {
   const {

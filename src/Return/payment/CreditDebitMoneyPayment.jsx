@@ -1,6 +1,6 @@
 
 import { MdPayment } from "react-icons/md";
-import { CreditDebitMoney } from "../assets/StylesPages/payment";
+import { CreditDebitMoney } from "../../assets/StylesPages/payment";
 
 export default function CreditDebitMoneyPayment({ text }) {
   return (
