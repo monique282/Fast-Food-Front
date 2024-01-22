@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import {
   OrderReady,
@@ -8,7 +9,7 @@ import {
 import { HiOutlineX } from "react-icons/hi";
 import updateDelete from "../../Functionality/DeletKitchen";
 
-function OrderReadyTrueKitchen({ main, setLoading }) {
+function OrderReadyTrueKitchen(main, setLoading) {
   return (
     <OrderReady
       key={main.idR}
