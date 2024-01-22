@@ -98,7 +98,7 @@ export default function Home() {
       console.log(err.response);
     });
 
-    if (order && order.length > 0) {
+    if (order && order.length >= 0) {
       const orderedIds = order.map((item) => item.ProductSpecific.id);
       setOrdereIds(orderedIds);
     }
@@ -255,6 +255,8 @@ export default function Home() {
           </Menu>
         </Products>
         {order && order.length > 0 && (
+
+          // resumo do pedido
           <PurchaseSummary>
             {order.map((main) => (
               <React.Fragment key={main.ProductSpecific.id}>
