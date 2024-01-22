@@ -47,6 +47,7 @@ import Observationrevision from "../Return/revision/Observationrevision";
 import PurchaseSummaryRevision from "../Return/revision/PurchaseSummaryRevision";
 import DescriptionPriceRevision from "../Return/revision/DescriptionPriceRevision";
 import DescriptionPriceFixedRevision from "../Return/revision/DescriptionPriceFixedRevision";
+import FinalValueRevision from "../Return/revision/FinalValueRevision";
 
 export default function Revision() {
   const {
@@ -128,18 +129,13 @@ export default function Revision() {
             sauceSelected={sauceSelected}
           />
           <Divider></Divider>
-          <FinalValue>
-            <h1>Total do pedido:</h1>
-            <Amount>
-              R${" "}
-              {(
-                ProductSpecific.price * counter +
-                (baconSelected ? 1 : 0) +
-                (cheddarSelected ? 1 : 0) +
-                (sauceSelected ? 1 : 0)
-              ).toFixed(2)}
-            </Amount>
-          </FinalValue>
+          <FinalValueRevision
+            baconSelected={baconSelected}
+            cheddarSelected={cheddarSelected}
+            sauceSelected={sauceSelected}
+            ProductSpecific={ProductSpecific}
+            counter={counter}
+          />
 
           <Finishing>
             <RemoveOrderFromList
@@ -178,6 +174,7 @@ export default function Revision() {
               Adicionar produto
             </AddProducttoList>
           </Finishing>
+
         </BoxAll>
       </All>
     );
