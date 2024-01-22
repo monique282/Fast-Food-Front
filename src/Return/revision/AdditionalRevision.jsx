@@ -1,13 +1,12 @@
-
 import {
-  Additional,
-  Bacon,
-  NameQuantity,
-  Butons,
-  Select,
-  Cheddar,
-  Sauce,
-} from "../../assets/StylesPages/revision";
+    Additional,
+    Bacon,
+    NameQuantity,
+    Butons,
+    Select,
+    Cheddar,
+    Sauce
+  } from '../../assets/StylesPages/revision';
 
 export default function AdditionalRevision(
   setCheddarSelected,
@@ -15,7 +14,10 @@ export default function AdditionalRevision(
   Cheddars,
   setSauceSelected,
   sauceSelected,
-  Barvecue
+  Barvecue,
+  setBaconSelected,
+  baconSelected,
+  Bacons
 ) {
   return (
     <Additional>

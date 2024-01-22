@@ -43,6 +43,7 @@ import HeaderRevision from "../Return/revision/HeaderRevision";
 import ExitRevision from "../Return/revision/ExitRevision";
 import ProductOverviewRevision from "../Return/revision/ProductOverviewRevision";
 import AdditionalRevision from "../Return/revision/AdditionalRevision";
+import Observationrevision from "../Return/revision/Observationrevision";
 
 export default function Revision() {
   const {
@@ -103,16 +104,11 @@ export default function Revision() {
             sauceSelected={sauceSelected}
             Barvecue={Barvecue}
           />
+          <Observationrevision
+            observationText={observationText}
+            setObservationText={setObservationText}
+          />
 
-          <Observation>
-            <h1>Observações</h1>
-            <Search
-              placeholder="Adicione uma observação ao pedido"
-              type="text"
-              value={observationText}
-              onChange={(e) => setObservationText(e.target.value)}
-            ></Search>
-          </Observation>
           <PurchaseSummary>
             <DescriptionPrice>
               <Summary>
@@ -154,6 +150,8 @@ export default function Revision() {
               </Amount>
             </FinalValue>
           </PurchaseSummary>
+
+          
           <Finishing>
             <RemoveOrderFromList
               onClick={() => {
