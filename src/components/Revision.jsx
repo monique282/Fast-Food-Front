@@ -1,44 +1,9 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
-import { HiOutlineX } from "react-icons/hi";
-import { CgMathMinus, CgMathPlus } from "react-icons/cg";
-import Bacons from "../assets/images/bacon.png";
 import Cheddars from "../assets/images/cheddar.png";
 import Barvecue from "../assets/images/barbecue.png";
-import {
-  All,
-  BoxAll,
-  Header,
-  Exit,
-  ProductOverview,
-  NameDescriptionQuantity,
-  AddQauntity,
-  Add,
-  Subtract,
-  Price,
-  Additional,
-  Bacon,
-  NameQuantity,
-  Butons,
-  Select,
-  Cheddar,
-  Sauce,
-  Observation,
-  Search,
-  PurchaseSummary,
-  DescriptionPrice,
-  Summary,
-  PriceDescription,
-  Divider,
-  FinalValue,
-  Amount,
-  Finishing,
-  RemoveOrderFromList,
-  AddProducttoList,
-} from "../assets/StylesPages/revision";
+import { All, BoxAll, Divider } from "../assets/StylesPages/revision";
 import checkingIfIDasAlreadyBeenSelected from "../Functionality/CheckingIfIDasAlreadyBeenSelected";
-import Remove from "../Functionality/Removed";
-import IWantThese from "../Functionality/IWantThese";
 import HeaderRevision from "../Return/revision/HeaderRevision";
 import ExitRevision from "../Return/revision/ExitRevision";
 import ProductOverviewRevision from "../Return/revision/ProductOverviewRevision";
