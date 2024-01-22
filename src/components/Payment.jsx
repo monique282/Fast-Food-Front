@@ -21,7 +21,7 @@ export default function Payment() {
   } = useContext(AuthContext);
   const [abilitCard, setAbilitCard] = useState(false);
   const [amountForPayment, setAmountForPayment] = useState(0);
-  const [updateCode, setUpdateCode] = useState(false);
+  const [, setUpdateCode] = useState(false);
 
   useEffect(() => {
     const urlCode = `${import.meta.env.VITE_API_URL}/update`;
@@ -43,7 +43,7 @@ export default function Payment() {
     promiseOrder.catch((err) => {
       console.log(err.response);
     });
-  }, [updateCode, order]);
+  }, [code, order]);
 
   let sumTotal = 0;
   if (order && order.length > 0) {

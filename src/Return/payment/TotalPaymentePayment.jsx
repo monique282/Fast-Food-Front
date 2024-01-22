@@ -1,5 +1,8 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import { FaWallet } from "react-icons/fa6";
+import PropTypes from 'prop-types';
+
 import {
   TotalPaymente,
   Order,
@@ -15,7 +18,15 @@ function TotalPaymentePayment({
   code,
   sumTotal,
   setNameClient,
-}) {
+}){
+
+  TotalPaymentePayment.propTypes = {
+    order: PropTypes.array.isRequired,
+    nameClient: PropTypes.string.isRequired,
+    code: PropTypes.number.isRequired,
+    sumTotal: PropTypes.number.isRequired,
+    setNameClient: PropTypes.string.isRequired
+  };
   return (
     <TotalPaymente>
       <p>
