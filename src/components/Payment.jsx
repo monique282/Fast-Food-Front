@@ -1,8 +1,6 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
-import { MdPayment } from "react-icons/md";
-import { FaWallet } from "react-icons/fa6";
-import { FaMoneyBillAlt } from "react-icons/fa";
 import axios from "axios";
 import Success from "../components/Success";
 import { All, BoxAll, Sidebar } from "../assets/StylesPages/payment";
@@ -31,7 +29,7 @@ export default function Payment() {
       idcode: code[0].idcode + 1,
     };
     const promise = axios.post(urlCode, data);
-    promise.then((response) => {});
+    promise.then(() => {});
     promise.catch((err) => {
       console.log(err.response);
     });

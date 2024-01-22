@@ -1,20 +1,17 @@
+/* eslint-disable react/prop-types */
+// eslint-disable-next-line no-unused-vars
 import React from "react";
-import { FaMoneyBillAlt } from "react-icons/fa";
-import { MdPayment } from "react-icons/md";
 import {
   FinalizePayment,
   Order,
   Title,
-  CreditDebitMoney,
-  ValueChange,
-  Value,
-  Change,
   Finishing,
   RemoveOrderFromList,
   AddProducttoList,
 } from "../../assets/StylesPages/payment";
 import CreditDebitMoneyPayment from "./CreditDebitMoneyPayment";
 import MoneyPayment from "./MoneyPayment";
+import ValueChangePayment from "./ValueChangePayment";
 
 function FinalizePaymentPayment({
   sumTotal,
@@ -48,29 +45,11 @@ function FinalizePaymentPayment({
             backgroundColor="#2E5D15"
           />
         )}
-        <ValueChange>
-          <Value>
-            <p>Valor entregue</p>
-            <input
-              placeholder="Digite o Valor"
-              type="number"
-              value={amountForPayment}
-              onChange={(e) => setAmountForPayment(e.target.value)}
-            />
-          </Value>
-          {amountForPayment < sumTotal && (
-            <Change>
-              <p>Troco</p>
-              <div></div>
-            </Change>
-          )}
-          {amountForPayment > sumTotal && (
-            <Change>
-              <p>Troco</p>
-              <div>R${(amountForPayment - sumTotal).toFixed(2)}</div>
-            </Change>
-          )}
-        </ValueChange>
+        <ValueChangePayment
+          amountForPayment={amountForPayment}
+          sumTotal={sumTotal}
+          setAmountForPayment={setAmountForPayment}
+        />
         <Finishing>
           <RemoveOrderFromList onClick={() => setShowPayment(false)}>
             Cancelar
