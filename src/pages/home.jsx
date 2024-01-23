@@ -35,6 +35,7 @@ import SearchHome from "../Return/home/SearchHome";
 import BoxHome from "../Return/home/BoxHome";
 import CategoriesHome from "../Return/home/CategoriesHome";
 import ProductFilteredFalseHome from "../Return/home/ProductFilteredFalseHome";
+import SelectedCategoryCombooHome from "../Return/home/SelectedCategoryCombooHome";
 
 export default function Home() {
   const {
@@ -160,15 +161,12 @@ export default function Home() {
             />
             {productFiltered === true && (
               <>
-                {selectedCategory === "COMBOO" &&
-                  comboo.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
+                <SelectedCategoryCombooHome
+                  selectedCategory={selectedCategory}
+                  comboo={comboo}
+                  ordereIds={ordereIds}
+                  ShowProductDetails={ShowProductDetails}
+                />
                 {selectedCategory === "FOLLOW" &&
                   follo.map((main) => (
                     <ProcuctBoxHome
