@@ -33,6 +33,8 @@ import handleSearchHome from "../Functionality/HandleSearchHome";
 import ProcuctBoxHome from "../Return/home/ProductBoxHome";
 import SearchHome from "../Return/home/SearchHome";
 import BoxHome from "../Return/home/BoxHome";
+import CategoriesHome from "../Return/home/CategoriesHome";
+import ProductFilteredFalseHome from "../Return/home/ProductFilteredFalseHome";
 
 export default function Home() {
   const {
@@ -138,55 +140,24 @@ export default function Home() {
         <Products>
           <Title>Categorias</Title>
           <Subtitle>Navegue por categorais</Subtitle>
-          <Categories>
-            <BoxHome
-              Imagem={Combo}
-              text={"Combo"}
-              productText={"COMBOO"}
-              setProductFiltered={setProductFiltered}
-              setSelectedCategory={setSelectedCategory}
-            />
-            <BoxHome
-              Imagem={snack}
-              text={"Lanches"}
-              productText={"SNACKS"}
-              setProductFiltered={setProductFiltered}
-              setSelectedCategory={setSelectedCategory}
-            />
-            <BoxHome
-              Imagem={follow}
-              text={"Acompanhamentos"}
-              productText={"FOLLOW"}
-              setProductFiltered={setProductFiltered}
-              setSelectedCategory={setSelectedCategory}
-            />
-            <BoxHome
-              Imagem={drinks}
-              text={"Bebidas"}
-              productText={"DRINK"}
-              setProductFiltered={setProductFiltered}
-              setSelectedCategory={setSelectedCategory}
-            />
-             <BoxHome
-              Imagem={dessert}
-              text={"Sobremesas"}
-              productText={"DESSERT"}
-              setProductFiltered={setProductFiltered}
-              setSelectedCategory={setSelectedCategory}
-            />
-          </Categories>
+          <CategoriesHome
+            setProductFiltered={setProductFiltered}
+            setSelectedCategory={setSelectedCategory}
+            Combo={Combo}
+            snack={snack}
+            follow={follow}
+            drinks={drinks}
+            dessert={dessert}
+          />
           <Title>Produtos</Title>
           <Subtitle>Selecione um produto para adicioar ao seu pedido</Subtitle>
           <Menu>
-            {!productFiltered &&
-              snacks.map((main) => (
-                <ProcuctBoxHome
-                  key={main.id}
-                  main={main}
-                  ordereIds={ordereIds}
-                  ShowProductDetails={ShowProductDetails}
-                />
-              ))}
+            <ProductFilteredFalseHome
+              productFiltered={productFiltered}
+              snacks={snacks}
+              ordereIds={ordereIds}
+              ShowProductDetails={ShowProductDetails}
+            />
             {productFiltered === true && (
               <>
                 {selectedCategory === "COMBOO" &&
