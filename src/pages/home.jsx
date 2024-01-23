@@ -1,6 +1,7 @@
+// eslint-disable-next-line no-unused-vars
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
-import React, { useContext, useEffect, useState } from "react";
 import Combo from "../assets/images/Combo.jpeg";
 import dessert from "../assets/images/dessert.jpeg";
 import drinks from "../assets/images/drinks.png";
@@ -13,17 +14,7 @@ import {
   Welcome,
   Products,
   Title,
-  Subtitle,
-  PurchaseSummary,
-  DescriptionPrice,
-  Summary,
-  PriceDescription,
-  Divider,
-  FinalValue,
-  Amount,
-  Finishing,
-  RemoveOrderFromList,
-  AddProducttoList,
+  Subtitle
 } from "../assets/StylesPages/home";
 import SearchHome from "../Return/home/SearchHome";
 import CategoriesHome from "../Return/home/CategoriesHome";
