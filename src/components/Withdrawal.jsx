@@ -1,14 +1,8 @@
 import { useContext } from "react";
 import { AuthContext } from "../context/authContext";
-import {
-  All,
-  Preparing,
-  Sidebar,
-  Ready,
-  Name,
-  ReadyName,
-} from "../assets/StylesPages/withdrawal";
+import { All, Sidebar } from "../assets/StylesPages/withdrawal";
 import PreparingWithdrawal from "../Return/withdrawal/PreparingWithdrawal";
+import ReadyWithdrawal from "../Return/withdrawal/ReadyWithdrawal";
 export default function Withdrawal() {
   const { notReadyRequests, showOnly2hours } = useContext(AuthContext);
 
@@ -16,27 +10,7 @@ export default function Withdrawal() {
     <All>
       <PreparingWithdrawal notReadyRequests={notReadyRequests} />
       <Sidebar></Sidebar>
-      <Ready>
-        <p>Pronto:</p>
-        {showOnly2hours.map((main) => (
-          <>
-            {main.error === false && (
-              <ReadyName key={main.idR}>
-                <p style={{ color: " #2E5D15" }}>{main.nameClient}</p>
-              </ReadyName>
-            )}
-            {main.error === true && (
-              <ReadyName key={main.idR}>
-                <p style={{ color: "#CF3C29" }}>{main.nameClient}</p>
-                <h1 style={{ color: "#CF3C29" }}>
-                  Desculpe, seu pedido não foi preparado, entre em contato com o
-                  estabelecimento para solucionar o problema.
-                </h1>
-              </ReadyName>
-            )}
-          </>
-        ))}
-      </Ready>
+      <ReadyWithdrawal showOnly2hours={showOnly2hours} />
     </All>
   );
 }
