@@ -11,13 +11,9 @@ import Payment from "../components/Payment";
 import {
   All,
   Welcome,
-  Search,
   Products,
   Title,
   Subtitle,
-  Categories,
-  Box,
-  Menu,
   PurchaseSummary,
   DescriptionPrice,
   Summary,
@@ -29,18 +25,11 @@ import {
   RemoveOrderFromList,
   AddProducttoList,
 } from "../assets/StylesPages/home";
-import handleSearchHome from "../Functionality/HandleSearchHome";
-import ProcuctBoxHome from "../Return/home/ProductBoxHome";
 import SearchHome from "../Return/home/SearchHome";
-import BoxHome from "../Return/home/BoxHome";
 import CategoriesHome from "../Return/home/CategoriesHome";
-import ProductFilteredFalseHome from "../Return/home/ProductFilteredFalseHome";
-import SelectedCategoryCombooHome from "../Return/home/SelectedCategoryCombooHome";
-import SelectedCategoryFollowHome from "../Return/home/SelectedCategoryFollowHome";
-import SelectedCategoryDessertHome from "../Return/home/SelectedCategoryDessertHome";
-import SelectedCategoryDrinkHome from "../Return/home/SelectedCategoryDrinkHome";
-import SearchResultsTrue from "../Return/home/SearchResultsTrue";
-import SelectedCategorySnacksHome from "../Return/home/SelectedCategorySnacksHome";
+import MenuHome from "../Return/home/MenuHome";
+import PurchaseSummaryHome from "../Return/home/PurchaseSummaryHome";
+import FinishingHome from "../Return/home/FinishingHome";
 
 export default function Home() {
   const {
@@ -157,118 +146,24 @@ export default function Home() {
           />
           <Title>Produtos</Title>
           <Subtitle>Selecione um produto para adicioar ao seu pedido</Subtitle>
-          <Menu>
-            <ProductFilteredFalseHome
-              productFiltered={productFiltered}
-              snacks={snacks}
-              ordereIds={ordereIds}
-              ShowProductDetails={ShowProductDetails}
-            />
-            {productFiltered === true && (
-                <>
-                <SelectedCategoryCombooHome
-                  selectedCategory={selectedCategory}
-                  comboo={comboo}
-                  ordereIds={ordereIds}
-                  ShowProductDetails={ShowProductDetails}
-                />
-                <SelectedCategoryFollowHome
-                  selectedCategory={selectedCategory}
-                  follo={follo}
-                  ordereIds={ordereIds}
-                  ShowProductDetails={ShowProductDetails}
-                />
-                <SelectedCategoryDessertHome
-                  selectedCategory={selectedCategory}
-                  desser={desser}
-                  ordereIds={ordereIds}
-                  ShowProductDetails={ShowProductDetails}
-                />
-                <SelectedCategorySnacksHome
-                  selectedCategory={selectedCategory}
-                  snacks={snacks}
-                  ordereIds={ordereIds}
-                  ShowProductDetails={ShowProductDetails}
-                />
-                <SelectedCategoryDrinkHome
-                  selectedCategory={selectedCategory}
-                  drink={drink}
-                  ordereIds={ordereIds}
-                  ShowProductDetails={ShowProductDetails}
-                />
-                <SearchResultsTrue
-                  search={search}
-                  searchResults={searchResults}
-                  ordereIds={ordereIds}
-                  ShowProductDetails={ShowProductDetails}
-                />
-              </>
-            )}
-          </Menu>
+          <MenuHome
+            productFiltered={productFiltered}
+            snacks={snacks}
+            ordereIds={ordereIds}
+            ShowProductDetails={ShowProductDetails}
+            selectedCategory={selectedCategory}
+            comboo={comboo}
+            follo={follo}
+            desser={desser}
+            drink={drink}
+            search={search}
+            searchResults={searchResults}
+          />
         </Products>
         {order && order.length > 0 && (
-          // resumo do pedido
-          <PurchaseSummary>
-            {order.map((main) => (
-              <React.Fragment key={main.ProductSpecific.id}>
-                <DescriptionPrice>
-                  <Summary>
-                    {main.counter}x {main.ProductSpecific.name}
-                  </Summary>
-                  <PriceDescription>
-                    R$ {(main.ProductSpecific.price * main.counter).toFixed(2)}
-                  </PriceDescription>
-                </DescriptionPrice>
-                {main.followUp.length > 0 &&
-                  main.followUp.map((followUpItem) => (
-                    <DescriptionPrice key={followUpItem.id}>
-                      <Summary>{followUpItem.item}</Summary>
-                      <PriceDescription>{followUpItem.price}</PriceDescription>
-                    </DescriptionPrice>
-                  ))}
-              </React.Fragment>
-            ))}
-
-            <Divider></Divider>
-            <FinalValue>
-              <h1>Total do pedido:</h1>
-              <Amount>R$ {sumTotal.toFixed(2)} </Amount>
-            </FinalValue>
-          </PurchaseSummary>
+          <PurchaseSummaryHome order={order} sumTotal={sumTotal} />
         )}
-
-        <Finishing>
-          <RemoveOrderFromList
-            onClick={() => {
-              location.reload();
-            }}
-          >
-            Cancelar
-          </RemoveOrderFromList>
-          {order.length > 0 && (
-            <AddProducttoList
-              style={{
-                backgroundColor: "#2E5D15",
-                border: "2px solid #2E5D15",
-              }}
-              onClick={() => {
-                setShowPayment(true);
-              }}
-            >
-              Finalizar pedido
-            </AddProducttoList>
-          )}
-          {order.length === 0 && (
-            <AddProducttoList
-              style={{
-                backgroundColor: "#9F9F9F",
-                border: "2px solid #9F9F9F",
-              }}
-            >
-              Finalizar pedido
-            </AddProducttoList>
-          )}
-        </Finishing>
+        <FinishingHome order={order} setShowPayment={setShowPayment} />
       </All>
     );
   }
