@@ -1,16 +1,16 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import ProcuctBoxHome from "./ProductBoxHome";
-export default function SelectedCategoryDrinkHome({
+export default function SelectedCategorySnacksHome({
   selectedCategory,
-  drink,
+  snacks,
   ordereIds,
   ShowProductDetails,
 }) {
   return (
     <>
-      {selectedCategory === "DRINK" &&
-        drink.map((main) => (
+      {selectedCategory === "SNACKS" &&
+        snacks.map((main) => (
           <ProcuctBoxHome
             key={main.id}
             main={main}

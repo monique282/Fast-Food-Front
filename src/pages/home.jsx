@@ -39,6 +39,8 @@ import SelectedCategoryCombooHome from "../Return/home/SelectedCategoryCombooHom
 import SelectedCategoryFollowHome from "../Return/home/SelectedCategoryFollowHome";
 import SelectedCategoryDessertHome from "../Return/home/SelectedCategoryDessertHome";
 import SelectedCategoryDrinkHome from "../Return/home/SelectedCategoryDrinkHome";
+import SearchResultsTrue from "../Return/home/SearchResultsTrue";
+import SelectedCategorySnacksHome from "../Return/home/SelectedCategorySnacksHome";
 
 export default function Home() {
   const {
@@ -163,7 +165,7 @@ export default function Home() {
               ShowProductDetails={ShowProductDetails}
             />
             {productFiltered === true && (
-              <>
+                <>
                 <SelectedCategoryCombooHome
                   selectedCategory={selectedCategory}
                   comboo={comboo}
@@ -182,31 +184,24 @@ export default function Home() {
                   ordereIds={ordereIds}
                   ShowProductDetails={ShowProductDetails}
                 />
-               
-                {selectedCategory === "SNACKS" &&
-                  snacks.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
-                 <SelectedCategoryDrinkHome
+                <SelectedCategorySnacksHome
+                  selectedCategory={selectedCategory}
+                  snacks={snacks}
+                  ordereIds={ordereIds}
+                  ShowProductDetails={ShowProductDetails}
+                />
+                <SelectedCategoryDrinkHome
                   selectedCategory={selectedCategory}
                   drink={drink}
                   ordereIds={ordereIds}
                   ShowProductDetails={ShowProductDetails}
                 />
-                {search.length !== 0 &&
-                  searchResults.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
+                <SearchResultsTrue
+                  search={search}
+                  searchResults={searchResults}
+                  ordereIds={ordereIds}
+                  ShowProductDetails={ShowProductDetails}
+                />
               </>
             )}
           </Menu>
