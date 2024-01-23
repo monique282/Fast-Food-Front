@@ -31,6 +31,7 @@ import {
 } from "../assets/StylesPages/home";
 import handleSearchHome from "../Functionality/HandleSearchHome";
 import ProcuctBoxHome from "../Return/home/ProductBoxHome";
+import SearchHome from "../Return/home/SearchHome";
 
 export default function Home() {
   const {
@@ -39,6 +40,7 @@ export default function Home() {
     setId,
     showReview,
     setShowReview,
+    setOrder,
     order,
     showPayment,
     setShowPayment,
@@ -66,7 +68,7 @@ export default function Home() {
     promise.catch((err) => {
       console.log(err.response);
     });
-  }, [code]);
+  }, [code, setCode]);
 
   useEffect(() => {
     const urlHome = `${import.meta.env.VITE_API_URL}/home`;
@@ -102,8 +104,7 @@ export default function Home() {
       const orderedIds = order.map((item) => item.ProductSpecific.id);
       setOrdereIds(orderedIds);
     }
-  }, [order]);
-
+  }, [order, setOrder]);
 
   function ShowProductDetails(id) {
     setShowReview(true);
@@ -116,14 +117,6 @@ export default function Home() {
     }, 0);
   }
 
-  function cancel() {
-    location.reload();
-  }
-
-  function IWantThese() {
-    setShowPayment(true);
-  }
-
   if (products.length === 0) {
     return <>carregando</>;
   } else {
@@ -133,21 +126,14 @@ export default function Home() {
         {showPayment === true && <Payment></Payment>}
 
         <Welcome>Seja bem Vindo(a)!</Welcome>
-        <Search
-          placeholder="O que voê procura?"
-          type="text"
-          value={search}
-          onChange={(e) => {
-            handleSearchHome(
-              e.target.value,
-              setSearch,
-              setSearchResults,
-              setProductFiltered,
-              setSelectedCategory,
-              products
-            );
-          }}
-        ></Search>
+        <SearchHome
+          setSearch={setSearch}
+          setSearchResults={setSearchResults}
+          setProductFiltered={setProductFiltered}
+          setSelectedCategory={setSelectedCategory}
+          products={products}
+          search={search}
+        />
         <Products>
           <Title>Categorias</Title>
           <Subtitle>Navegue por categorais</Subtitle>
@@ -309,7 +295,11 @@ export default function Home() {
         )}
 
         <Finishing>
-          <RemoveOrderFromList onClick={() => cancel()}>
+          <RemoveOrderFromList
+            onClick={() => {
+              location.reload();
+            }}
+          >
             Cancelar
           </RemoveOrderFromList>
           {order.length > 0 && (
@@ -318,7 +308,9 @@ export default function Home() {
                 backgroundColor: "#2E5D15",
                 border: "2px solid #2E5D15",
               }}
-              onClick={() => IWantThese()}
+              onClick={() => {
+                setShowPayment(true);
+              }}
             >
               Finalizar pedido
             </AddProducttoList>
