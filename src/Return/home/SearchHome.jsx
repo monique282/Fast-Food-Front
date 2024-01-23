@@ -13,7 +13,7 @@ export default function SearchHome({
 }) {
   return (
     <Search
-          placeholder="O que voê procura?"
+          placeholder="O que você procura?"
           type="text"
           value={search}
           onChange={(e) => {

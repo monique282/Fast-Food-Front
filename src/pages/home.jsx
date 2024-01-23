@@ -32,6 +32,7 @@ import {
 import handleSearchHome from "../Functionality/HandleSearchHome";
 import ProcuctBoxHome from "../Return/home/ProductBoxHome";
 import SearchHome from "../Return/home/SearchHome";
+import BoxHome from "../Return/home/BoxHome";
 
 export default function Home() {
   const {
@@ -138,58 +139,41 @@ export default function Home() {
           <Title>Categorias</Title>
           <Subtitle>Navegue por categorais</Subtitle>
           <Categories>
-            <Box
-              onClick={() => {
-                setProductFiltered(true);
-                setSelectedCategory();
-                setSelectedCategory("COMBOO");
-              }}
-            >
-              <img src={Combo} alt="" />
-              <p style={{ fontWeight: "bold" }}>Combos</p>
-            </Box>
-            <Box
-              onClick={() => {
-                setProductFiltered(true);
-                setSelectedCategory();
-                setSelectedCategory("SNACKS");
-              }}
-            >
-              <img src={snack} alt="" />
-              <p style={{ fontWeight: "bold" }}>Lanches</p>
-            </Box>
-            <Box
-              onClick={() => {
-                setProductFiltered(true);
-                setSelectedCategory();
-                setSelectedCategory("FOLLOW");
-              }}
-            >
-              <img src={follow} alt="" />
-              <p style={{ marginTop: "-5px", fontWeight: "bold" }}>
-                Acompanhamentos
-              </p>
-            </Box>
-            <Box
-              onClick={() => {
-                setProductFiltered(true);
-                setSelectedCategory();
-                setSelectedCategory("DRINK");
-              }}
-            >
-              <img src={drinks} alt="" />
-              <p style={{ fontWeight: "bold" }}>Bebidas</p>
-            </Box>
-            <Box
-              onClick={() => {
-                setProductFiltered(true);
-                setSelectedCategory();
-                setSelectedCategory("DESSERT");
-              }}
-            >
-              <img src={dessert} alt="" />
-              <p style={{ fontWeight: "bold" }}>Sobremesas</p>
-            </Box>
+            <BoxHome
+              Imagem={Combo}
+              text={"Combo"}
+              productText={"COMBOO"}
+              setProductFiltered={setProductFiltered}
+              setSelectedCategory={setSelectedCategory}
+            />
+            <BoxHome
+              Imagem={snack}
+              text={"Lanches"}
+              productText={"SNACKS"}
+              setProductFiltered={setProductFiltered}
+              setSelectedCategory={setSelectedCategory}
+            />
+            <BoxHome
+              Imagem={follow}
+              text={"Acompanhamentos"}
+              productText={"FOLLOW"}
+              setProductFiltered={setProductFiltered}
+              setSelectedCategory={setSelectedCategory}
+            />
+            <BoxHome
+              Imagem={drinks}
+              text={"Bebidas"}
+              productText={"DRINK"}
+              setProductFiltered={setProductFiltered}
+              setSelectedCategory={setSelectedCategory}
+            />
+             <BoxHome
+              Imagem={dessert}
+              text={"Sobremesas"}
+              productText={"DESSERT"}
+              setProductFiltered={setProductFiltered}
+              setSelectedCategory={setSelectedCategory}
+            />
           </Categories>
           <Title>Produtos</Title>
           <Subtitle>Selecione um produto para adicioar ao seu pedido</Subtitle>

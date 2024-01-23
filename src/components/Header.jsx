@@ -15,7 +15,7 @@ export default function Header() {
   return (
     <All>
       <HeaderBhutans>
-        <SloganName to="/">Fest Food</SloganName>
+        <SloganName to="/">Fast Food</SloganName>
         <Control>
           <Requests to="/" isActive={location.pathname === "/"}>
             Pedidos
