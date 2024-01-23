@@ -36,6 +36,7 @@ import BoxHome from "../Return/home/BoxHome";
 import CategoriesHome from "../Return/home/CategoriesHome";
 import ProductFilteredFalseHome from "../Return/home/ProductFilteredFalseHome";
 import SelectedCategoryCombooHome from "../Return/home/SelectedCategoryCombooHome";
+import SelectedCategoryFollowHome from "../Return/home/SelectedCategoryFollowHome";
 
 export default function Home() {
   const {
@@ -164,6 +165,12 @@ export default function Home() {
                 <SelectedCategoryCombooHome
                   selectedCategory={selectedCategory}
                   comboo={comboo}
+                  ordereIds={ordereIds}
+                  ShowProductDetails={ShowProductDetails}
+                />
+                <SelectedCategoryFollowHome
+                  selectedCategory={selectedCategory}
+                  follo={follo}
                   ordereIds={ordereIds}
                   ShowProductDetails={ShowProductDetails}
                 />
