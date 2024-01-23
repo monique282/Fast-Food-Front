@@ -1,4 +1,4 @@
-import { Ready, ReadyName } from "../assets/StylesPages/withdrawal";
+import { Ready, ReadyName } from "../../assets/StylesPages/withdrawal";
 export default function ReadyWithdrawal(showOnly2hours) {
   return (
     <Ready>
