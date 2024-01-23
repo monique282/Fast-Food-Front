@@ -8,20 +8,13 @@ import {
   Name,
   ReadyName,
 } from "../assets/StylesPages/withdrawal";
+import PreparingWithdrawal from "../Return/withdrawal/PreparingWithdrawal";
 export default function Withdrawal() {
-  const { notReadyRequests, showOnly2hours } =
-    useContext(AuthContext);
+  const { notReadyRequests, showOnly2hours } = useContext(AuthContext);
 
   return (
     <All>
-      <Preparing>
-        <p>Preparando:</p>
-        {notReadyRequests.map((main) => (
-          <Name key={main.idR}>
-            <p>{main.nameClient}</p>
-          </Name>
-        ))}
-      </Preparing>
+      <PreparingWithdrawal notReadyRequests={notReadyRequests} />
       <Sidebar></Sidebar>
       <Ready>
         <p>Pronto:</p>
