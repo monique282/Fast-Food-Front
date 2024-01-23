@@ -1,23 +1,23 @@
+import Cheddars from "../../assets/images/cheddar.png";
+import Barvecue from "../../assets/images/barbecue.png";
+import Bacons from "../../assets/images/bacon.png";
 import {
-    Additional,
-    Bacon,
-    NameQuantity,
-    Butons,
-    Select,
-    Cheddar,
-    Sauce
-  } from '../../assets/StylesPages/revision';
+  Additional,
+  Bacon,
+  NameQuantity,
+  Butons,
+  Select,
+  Cheddar,
+  Sauce,
+} from "../../assets/StylesPages/revision";
 
 export default function AdditionalRevision(
-  setCheddarSelected,
-  cheddarSelected,
-  Cheddars,
-  setSauceSelected,
-  sauceSelected,
-  Barvecue,
-  setBaconSelected,
-  baconSelected,
-  Bacons
+  {setCheddarSelected,
+    cheddarSelected,
+    setSauceSelected,
+    sauceSelected,
+    setBaconSelected,
+    baconSelected}
 ) {
   return (
     <Additional>

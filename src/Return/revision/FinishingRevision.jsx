@@ -1,10 +1,12 @@
 import IWantThese from "../../Functionality/IWantThese";
+import selectedSideDishes from "../../Functionality/SelectedSideDishes";
 import {
   Finishing,
   RemoveOrderFromList,
   AddProducttoList,
 } from "../../assets/StylesPages/revision";
-export default function FinishingRevision(
+
+export default function FinishingRevision({
   baconSelected,
   cheddarSelected,
   sauceSelected,
@@ -20,8 +22,29 @@ export default function FinishingRevision(
   id,
   setOrder,
   followUp,
-  observationText
-) {
+  observationText,
+}) {
+  function IWantThese() {
+    selectedSideDishes(baconSelected, followUp, cheddarSelected, sauceSelected);
+    const total = (
+      ProductSpecific.price * counter +
+      (baconSelected ? 1 : 0) +
+      (cheddarSelected ? 1 : 0) +
+      (sauceSelected ? 1 : 0)
+    ).toFixed(2);
+    const orderDetails = {
+      ProductSpecific,
+      counter,
+      followUp,
+      observationText,
+      total,
+    };
+    const newOrder = [...order, orderDetails];
+    setOrder(newOrder);
+    setCounter(1);
+    setShowReview(false);
+  }
+
   return (
     <Finishing>
       <RemoveOrderFromList
@@ -40,23 +63,7 @@ export default function FinishingRevision(
       >
         Remover produto
       </RemoveOrderFromList>
-      <AddProducttoList
-        onClick={() =>
-          IWantThese(
-            baconSelected,
-            followUp,
-            order,
-            setOrder,
-            setCounter,
-            setShowReview,
-            cheddarSelected,
-            sauceSelected,
-            ProductSpecific,
-            counter,
-            observationText
-          )
-        }
-      >
+      <AddProducttoList onClick={() => IWantThese()}>
         Adicionar produto
       </AddProducttoList>
     </Finishing>

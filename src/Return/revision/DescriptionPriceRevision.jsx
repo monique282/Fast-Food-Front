@@ -5,8 +5,8 @@ import {
   } from "../../assets/StylesPages/revision";
   
   export default function DescriptionPriceRevision(
-    counter,
-    ProductSpecific,
+   { counter,
+    ProductSpecific}
   ) {
     return (
         <DescriptionPrice>

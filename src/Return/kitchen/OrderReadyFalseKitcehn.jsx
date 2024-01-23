@@ -4,7 +4,7 @@ import { OrderReady, NameCode, Butons, Not } from "../../assets/StylesPages/kitc
 import { HiOutlineX } from "react-icons/hi";
 import updateDelete from "../../Functionality/DeletKitchen";
 
-function OrderReadyFalseKitchen( main, setLoading ) {
+function OrderReadyFalseKitchen( {main, setLoading} ) {
   return (
     <OrderReady
       key={main.idR}

@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../context/authContext";
 import axios from "axios";
-import { All, Preparing, Sidebar, Ready } from "../assets/StylesPages/kitchen";
+import { All, Sidebar } from "../assets/StylesPages/kitchen";
 import theLastTwoHoursKitchen from "../Functionality/TheLastTwoHoursKitchen";
-import AllRequestKitchen from "../Return/kitchen/AllRquestKitchen";
-import OrderReadyFalseKitchen from "../Return/kitchen/OrderReadyFalseKitcehn";
-import OrderReadyTrueKitchen from "../Return/kitchen/OrderReadyTrueKitchen";
+import ReadyKitchen from "../Return/kitchen/ReadyKitchen";
+import PreparingKitchen from "../Return/kitchen/PreparingKitchen";
 
 export default function Kitchen() {
   const {
@@ -50,38 +49,15 @@ export default function Kitchen() {
   }
   return (
     <All>
-      <Preparing>
-        <p>Preparando:</p>
-        {notReadyRequests.map((main) => (
-          <AllRequestKitchen
-            key={main.idR}
-            main={main}
-            setLoading={setLoading}
-          />
-        ))}
-      </Preparing>
+      <PreparingKitchen
+        setLoading={setLoading}
+        notReadyRequests={notReadyRequests}
+      />
       <Sidebar></Sidebar>
-      <Ready>
-        <p>Pronto:</p>
-        {showOnly2hours.map((main) => (
-          <>
-            {main.error === false && (
-              <OrderReadyFalseKitchen
-                key={main.idR}
-                main={main}
-                setLoading={setLoading}
-              />
-            )}
-            {main.error === true && (
-              <OrderReadyTrueKitchen
-                key={main.idR}
-                main={main}
-                setLoading={setLoading}
-              />
-            )}
-          </>
-        ))}
-      </Ready>
+      <ReadyKitchen
+        setLoading={setLoading}
+        showOnly2hours={showOnly2hours}
+      />
     </All>
   );
-};
+}

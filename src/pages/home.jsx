@@ -1,6 +1,7 @@
+// eslint-disable-next-line no-unused-vars
+import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthContext } from "../context/authContext";
-import React, { useContext, useEffect, useState } from "react";
 import Combo from "../assets/images/Combo.jpeg";
 import dessert from "../assets/images/dessert.jpeg";
 import drinks from "../assets/images/drinks.png";
@@ -11,27 +12,15 @@ import Payment from "../components/Payment";
 import {
   All,
   Welcome,
-  Search,
   Products,
   Title,
-  Subtitle,
-  Categories,
-  Box,
-  Menu,
-  PurchaseSummary,
-  DescriptionPrice,
-  Summary,
-  PriceDescription,
-  Divider,
-  FinalValue,
-  Amount,
-  Finishing,
-  RemoveOrderFromList,
-  AddProducttoList,
+  Subtitle
 } from "../assets/StylesPages/home";
-import handleSearchHome from "../Functionality/HandleSearchHome";
-import ProcuctBoxHome from "../Return/home/ProductBoxHome";
-
+import SearchHome from "../Return/home/SearchHome";
+import CategoriesHome from "../Return/home/CategoriesHome";
+import MenuHome from "../Return/home/MenuHome";
+import PurchaseSummaryHome from "../Return/home/PurchaseSummaryHome";
+import FinishingHome from "../Return/home/FinishingHome";
 
 export default function Home() {
   const {
@@ -40,6 +29,7 @@ export default function Home() {
     setId,
     showReview,
     setShowReview,
+    setOrder,
     order,
     showPayment,
     setShowPayment,
@@ -67,7 +57,7 @@ export default function Home() {
     promise.catch((err) => {
       console.log(err.response);
     });
-  }, [code]);
+  }, [code, setCode]);
 
   useEffect(() => {
     const urlHome = `${import.meta.env.VITE_API_URL}/home`;
@@ -103,24 +93,7 @@ export default function Home() {
       const orderedIds = order.map((item) => item.ProductSpecific.id);
       setOrdereIds(orderedIds);
     }
-  }, [order]);
-
-  function ShowSpecific(parament) {
-    setProductFiltered(true);
-    setSelectedCategory();
-    setSelectedCategory(parament);
-  }
-
-  function handleSearch(query) {
-    handleSearchHome(
-      query,
-      setSearch,
-      setSearchResults,
-      setProductFiltered,
-      setSelectedCategory,
-      products
-    );
-  }
+  }, [order, setOrder]);
 
   function ShowProductDetails(id) {
     setShowReview(true);
@@ -133,14 +106,6 @@ export default function Home() {
     }, 0);
   }
 
-  function cancel() {
-    location.reload();
-  }
-
-  function IWantThese() {
-    setShowPayment(true);
-  }
-
   if (products.length === 0) {
     return <>carregando</>;
   } else {
@@ -150,169 +115,46 @@ export default function Home() {
         {showPayment === true && <Payment></Payment>}
 
         <Welcome>Seja bem Vindo(a)!</Welcome>
-        <Search
-          placeholder="O que voê procura?"
-          type="text"
-          value={search}
-          onChange={(e) => handleSearch(e.target.value)}
-        ></Search>
+        <SearchHome
+          setSearch={setSearch}
+          setSearchResults={setSearchResults}
+          setProductFiltered={setProductFiltered}
+          setSelectedCategory={setSelectedCategory}
+          products={products}
+          search={search}
+        />
         <Products>
           <Title>Categorias</Title>
           <Subtitle>Navegue por categorais</Subtitle>
-          <Categories>
-            <Box onClick={() => ShowSpecific("COMBOO")}>
-              <img src={Combo} alt="" />
-              <p style={{ fontWeight: "bold" }}>Combos</p>
-            </Box>
-            <Box onClick={() => ShowSpecific("SNACKS")}>
-              <img src={snack} alt="" />
-              <p style={{ fontWeight: "bold" }}>Lanches</p>
-            </Box>
-            <Box onClick={() => ShowSpecific("FOLLOW")}>
-              <img src={follow} alt="" />
-              <p style={{ marginTop: "-5px", fontWeight: "bold" }}>
-                Acompanhamentos
-              </p>
-            </Box>
-            <Box onClick={() => ShowSpecific("DRINK")}>
-              <img src={drinks} alt="" />
-              <p style={{ fontWeight: "bold" }}>Bebidas</p>
-            </Box>
-            <Box onClick={() => ShowSpecific("DESSERT")}>
-              <img src={dessert} alt="" />
-              <p style={{ fontWeight: "bold" }}>Sobremesas</p>
-            </Box>
-          </Categories>
+          <CategoriesHome
+            setProductFiltered={setProductFiltered}
+            setSelectedCategory={setSelectedCategory}
+            Combo={Combo}
+            snack={snack}
+            follow={follow}
+            drinks={drinks}
+            dessert={dessert}
+          />
           <Title>Produtos</Title>
           <Subtitle>Selecione um produto para adicioar ao seu pedido</Subtitle>
-          <Menu>
-            {!productFiltered &&
-              snacks.map((main) => (
-                <ProcuctBoxHome
-                  key={main.id}
-                  main={main}
-                  ordereIds={ordereIds}
-                  ShowProductDetails={ShowProductDetails}
-                />
-              ))}
-            {productFiltered === true && (
-              <>
-                {selectedCategory === "COMBOO" &&
-                  comboo.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
-                {selectedCategory === "FOLLOW" &&
-                  follo.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
-                {selectedCategory === "DESSERT" &&
-                  desser.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
-                {selectedCategory === "SNACKS" &&
-                  snacks.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
-                {selectedCategory === "DRINK" &&
-                  drink.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
-                {search.length !== 0 &&
-                  searchResults.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
-              </>
-            )}
-          </Menu>
+          <MenuHome
+            productFiltered={productFiltered}
+            snacks={snacks}
+            ordereIds={ordereIds}
+            ShowProductDetails={ShowProductDetails}
+            selectedCategory={selectedCategory}
+            comboo={comboo}
+            follo={follo}
+            desser={desser}
+            drink={drink}
+            search={search}
+            searchResults={searchResults}
+          />
         </Products>
         {order && order.length > 0 && (
-
-          // resumo do pedido
-          <PurchaseSummary>
-            {order.map((main) => (
-              <React.Fragment key={main.ProductSpecific.id}>
-                <DescriptionPrice>
-                  <Summary>
-                    {main.counter}x {main.ProductSpecific.name}
-                  </Summary>
-                  <PriceDescription>
-                    R$ {(main.ProductSpecific.price * main.counter).toFixed(2)}
-                  </PriceDescription>
-                </DescriptionPrice>
-                {main.followUp.length > 0 &&
-                  main.followUp.map((followUpItem) => (
-                    <DescriptionPrice key={followUpItem.id}>
-                      <Summary>{followUpItem.item}</Summary>
-                      <PriceDescription>{followUpItem.price}</PriceDescription>
-                    </DescriptionPrice>
-                  ))}
-              </React.Fragment>
-            ))}
-
-            <Divider></Divider>
-            <FinalValue>
-              <h1>Total do pedido:</h1>
-              <Amount>R$ {sumTotal.toFixed(2)} </Amount>
-            </FinalValue>
-          </PurchaseSummary>
+          <PurchaseSummaryHome order={order} sumTotal={sumTotal} />
         )}
-
-        <Finishing>
-          <RemoveOrderFromList onClick={() => cancel()}>
-            Cancelar
-          </RemoveOrderFromList>
-          {order.length > 0 && (
-            <AddProducttoList
-              style={{
-                backgroundColor: "#2E5D15",
-                border: "2px solid #2E5D15",
-              }}
-              onClick={() => IWantThese()}
-            >
-              Finalizar pedido
-            </AddProducttoList>
-          )}
-          {order.length === 0 && (
-            <AddProducttoList
-              style={{
-                backgroundColor: "#9F9F9F",
-                border: "2px solid #9F9F9F",
-              }}
-            >
-              Finalizar pedido
-            </AddProducttoList>
-          )}
-        </Finishing>
+        <FinishingHome order={order} setShowPayment={setShowPayment} />
       </All>
     );
   }

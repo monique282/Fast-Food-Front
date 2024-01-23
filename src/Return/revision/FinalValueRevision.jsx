@@ -1,11 +1,11 @@
 import { FinalValue, Amount } from "../../assets/StylesPages/revision";
 
 export default function FinalValueRevision(
-  baconSelected,
-  cheddarSelected,
-  sauceSelected,
-  ProductSpecific,
-  counter
+  {baconSelected,
+    cheddarSelected,
+    sauceSelected,
+    ProductSpecific,
+    counter}
 ) {
   return (
     <FinalValue>

@@ -3,9 +3,12 @@ import React from "react";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { CreditDebitMoney } from "../../assets/StylesPages/payment";
 
-export default function MoneyPayment( setAbilitCard, borderColor, backgroundColor ) {
+export default function MoneyPayment({ setAbilitCard, borderColor, backgroundColor }) {
   return (
-    <CreditDebitMoney onClick={setAbilitCard}>
+    <CreditDebitMoney 
+    onClick={() => {
+      setAbilitCard(true)
+    }}>
       <p>
         <FaMoneyBillAlt
           style={{

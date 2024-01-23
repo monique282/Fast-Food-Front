@@ -9,7 +9,7 @@ import {
     Price
   } from "../../assets/StylesPages/revision";
 
-export default function ProductOverviewRevision(ProductSpecific,setShowReview, counter, setCounter ) {
+export default function ProductOverviewRevision({ProductSpecific,setShowReview, counter, setCounter} ) {
   return (
     <ProductOverview>
     <img src={ProductSpecific.image} alt=""></img>

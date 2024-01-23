@@ -21,7 +21,7 @@ export default function Payment() {
   } = useContext(AuthContext);
   const [abilitCard, setAbilitCard] = useState(false);
   const [amountForPayment, setAmountForPayment] = useState(0);
-  const [, setUpdateCode] = useState(false);
+  const [updateCode, setUpdateCode] = useState(false);
 
   useEffect(() => {
     const urlCode = `${import.meta.env.VITE_API_URL}/update`;
@@ -35,7 +35,6 @@ export default function Payment() {
     });
 
     const urlrequest = `${import.meta.env.VITE_API_URL}/request`;
-    console.log("aquui", order);
     const promiseOrder = axios.post(urlrequest, order);
     promiseOrder.then((response) => {
       console.log(response.data);
@@ -43,7 +42,7 @@ export default function Payment() {
     promiseOrder.catch((err) => {
       console.log(err.response);
     });
-  }, [code, order]);
+  }, [updateCode, order]);
 
   let sumTotal = 0;
   if (order && order.length > 0) {

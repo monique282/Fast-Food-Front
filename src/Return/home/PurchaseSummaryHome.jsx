@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import {
   PurchaseSummary,
@@ -7,9 +8,12 @@ import {
   Divider,
   FinalValue,
   Amount,
-} from "../../assets/StylesPages/payment";
+} from "../../assets/StylesPages/home";
 
-function PurchaseSummaryPayment( {order, sumTotal} ) {
+export default function PurchaseSummaryHome({
+    order,
+    sumTotal
+}) {
   return (
     <PurchaseSummary>
       {order.map((main) => (
@@ -39,5 +43,3 @@ function PurchaseSummaryPayment( {order, sumTotal} ) {
     </PurchaseSummary>
   );
 }
-
-export default PurchaseSummaryPayment;

@@ -69,10 +69,10 @@ export default function Revision() {
           <AdditionalRevision
             setCheddarSelected={setCheddarSelected}
             cheddarSelected={cheddarSelected}
-            Cheddars={Cheddars}
             setSauceSelected={setSauceSelected}
             sauceSelected={sauceSelected}
-            Barvecue={Barvecue}
+            setBaconSelected={setBaconSelected}
+            baconSelected={baconSelected}
           />
           <Observationrevision
             observationText={observationText}
