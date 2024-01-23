@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import {
   AllRequest,
@@ -14,7 +15,7 @@ import { HiOutlineCheck, HiOutlineX } from "react-icons/hi";
 import updateError from "../../Functionality/ErrorKitchen";
 import updateReady from "../../Functionality/ReadyKitchen";
 
-function AllRequestKitchen({ main, setLoading }) {
+function AllRequestKitchen(main, setLoading) {
   return (
     <AllRequest key={main.idR}>
       <Order>

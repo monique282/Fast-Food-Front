@@ -1,11 +1,12 @@
+// eslint-disable-next-line no-unused-vars
 import React from "react";
 import {
   Select,
   ProductBox as StyledProductBox,
-} from "../assets/StylesPages/home";
+} from "../../assets/StylesPages/home";
 import { CgCheck } from "react-icons/cg";
 
-export default function ProcuctBoxHome({ main, ordereIds, ShowProductDetails }) {
+export default function ProcuctBoxHome({main, ordereIds, ShowProductDetails}) {
   return (
     <StyledProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
       {ordereIds.includes(main.id) && (

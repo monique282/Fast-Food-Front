@@ -30,7 +30,8 @@ import {
   AddProducttoList,
 } from "../assets/StylesPages/home";
 import handleSearchHome from "../Functionality/HandleSearchHome";
-import ProcuctBoxHome from "../Return/ProductBoxHome";
+import ProcuctBoxHome from "../Return/home/ProductBoxHome";
+
 
 export default function Home() {
   const {

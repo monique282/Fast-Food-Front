@@ -9,7 +9,7 @@ import {
   Amount,
 } from "../../assets/StylesPages/payment";
 
-function PurchaseSummaryPayment({ order, sumTotal }) {
+function PurchaseSummaryPayment( order, sumTotal ) {
   return (
     <PurchaseSummary>
       {order.map((main) => (
