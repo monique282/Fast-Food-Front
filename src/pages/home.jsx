@@ -37,6 +37,7 @@ import CategoriesHome from "../Return/home/CategoriesHome";
 import ProductFilteredFalseHome from "../Return/home/ProductFilteredFalseHome";
 import SelectedCategoryCombooHome from "../Return/home/SelectedCategoryCombooHome";
 import SelectedCategoryFollowHome from "../Return/home/SelectedCategoryFollowHome";
+import SelectedCategoryDessertHome from "../Return/home/SelectedCategoryDessertHome";
 
 export default function Home() {
   const {
@@ -174,24 +175,12 @@ export default function Home() {
                   ordereIds={ordereIds}
                   ShowProductDetails={ShowProductDetails}
                 />
-                {selectedCategory === "FOLLOW" &&
-                  follo.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
-                {selectedCategory === "DESSERT" &&
-                  desser.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
+                <SelectedCategoryDessertHome
+                  selectedCategory={selectedCategory}
+                  desser={desser}
+                  ordereIds={ordereIds}
+                  ShowProductDetails={ShowProductDetails}
+                />
                 {selectedCategory === "SNACKS" &&
                   snacks.map((main) => (
                     <ProcuctBoxHome
