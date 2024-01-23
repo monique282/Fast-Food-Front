@@ -38,6 +38,7 @@ import ProductFilteredFalseHome from "../Return/home/ProductFilteredFalseHome";
 import SelectedCategoryCombooHome from "../Return/home/SelectedCategoryCombooHome";
 import SelectedCategoryFollowHome from "../Return/home/SelectedCategoryFollowHome";
 import SelectedCategoryDessertHome from "../Return/home/SelectedCategoryDessertHome";
+import SelectedCategoryDrinkHome from "../Return/home/SelectedCategoryDrinkHome";
 
 export default function Home() {
   const {
@@ -181,6 +182,7 @@ export default function Home() {
                   ordereIds={ordereIds}
                   ShowProductDetails={ShowProductDetails}
                 />
+               
                 {selectedCategory === "SNACKS" &&
                   snacks.map((main) => (
                     <ProcuctBoxHome
@@ -190,15 +192,12 @@ export default function Home() {
                       ShowProductDetails={ShowProductDetails}
                     />
                   ))}
-                {selectedCategory === "DRINK" &&
-                  drink.map((main) => (
-                    <ProcuctBoxHome
-                      key={main.id}
-                      main={main}
-                      ordereIds={ordereIds}
-                      ShowProductDetails={ShowProductDetails}
-                    />
-                  ))}
+                 <SelectedCategoryDrinkHome
+                  selectedCategory={selectedCategory}
+                  drink={drink}
+                  ordereIds={ordereIds}
+                  ShowProductDetails={ShowProductDetails}
+                />
                 {search.length !== 0 &&
                   searchResults.map((main) => (
                     <ProcuctBoxHome
