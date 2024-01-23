@@ -15,7 +15,7 @@ import { HiOutlineCheck, HiOutlineX } from "react-icons/hi";
 import updateError from "../../Functionality/ErrorKitchen";
 import updateReady from "../../Functionality/ReadyKitchen";
 
-function AllRequestKitchen(main, setLoading) {
+function AllRequestKitchen({main, setLoading}) {
   return (
     <AllRequest key={main.idR}>
       <Order>
@@ -25,7 +25,7 @@ function AllRequestKitchen(main, setLoading) {
             {main.code} - {main.nameClient}
           </h1>
           <h2>{main.name}</h2>
-          {main.followUps.length !== 0 &&
+          {main.followUps && main.followUps.length !== 0 &&
             main.followUps.map((followUp) => (
               <h2 key={followUp.id}>{followUp.item}</h2>
             ))}
@@ -52,7 +52,7 @@ function AllRequestKitchen(main, setLoading) {
           </Ok>
         </Butons>
       </Order>
-      {main.observationText.length !== 0 && (
+      {main.observationText && main.observationText.length !== 0 && (
         <>
           <Ob>Observações:</Ob>
           <Observation>

@@ -9,11 +9,11 @@ import {
   } from "../../assets/StylesPages/revision";
   
   export default function PurchaseSummaryRevision(
-    counter,
-    ProductSpecific,
-    baconSelected,
-    cheddarSelected,
-    sauceSelected
+    {counter,
+      ProductSpecific,
+      baconSelected,
+      cheddarSelected,
+      sauceSelected}
   ) {
     return (
       <PurchaseSummary>

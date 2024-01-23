@@ -1,4 +1,3 @@
-
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { FaWallet } from "react-icons/fa6";
@@ -13,20 +12,13 @@ import {
 } from "../../assets/StylesPages/payment";
 import PurchaseSummaryPayment from "./PurchaseSummaryPayment";
 
-function TotalPaymentePayment(
+function TotalPaymentePayment({
   order,
   nameClient,
   code,
   sumTotal,
-  setNameClient
-) {
-  TotalPaymentePayment.propTypes = {
-    order: PropTypes.array.isRequired,
-    nameClient: PropTypes.string.isRequired,
-    code: PropTypes.number.isRequired,
-    sumTotal: PropTypes.number.isRequired,
-    setNameClient: PropTypes.string.isRequired,
-  };
+  setNameClient,
+}) {
   return (
     <TotalPaymente>
       <p>

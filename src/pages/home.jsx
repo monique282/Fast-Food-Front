@@ -32,7 +32,6 @@ import {
 import handleSearchHome from "../Functionality/HandleSearchHome";
 import ProcuctBoxHome from "../Return/home/ProductBoxHome";
 
-
 export default function Home() {
   const {
     products,
@@ -105,22 +104,6 @@ export default function Home() {
     }
   }, [order]);
 
-  function ShowSpecific(parament) {
-    setProductFiltered(true);
-    setSelectedCategory();
-    setSelectedCategory(parament);
-  }
-
-  function handleSearch(query) {
-    handleSearchHome(
-      query,
-      setSearch,
-      setSearchResults,
-      setProductFiltered,
-      setSelectedCategory,
-      products
-    );
-  }
 
   function ShowProductDetails(id) {
     setShowReview(true);
@@ -154,31 +137,70 @@ export default function Home() {
           placeholder="O que voê procura?"
           type="text"
           value={search}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={(e) => {
+            handleSearchHome(
+              e.target.value,
+              setSearch,
+              setSearchResults,
+              setProductFiltered,
+              setSelectedCategory,
+              products
+            );
+          }}
         ></Search>
         <Products>
           <Title>Categorias</Title>
           <Subtitle>Navegue por categorais</Subtitle>
           <Categories>
-            <Box onClick={() => ShowSpecific("COMBOO")}>
+            <Box
+              onClick={() => {
+                setProductFiltered(true);
+                setSelectedCategory();
+                setSelectedCategory("COMBOO");
+              }}
+            >
               <img src={Combo} alt="" />
               <p style={{ fontWeight: "bold" }}>Combos</p>
             </Box>
-            <Box onClick={() => ShowSpecific("SNACKS")}>
+            <Box
+              onClick={() => {
+                setProductFiltered(true);
+                setSelectedCategory();
+                setSelectedCategory("SNACKS");
+              }}
+            >
               <img src={snack} alt="" />
               <p style={{ fontWeight: "bold" }}>Lanches</p>
             </Box>
-            <Box onClick={() => ShowSpecific("FOLLOW")}>
+            <Box
+              onClick={() => {
+                setProductFiltered(true);
+                setSelectedCategory();
+                setSelectedCategory("FOLLOW");
+              }}
+            >
               <img src={follow} alt="" />
               <p style={{ marginTop: "-5px", fontWeight: "bold" }}>
                 Acompanhamentos
               </p>
             </Box>
-            <Box onClick={() => ShowSpecific("DRINK")}>
+            <Box
+              onClick={() => {
+                setProductFiltered(true);
+                setSelectedCategory();
+                setSelectedCategory("DRINK");
+              }}
+            >
               <img src={drinks} alt="" />
               <p style={{ fontWeight: "bold" }}>Bebidas</p>
             </Box>
-            <Box onClick={() => ShowSpecific("DESSERT")}>
+            <Box
+              onClick={() => {
+                setProductFiltered(true);
+                setSelectedCategory();
+                setSelectedCategory("DESSERT");
+              }}
+            >
               <img src={dessert} alt="" />
               <p style={{ fontWeight: "bold" }}>Sobremesas</p>
             </Box>
@@ -256,7 +278,6 @@ export default function Home() {
           </Menu>
         </Products>
         {order && order.length > 0 && (
-
           // resumo do pedido
           <PurchaseSummary>
             {order.map((main) => (

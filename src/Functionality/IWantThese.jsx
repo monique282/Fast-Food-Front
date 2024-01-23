@@ -1,17 +1,17 @@
 import selectedSideDishes from "./SelectedSideDishes";
 
 export default function IWantThese(
-  baconSelected,
-  followUp,
-  order,
-  setOrder,
-  setCounter,
-  setShowReview,
-  cheddarSelected,
-  sauceSelected,
-  ProductSpecific,
-  counter,
-  observationText
+  {baconSelected,
+    followUp,
+    order,
+    setOrder,
+    setCounter,
+    setShowReview,
+    cheddarSelected,
+    sauceSelected,
+    ProductSpecific,
+    counter,
+    observationText}
 ) {
   selectedSideDishes(baconSelected, followUp, cheddarSelected, sauceSelected);
   const total = (
