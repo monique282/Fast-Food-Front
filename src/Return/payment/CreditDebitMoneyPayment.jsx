@@ -1,8 +1,13 @@
-
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 import { MdPayment } from "react-icons/md";
 import { CreditDebitMoney } from "../../assets/StylesPages/payment";
+import PropTypes from "prop-types";
 
 export default function CreditDebitMoneyPayment({ text }) {
+  CreditDebitMoneyPayment.propTypes = {
+    text: PropTypes.string.isRequired,
+  };
   return (
     <CreditDebitMoney>
       <p>

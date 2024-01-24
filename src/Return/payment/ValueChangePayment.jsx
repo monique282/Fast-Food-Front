@@ -1,12 +1,18 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import { ValueChange, Value, Change } from "../../assets/StylesPages/payment";
+import PropTypes from "prop-types";
 
 export default function ValueChangePayment({
   amountForPayment,
   sumTotal,
   setAmountForPayment,
 }) {
+  ValueChangePayment.propTypes = {
+    amountForPayment: PropTypes.number.isRequired,
+    sumTotal: PropTypes.number.isRequired,
+    setAmountForPayment: PropTypes.func.isRequired,
+  };
   return (
     <ValueChange>
       <Value>

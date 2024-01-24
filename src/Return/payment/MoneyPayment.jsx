@@ -2,13 +2,24 @@
 import React from "react";
 import { FaMoneyBillAlt } from "react-icons/fa";
 import { CreditDebitMoney } from "../../assets/StylesPages/payment";
+import PropTypes from "prop-types";
 
-export default function MoneyPayment({ setAbilitCard, borderColor, backgroundColor }) {
+export default function MoneyPayment({
+  setAbilitCard,
+  borderColor,
+  backgroundColor,
+}) {
+  MoneyPayment.propTypes = {
+    setAbilitCard: PropTypes.func.isRequired,
+    borderColor: PropTypes.string.isRequired,
+    backgroundColor: PropTypes.string.isRequired,
+  };
   return (
-    <CreditDebitMoney 
-    onClick={() => {
-      setAbilitCard(true)
-    }}>
+    <CreditDebitMoney
+      onClick={() => {
+        setAbilitCard(true);
+      }}
+    >
       <p>
         <FaMoneyBillAlt
           style={{

@@ -8,8 +8,13 @@ import {
   FinalValue,
   Amount,
 } from "../../assets/StylesPages/payment";
+import PropTypes from "prop-types";
 
-function PurchaseSummaryPayment( {order, sumTotal} ) {
+export default function PurchaseSummaryPayment({ order, sumTotal }) {
+  PurchaseSummaryPayment.propTypes = {
+    order: PropTypes.array.isRequired,
+    sumTotal: PropTypes.number.isRequired,
+  };
   return (
     <PurchaseSummary>
       {order.map((main) => (
@@ -39,5 +44,3 @@ function PurchaseSummaryPayment( {order, sumTotal} ) {
     </PurchaseSummary>
   );
 }
-
-export default PurchaseSummaryPayment;
