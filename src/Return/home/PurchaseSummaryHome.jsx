@@ -15,7 +15,6 @@ export default function PurchaseSummaryHome({
     order,
     sumTotal
 }) {
-  console.log(order)
   PurchaseSummaryHome.propTypes = {
     order: PropTypes.array.isRequired,
     sumTotal: PropTypes.number.isRequired,
