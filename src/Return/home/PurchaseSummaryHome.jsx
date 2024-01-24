@@ -9,11 +9,16 @@ import {
   FinalValue,
   Amount,
 } from "../../assets/StylesPages/home";
+import PropTypes from "prop-types";
 
 export default function PurchaseSummaryHome({
     order,
     sumTotal
 }) {
+  PurchaseSummaryHome.propTypes = {
+    order: PropTypes.array.isRequired,
+    sumTotal: PropTypes.number.isRequired,
+  };
   return (
     <PurchaseSummary>
       {order.map((main) => (

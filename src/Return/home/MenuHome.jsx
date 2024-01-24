@@ -1,13 +1,15 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import {  Menu } from "../../assets/StylesPages/home";
+import { Menu } from "../../assets/StylesPages/home";
 import ProductFilteredFalseHome from "./ProductFilteredFalseHome";
 import SelectedCategoryCombooHome from "./SelectedCategoryCombooHome";
 import SelectedCategoryFollowHome from "./SelectedCategoryFollowHome";
 import SelectedCategoryDessertHome from "./SelectedCategoryDessertHome";
 import SelectedCategorySnacksHome from "./SelectedCategorySnacksHome";
 import SelectedCategoryDrinkHome from "./SelectedCategoryDrinkHome";
-import SearchResultsTrue from "./SearchResultsTrue";
+import SearchResultsTrue from "./SearchResultsTrueHome";
+import PropTypes from "prop-types";
+
 export default function MenuHome({
   productFiltered,
   snacks,
@@ -21,6 +23,19 @@ export default function MenuHome({
   search,
   searchResults,
 }) {
+  MenuHome.propTypes = {
+    productFiltered: PropTypes.bool.isRequired,
+    selectedCategory: PropTypes.string.isRequired,
+    ordereIds: PropTypes.array.isRequired,
+    ShowProductDetails: PropTypes.func.isRequired,
+    comboo: PropTypes.array.isRequired,
+    snacks: PropTypes.array.isRequired,
+    follo: PropTypes.array.isRequired,
+    drink: PropTypes.array.isRequired,
+    desser: PropTypes.array.isRequired,
+    search: PropTypes.array.isRequired,
+    searchResults: PropTypes.array.isRequired,
+  };
   return (
     <Menu>
       <ProductFilteredFalseHome

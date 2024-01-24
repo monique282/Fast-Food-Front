@@ -5,8 +5,18 @@ import {
   ProductBox as StyledProductBox,
 } from "../../assets/StylesPages/home";
 import { CgCheck } from "react-icons/cg";
+import PropTypes from "prop-types";
 
-export default function ProcuctBoxHome({main, ordereIds, ShowProductDetails}) {
+export default function ProcuctBoxHome({
+  main,
+  ordereIds,
+  ShowProductDetails,
+}) {
+  ProcuctBoxHome.propTypes = {
+    main: PropTypes.object.isRequired,
+    ordereIds: PropTypes.array.isRequired,
+    ShowProductDetails: PropTypes.func.isRequired,
+  };
   return (
     <StyledProductBox key={main.id} onClick={() => ShowProductDetails(main.id)}>
       {ordereIds.includes(main.id) && (
