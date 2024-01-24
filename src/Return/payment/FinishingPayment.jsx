@@ -1,4 +1,3 @@
-/* eslint-disable react/prop-types */
 // eslint-disable-next-line no-unused-vars
 import React from "react";
 import {
@@ -6,6 +5,7 @@ import {
   RemoveOrderFromList,
   AddProducttoList,
 } from "../../assets/StylesPages/payment";
+import PropTypes from "prop-types";
 
 function FinishingPayment({
   amountForPayment,
@@ -15,6 +15,14 @@ function FinishingPayment({
   setShowPayment,
   finishPayment,
 }) {
+  FinishingPayment.propTypes = {
+    sumTotal: PropTypes.number.isRequired,
+    amountForPayment: PropTypes.number.isRequired,
+    abilitCard: PropTypes.bool.isRequired,
+    nameClient: PropTypes.string.isRequired,
+    setShowPayment: PropTypes.func.isRequired,
+    finishPayment: PropTypes.func.isRequired,
+  };
   return (
     <Finishing>
       <RemoveOrderFromList onClick={() => setShowPayment(false)}>
