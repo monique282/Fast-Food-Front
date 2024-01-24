@@ -7,7 +7,7 @@ import SelectedCategoryFollowHome from "./SelectedCategoryFollowHome";
 import SelectedCategoryDessertHome from "./SelectedCategoryDessertHome";
 import SelectedCategorySnacksHome from "./SelectedCategorySnacksHome";
 import SelectedCategoryDrinkHome from "./SelectedCategoryDrinkHome";
-import SearchResultsTrue from "./SearchResultsTrue";
+import SearchResultsTrue from "./SearchResultsTrueHome";
 import PropTypes from "prop-types";
 
 export default function MenuHome({
@@ -24,17 +24,17 @@ export default function MenuHome({
   searchResults,
 }) {
   MenuHome.propTypes = {
-    productFiltered: PropTypes.func.isRequired,
-    selectedCategory: PropTypes.func.isRequired,
-    ordereIds: PropTypes.func.isRequired,
+    productFiltered: PropTypes.bool.isRequired,
+    selectedCategory: PropTypes.string.isRequired,
+    ordereIds: PropTypes.array.isRequired,
     ShowProductDetails: PropTypes.func.isRequired,
-    comboo: PropTypes.string.isRequired,
-    snacks: PropTypes.string.isRequired,
-    follo: PropTypes.string.isRequired,
-    drink: PropTypes.string.isRequired,
-    desser: PropTypes.string.isRequired,
-    search: PropTypes.string.isRequired,
-    searchResults: PropTypes.func.isRequired,
+    comboo: PropTypes.array.isRequired,
+    snacks: PropTypes.array.isRequired,
+    follo: PropTypes.array.isRequired,
+    drink: PropTypes.array.isRequired,
+    desser: PropTypes.array.isRequired,
+    search: PropTypes.array.isRequired,
+    searchResults: PropTypes.array.isRequired,
   };
   return (
     <Menu>

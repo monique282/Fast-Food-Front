@@ -10,9 +10,9 @@ export default function SelectedCategoryCombooHome({
   ShowProductDetails,
 }) {
   SelectedCategoryCombooHome.propTypes = {
-    selectedCategory: PropTypes.func.isRequired,
+    selectedCategory: PropTypes.string.isRequired,
     comboo: PropTypes.array.isRequired,
-    ordereIds: PropTypes.func.isRequired,
+    ordereIds: PropTypes.array.isRequired,
     ShowProductDetails: PropTypes.func.isRequired,
   };
   return (

@@ -10,7 +10,7 @@ export default function ProductFilteredFalseHome({
   ShowProductDetails,
 }) {
   ProductFilteredFalseHome.propTypes = {
-    productFiltered: PropTypes.func.isRequired,
+    productFiltered: PropTypes.bool.isRequired,
     snacks: PropTypes.array.isRequired,
     ordereIds: PropTypes.array.isRequired,
     ShowProductDetails: PropTypes.func.isRequired,

@@ -10,9 +10,9 @@ export default function SelectedCategoryDrinkHome({
   ShowProductDetails,
 }) {
   SelectedCategoryDrinkHome.propTypes = {
-    selectedCategory: PropTypes.func.isRequired,
+    selectedCategory: PropTypes.string.isRequired,
     drink: PropTypes.array.isRequired,
-    ordereIds: PropTypes.func.isRequired,
+    ordereIds: PropTypes.array.isRequired,
     ShowProductDetails: PropTypes.func.isRequired,
   };
   return (

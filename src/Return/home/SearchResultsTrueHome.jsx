@@ -10,9 +10,9 @@ export default function SearchResultsTrue({
   ShowProductDetails,
 }) {
   SearchResultsTrue.propTypes = {
-    searchResults: PropTypes.func.isRequired,
-    search: PropTypes.func.isRequired,
-    ordereIds: PropTypes.func.isRequired,
+    searchResults: PropTypes.array.isRequired,
+    search: PropTypes.array.isRequired,
+    ordereIds: PropTypes.array.isRequired,
     ShowProductDetails: PropTypes.func.isRequired,
   };
   return (

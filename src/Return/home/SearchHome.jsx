@@ -17,8 +17,8 @@ export default function SearchHome({
     setSearchResults: PropTypes.func.isRequired,
     setProductFiltered: PropTypes.func.isRequired,
     setSelectedCategory: PropTypes.func.isRequired,
-    products: PropTypes.object.isRequired,
-    search: PropTypes.func.isRequired,
+    products: PropTypes.array.isRequired,
+    search: PropTypes.array.isRequired,
   };
   return (
     <Search
