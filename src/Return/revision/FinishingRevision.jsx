@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React from "react";
-import selectedSideDishes from "../../Functionality/SelectedSideDishes";
+
 import {
   Finishing,
   RemoveOrderFromList,
@@ -45,7 +45,24 @@ export default function FinishingRevision({
     observationText: PropTypes.string.isRequired,
   };
   function IWantThese() {
-    selectedSideDishes(baconSelected, followUp, cheddarSelected, sauceSelected);
+    if (baconSelected === true) {
+      followUp = [
+        ...followUp,
+        { id: 1, item: "1x Bacon 10g", price: "R$1.00" },
+      ];
+    }
+    if (cheddarSelected === true) {
+      followUp = [
+        ...followUp,
+        { id: 2, item: "1x Cheddar 10g", price: "R$1.00" },
+      ];
+    }
+    if (sauceSelected === true) {
+      followUp = [
+        ...followUp,
+        { id: 3, item: "1x Molho acompanhamento Barbecue", price: "R$1.00" },
+      ];
+    }
     const total = (
       ProductSpecific.price * counter +
       (baconSelected ? 1 : 0) +
@@ -60,9 +77,13 @@ export default function FinishingRevision({
       total,
     };
     const newOrder = [...order, orderDetails];
+    console.log(orderDetails);
     setOrder(newOrder);
     setCounter(1);
     setShowReview(false);
+    setBaconSelected(false);
+    setCheddarSelected(false);
+    setSauceSelected(false);
   }
 
   return (

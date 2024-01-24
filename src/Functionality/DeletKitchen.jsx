@@ -6,7 +6,7 @@ export default function updateDelete(code, setLoading) {
       code,
     };
     const promise = axios.delete(urlDelete, { data });
-    promise.then((response) => {
+    promise.then(() => {
       setLoading(true);
     });
     promise.catch((err) => {
