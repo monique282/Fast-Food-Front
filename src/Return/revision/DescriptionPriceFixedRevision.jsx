@@ -1,14 +1,22 @@
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 import {
   DescriptionPrice,
   Summary,
   PriceDescription,
 } from "../../assets/StylesPages/revision";
+import PropTypes from "prop-types";
 
-export default function DescriptionPriceFixedRevision(
-    baconSelected,
-    cheddarSelected,
-    sauceSelected
-) {
+export default function DescriptionPriceFixedRevision({
+  baconSelected,
+  cheddarSelected,
+  sauceSelected,
+}) {
+  DescriptionPriceFixedRevision.propTypes = {
+    cheddarSelected: PropTypes.bool.isRequired,
+    sauceSelected: PropTypes.bool.isRequired,
+    baconSelected: PropTypes.bool.isRequired,
+  };
   return (
     <>
       {baconSelected === true && (
