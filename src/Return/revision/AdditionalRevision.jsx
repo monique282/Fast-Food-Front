@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 import Cheddars from "../../assets/images/cheddar.png";
 import Barvecue from "../../assets/images/barbecue.png";
 import Bacons from "../../assets/images/bacon.png";
@@ -10,15 +12,24 @@ import {
   Cheddar,
   Sauce,
 } from "../../assets/StylesPages/revision";
+import PropTypes from "prop-types";
 
-export default function AdditionalRevision(
-  {setCheddarSelected,
-    cheddarSelected,
-    setSauceSelected,
-    sauceSelected,
-    setBaconSelected,
-    baconSelected}
-) {
+export default function AdditionalRevision({
+  setCheddarSelected,
+  cheddarSelected,
+  setSauceSelected,
+  sauceSelected,
+  setBaconSelected,
+  baconSelected,
+}) {
+  AdditionalRevision.propTypes = {
+    setCheddarSelected: PropTypes.func.isRequired,
+    cheddarSelected: PropTypes.bool.isRequired,
+    setSauceSelected: PropTypes.func.isRequired,
+    sauceSelected: PropTypes.bool.isRequired,
+    setBaconSelected: PropTypes.func.isRequired,
+    baconSelected: PropTypes.bool.isRequired,
+  };
   return (
     <Additional>
       <h1>Adicionais</h1>

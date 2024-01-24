@@ -1,10 +1,12 @@
-import IWantThese from "../../Functionality/IWantThese";
+// eslint-disable-next-line no-unused-vars
+import React from "react";
 import selectedSideDishes from "../../Functionality/SelectedSideDishes";
 import {
   Finishing,
   RemoveOrderFromList,
   AddProducttoList,
 } from "../../assets/StylesPages/revision";
+import PropTypes from "prop-types";
 
 export default function FinishingRevision({
   baconSelected,
@@ -24,6 +26,24 @@ export default function FinishingRevision({
   followUp,
   observationText,
 }) {
+  FinishingRevision.propTypes = {
+    baconSelected: PropTypes.bool.isRequired,
+    cheddarSelected: PropTypes.bool.isRequired,
+    sauceSelected: PropTypes.bool.isRequired,
+    ProductSpecific: PropTypes.object.isRequired,
+    counter: PropTypes.number.isRequired,
+    setCounter: PropTypes.func.isRequired,
+    setBaconSelected: PropTypes.func.isRequired,
+    setCheddarSelected: PropTypes.func.isRequired,
+    setSauceSelected: PropTypes.func.isRequired,
+    setObservationText: PropTypes.func.isRequired,
+    setShowReview: PropTypes.func.isRequired,
+    order: PropTypes.array.isRequired,
+    id: PropTypes.number.isRequired,
+    setOrder: PropTypes.func.isRequired,
+    followUp: PropTypes.array.isRequired,
+    observationText: PropTypes.string.isRequired,
+  };
   function IWantThese() {
     selectedSideDishes(baconSelected, followUp, cheddarSelected, sauceSelected);
     const total = (
