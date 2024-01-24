@@ -8,8 +8,13 @@ import {
 } from "../../assets/StylesPages/kitchen";
 import { HiOutlineX } from "react-icons/hi";
 import updateDelete from "../../Functionality/DeletKitchen";
+import PropTypes from "prop-types";
 
-function OrderReadyTrueKitchen({main, setLoading}) {
+function OrderReadyTrueKitchen({ main, setLoading }) {
+  OrderReadyTrueKitchen.propTypes = {
+    main: PropTypes.array.isRequired,
+    setLoading: PropTypes.func.isRequired,
+  };
   return (
     <OrderReady
       key={main.idR}
