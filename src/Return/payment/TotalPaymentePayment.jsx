@@ -12,13 +12,20 @@ import {
 } from "../../assets/StylesPages/payment";
 import PurchaseSummaryPayment from "./PurchaseSummaryPayment";
 
-function TotalPaymentePayment({
+export default function TotalPaymentePayment({
   order,
   nameClient,
   code,
   sumTotal,
   setNameClient,
 }) {
+  TotalPaymentePayment.propTypes = {
+    order: PropTypes.array.isRequired,
+    sumTotal: PropTypes.number.isRequired,
+    nameClient: PropTypes.string.isRequired,
+    code: PropTypes.number.isRequired,
+    setNameClient: PropTypes.func.isRequired,
+  };
   return (
     <TotalPaymente>
       <p>
@@ -56,5 +63,3 @@ function TotalPaymentePayment({
     </TotalPaymente>
   );
 }
-
-export default TotalPaymentePayment;
