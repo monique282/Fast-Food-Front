@@ -6,7 +6,7 @@ export default function updateError(code, setLoading) {
     code,
   };
   const promise = axios.post(urlError, data);
-  promise.then((response) => {
+  promise.then(() => {
     setLoading(true);
   });
   promise.catch((err) => {

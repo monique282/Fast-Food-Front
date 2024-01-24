@@ -6,7 +6,7 @@ export default function updateReady(code, setLoading) {
       code,
     };
     const promise = axios.post(urlRequest, data);
-    promise.then((response) => {
+    promise.then(() => {
       setLoading(true);
     });
     promise.catch((err) => {
