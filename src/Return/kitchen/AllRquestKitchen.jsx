@@ -14,8 +14,13 @@ import {
 import { HiOutlineCheck, HiOutlineX } from "react-icons/hi";
 import updateError from "../../Functionality/ErrorKitchen";
 import updateReady from "../../Functionality/ReadyKitchen";
+import PropTypes from "prop-types";
 
-function AllRequestKitchen({main, setLoading}) {
+function AllRequestKitchen({ main, setLoading }) {
+  AllRequestKitchen.propTypes = {
+    main: PropTypes.array.isRequired,
+    setLoading: PropTypes.func.isRequired,
+  };
   return (
     <AllRequest key={main.idR}>
       <Order>
@@ -25,7 +30,8 @@ function AllRequestKitchen({main, setLoading}) {
             {main.code} - {main.nameClient}
           </h1>
           <h2>{main.name}</h2>
-          {main.followUps && main.followUps.length !== 0 &&
+          {main.followUps &&
+            main.followUps.length !== 0 &&
             main.followUps.map((followUp) => (
               <h2 key={followUp.id}>{followUp.item}</h2>
             ))}
