@@ -10,6 +10,7 @@ import CreditDebitMoneyPayment from "./CreditDebitMoneyPayment";
 import MoneyPayment from "./MoneyPayment";
 import ValueChangePayment from "./ValueChangePayment";
 import FinishingPayment from "./FinishingPayment";
+import PropTypes from "prop-types";
 
 function FinalizePaymentPayment({
   sumTotal,
@@ -21,6 +22,16 @@ function FinalizePaymentPayment({
   setShowPayment,
   finishPayment,
 }) {
+  FinalizePaymentPayment.propTypes = {
+    sumTotal: PropTypes.number.isRequired,
+    amountForPayment: PropTypes.number.isRequired,
+    setAmountForPayment: PropTypes.func.isRequired,
+    abilitCard: PropTypes.bool.isRequired,
+    nameClient: PropTypes.string.isRequired,
+    setShowPayment: PropTypes.func.isRequired,
+    setAbilitCard: PropTypes.func.isRequired,
+    finishPayment: PropTypes.func.isRequired,
+  };
   return (
     <FinalizePayment>
       <Order>
