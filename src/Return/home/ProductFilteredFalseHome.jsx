@@ -11,9 +11,8 @@ export default function ProductFilteredFalseHome({
 }) {
   ProductFilteredFalseHome.propTypes = {
     productFiltered: PropTypes.func.isRequired,
-    snacks: PropTypes.func.isRequired,
-    main: PropTypes.array.isRequired,
-    ordereIds: PropTypes.func.isRequired,
+    snacks: PropTypes.array.isRequired,
+    ordereIds: PropTypes.array.isRequired,
     ShowProductDetails: PropTypes.func.isRequired,
   };
   return (

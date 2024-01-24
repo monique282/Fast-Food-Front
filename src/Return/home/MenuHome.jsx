@@ -33,7 +33,7 @@ export default function MenuHome({
     follo: PropTypes.string.isRequired,
     drink: PropTypes.string.isRequired,
     desser: PropTypes.string.isRequired,
-    search: PropTypes.func.isRequired,
+    search: PropTypes.string.isRequired,
     searchResults: PropTypes.func.isRequired,
   };
   return (

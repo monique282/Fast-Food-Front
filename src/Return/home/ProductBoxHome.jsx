@@ -13,8 +13,8 @@ export default function ProcuctBoxHome({
   ShowProductDetails,
 }) {
   ProcuctBoxHome.propTypes = {
-    main: PropTypes.array.isRequired,
-    ordereIds: PropTypes.func.isRequired,
+    main: PropTypes.object.isRequired,
+    ordereIds: PropTypes.array.isRequired,
     ShowProductDetails: PropTypes.func.isRequired,
   };
   return (
