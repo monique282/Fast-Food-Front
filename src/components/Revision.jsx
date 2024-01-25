@@ -1,18 +1,12 @@
 import { useContext, useEffect } from "react";
 import { AuthContext } from "../context/authContext";
-import Cheddars from "../assets/images/cheddar.png";
-import Barvecue from "../assets/images/barbecue.png";
-import { All, BoxAll, Divider } from "../assets/StylesPages/revision";
+import { All, BoxAll } from "../assets/StylesPages/revision";
 import checkingIfIDasAlreadyBeenSelected from "../Functionality/CheckingIfIDasAlreadyBeenSelected";
 import HeaderRevision from "../Return/revision/HeaderRevision";
-import ExitRevision from "../Return/revision/ExitRevision";
 import ProductOverviewRevision from "../Return/revision/ProductOverviewRevision";
 import AdditionalRevision from "../Return/revision/AdditionalRevision";
 import Observationrevision from "../Return/revision/Observationrevision";
 import PurchaseSummaryRevision from "../Return/revision/PurchaseSummaryRevision";
-import DescriptionPriceRevision from "../Return/revision/DescriptionPriceRevision";
-import DescriptionPriceFixedRevision from "../Return/revision/DescriptionPriceFixedRevision";
-import FinalValueRevision from "../Return/revision/FinalValueRevision";
 import FinishingRevision from "../Return/revision/FinishingRevision";
 
 export default function Revision() {
@@ -57,9 +51,7 @@ export default function Revision() {
     return (
       <All>
         <BoxAll>
-          <HeaderRevision setShowReview={setShowReview} />
-          <p>Revise seu pedido!</p>
-          <ExitRevision setShowReview={setShowReview} />
+          <HeaderRevision setShowReview={setShowReview} />{" "}
           <ProductOverviewRevision
             ProductSpecific={ProductSpecific}
             setShowReview={setShowReview}
@@ -84,23 +76,6 @@ export default function Revision() {
             baconSelected={baconSelected}
             cheddarSelected={cheddarSelected}
             sauceSelected={sauceSelected}
-          />
-          <DescriptionPriceRevision
-            counter={counter}
-            ProductSpecific={ProductSpecific}
-          />
-          <DescriptionPriceFixedRevision
-            baconSelected={baconSelected}
-            cheddarSelected={cheddarSelected}
-            sauceSelected={sauceSelected}
-          />
-          <Divider></Divider>
-          <FinalValueRevision
-            baconSelected={baconSelected}
-            cheddarSelected={cheddarSelected}
-            sauceSelected={sauceSelected}
-            ProductSpecific={ProductSpecific}
-            counter={counter}
           />
           <FinishingRevision
             baconSelected={baconSelected}
