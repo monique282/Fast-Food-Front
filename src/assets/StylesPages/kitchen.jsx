@@ -50,7 +50,6 @@ export const OrderReady = styled.div`
   text-align: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   margin-top: 5%;
-  background-color: red;
   img {
     width: 100px;
     height: 80px;
