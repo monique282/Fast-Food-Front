@@ -45,15 +45,24 @@ export const OrderReady = styled.div`
   height: 100%;
   border-radius: 20px;
   display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   margin-top: 5%;
+  background-color: red;
   img {
     width: 100px;
     height: 80px;
     margin: 2%;
     border-radius: 10px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+  @media (max-width: 1024px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 export const AllRequest = styled.div`
@@ -64,6 +73,7 @@ export const AllRequest = styled.div`
   display: flex;
   flex-direction: column;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  margin-bottom: 10px;
 `;
 export const Order = styled.div`
   width: 100%;
@@ -79,6 +89,14 @@ export const Order = styled.div`
     margin: 2%;
     border-radius: 10px;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 `;
 export const Ob = styled.div`
@@ -117,7 +135,7 @@ export const P = styled.div`
   margin-bottom: 10px;
 `;
 export const NameCode = styled.div`
-  width: 200%;
+  width: 100%;
   display: flex;
   flex-direction: column;
   h1 {
@@ -135,12 +153,30 @@ export const NameCode = styled.div`
     margin-top: 2%;
     margin-bottom: 3%;
   }
+  @media (max-width: 1024px) {
+    h1 {
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black;
+    font-weight: bold;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+  h2 {
+    font-family: "Varela Round";
+    font-size: 15px;
+    color: black;
+    margin-top: 1%;
+    margin-bottom: 1%;
+  }
+  }
 `;
 export const Butons = styled.div`
   width: 100%;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
+  margin-bottom: 10px;
 `;
 export const Not = styled.div`
   width: 50px;
