@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { CgCheck } from "react-icons/cg";
 
 export const All = styled.div`
   width: 100%;
@@ -15,6 +14,15 @@ export const Welcome = styled.div`
   margin-top: 7%;
   margin-left: 12%;
   font-weight: bold;
+  @media (max-width: 1024px) {
+    margin-left: 2%;
+    font-family: "Varela Round";
+    font-size: 25px;
+    color: black;
+    margin-top: 2%;
+    margin-left: 1%;
+    font-weight: bold;
+  }
 `;
 export const Search = styled.input`
   width: 350px;
@@ -36,12 +44,22 @@ export const Search = styled.input`
     border: 1px solid black;
     outline: none;
   }
+  @media (max-width: 1024px) {
+    width: 90%;
+    margin-top: 1%;
+    margin-left: 1%;
+  }
 `;
 export const Products = styled.div`
   width: 80%;
   height: 100%;
   margin-top: 2%;
   margin-left: 12%;
+  @media (max-width: 1024px) {
+    width: 100%;
+    margin-top: 1%;
+    margin-left: 1%;
+  }
 `;
 export const Title = styled.div`
   width: 150px;
@@ -66,6 +84,18 @@ export const Categories = styled.div`
   margin-top: 1%;
   display: flex;
   justify-content: space-between;
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  @media (max-width: 1024px) {
+    overflow-x: auto;
+    display: flex;
+  }
 `;
 export const Box = styled.div`
   width: 200px;
@@ -82,11 +112,31 @@ export const Box = styled.div`
     margin-left: 25%;
     margin-bottom: 3px;
   }
+  @media (max-width: 1024px) {
+    justify-content: center;
+    margin-top: 2%;
+    flex: 0 0 auto;
+  }
 `;
 export const Menu = styled.div`
+  width: 100%;
+  height: 100%;
+  margin-top: 1%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: center;
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
+  @media (max-width: 1024px) {
+    overflow-x: auto;
+    display: flex;
+    justify-content: space-between;
+  }
 `;
 export const Select = styled.div`
   position: absolute;
@@ -103,15 +153,14 @@ export const Select = styled.div`
   z-index: 1;
 `;
 export const ProductBox = styled.div`
-  width: calc(20% - 2.4%);
-  max-width: 180px;
-  height: 250px;
+  width: 200px;
+  height: 380px;
   border: none;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   text-align: center;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
   margin-top: 2.4%;
@@ -120,6 +169,7 @@ export const ProductBox = styled.div`
   z-index: 0;
   img {
     width: 100px;
+    margin-top: 10px;
   }
   h1 {
     font-family: "Varela Round";
@@ -140,6 +190,13 @@ export const ProductBox = styled.div`
     color: black;
     margin-top: 5%;
     font-weight: bold;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 1024px) {
+    width: 100%;
+    img {
+      width: 100px;
+    }
   }
 `;
 export const PurchaseSummary = styled.div`
@@ -194,6 +251,11 @@ export const Finishing = styled.div`
   margin-right: 10%;
   margin-top: 5%;
   margin-bottom: 10%;
+  @media (max-width: 1024px) {
+    display: flex;
+    justify-content: space-around;
+    margin-right: 0%;
+  }
 `;
 export const RemoveOrderFromList = styled.div`
   width: 22%;
@@ -217,8 +279,12 @@ export const AddProducttoList = styled.div`
   color: black;
   display: flex;
   align-items: center;
+  text-align: center;
   justify-content: center;
   border-radius: 15px;
   border: 2px solid #2e5d15;
   color: #ffffff;
+  @media (max-width: 1024px) {
+    margin-right: 0%;
+  }
 `;
