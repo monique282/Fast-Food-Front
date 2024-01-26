@@ -26,4 +26,7 @@ export const BoxAll = styled(Link)`
     width: 100%;
     border-radius: 20px;
   }
+  @media (max-width: 1024px) {
+    width: 100%;
+  }
 `;
