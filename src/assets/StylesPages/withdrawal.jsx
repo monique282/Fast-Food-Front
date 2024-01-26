@@ -17,6 +17,12 @@ export const Preparing = styled.div`
     color: black;
     font-weight: bold;
   }
+  @media (max-width: 1024px) {
+    margin-left: 2%;
+    p {
+      font-size: 15px;
+    }
+  }
 `;
 export const Sidebar = styled.div`
   width: 1px;
@@ -37,6 +43,12 @@ export const Ready = styled.div`
     color: black;
     font-weight: bold;
   }
+  @media (max-width: 1024px) {
+    margin-left: 2%;
+    p {
+      font-size: 15px;
+    }
+  }
 `;
 export const Name = styled.div`
   width: 90%;
@@ -53,6 +65,11 @@ export const Name = styled.div`
     font-family: "Varela Round";
     font-size: 50px;
     color: #9f9f9f;
+  }
+  @media (max-width: 1024px) {
+    p {
+      font-size: 25px;
+    }
   }
 `;
 export const ReadyName = styled.div`
@@ -83,5 +100,10 @@ export const ReadyName = styled.div`
     color: black;
     margin-top: 1%;
     margin-bottom: 1%;
+  }
+  @media (max-width: 1024px) {
+    p {
+      font-size: 25px;
+    }
   }
 `;
