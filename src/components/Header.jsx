@@ -1,12 +1,12 @@
 import { useLocation } from "react-router-dom";
 import {
-  All,
   HeaderBhutans,
   SloganName,
   Control,
   Requests,
   Kitchen,
   Withdrawal,
+  All,
 } from "../assets/StylesPages/header";
 
 export default function Header() {
