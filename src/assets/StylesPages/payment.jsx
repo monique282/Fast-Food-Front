@@ -10,12 +10,28 @@ export const All = styled.div`
   display: flex;
   justify-content: center;
   z-index: 3;
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
 `;
 export const BoxAll = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
   overflow-y: auto;
+  scrollbar-width: thin;
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    width: 0.5rem;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+  }
   @media (max-width: 1024px) {
     display: flex;
     flex-direction: column;
