@@ -9,6 +9,7 @@ import {
   CodeName,
   Name,
   Code,
+  Header,
 } from "../../assets/StylesPages/payment";
 import PurchaseSummaryPayment from "./PurchaseSummaryPayment";
 
@@ -28,17 +29,19 @@ export default function TotalPaymentePayment({
   };
   return (
     <TotalPaymente>
-      <p>
-        <FaWallet
-          style={{
-            color: "#2E5D15",
-            marginRight: "3%",
-            width: "30px",
-            height: "30px",
-          }}
-        />
-        Pagamento
-      </p>
+      <Header>
+        <p>
+          <FaWallet
+            style={{
+              color: "#2E5D15",
+              marginRight: "3%",
+              width: "30px",
+              height: "30px",
+            }}
+          />
+          Pagamento
+        </p>
+      </Header>
       <Order>
         <p>Resumo da compra</p>
         {order && order.length > 0 && (
