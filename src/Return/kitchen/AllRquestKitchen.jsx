@@ -39,8 +39,8 @@ function AllRequestKitchen({ main, setLoading }) {
         <Butons>
           <Not
             onClick={() => {
-              updateError(main.code, setLoading);
-              updateReady(main.code, setLoading);
+              updateError(main.idR, setLoading);
+              updateReady(main.idR, setLoading);
             }}
           >
             <HiOutlineX
@@ -49,7 +49,7 @@ function AllRequestKitchen({ main, setLoading }) {
           </Not>
           <Ok
             onClick={() => {
-              updateReady(main.code, setLoading);
+              updateReady(main.idR, setLoading);
             }}
           >
             <HiOutlineCheck

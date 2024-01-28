@@ -3,6 +3,5 @@ export default function Remove(setShowReview, counter, setCounter) {
     setShowReview(false);
   } else {
     setCounter(counter - 1);
-    console.log(counter);
   }
 }

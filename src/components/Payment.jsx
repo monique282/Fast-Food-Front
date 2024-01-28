@@ -56,7 +56,12 @@ export default function Payment() {
   } else {
     return (
       <All>
-        {showSuccess === true && <Success></Success>}
+        {showSuccess === true && (
+          <Success
+            amountForPayment={amountForPayment}
+            sumTotal={sumTotal}
+          ></Success>
+        )}
         <BoxAll>
           <TotalPaymentePayment
             order={order}
