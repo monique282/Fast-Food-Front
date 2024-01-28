@@ -36,7 +36,7 @@ function OrderReadyTrueKitchen({ main, setLoading }) {
       <Butons>
         <Not
           onClick={() => {
-            updateDelete(main.code, setLoading);
+            updateDelete(main.idR, setLoading);
           }}
         >
           <HiOutlineX

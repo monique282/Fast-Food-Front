@@ -60,6 +60,7 @@ export const TotalPaymente = styled.div`
     align-items: center;
     justify-content: center;
     margin-top: 27%;
+    margin-top: 70%;
   }
 `;
 export const Header = styled.div`

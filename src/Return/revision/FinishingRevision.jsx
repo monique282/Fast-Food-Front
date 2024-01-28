@@ -77,7 +77,6 @@ export default function FinishingRevision({
       total,
     };
     const newOrder = [...order, orderDetails];
-    console.log(orderDetails);
     setOrder(newOrder);
     setCounter(1);
     setShowReview(false);
